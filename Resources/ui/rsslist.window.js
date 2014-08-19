@@ -11,10 +11,10 @@ module.exports = function(_e) {
 				e.section.updateItemAt(e.itemIndex, item);
 			}
 		};
-		var HoerSuppe = require('controls/hoersuppe_adapter');
+		var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
 		var key = Ti.Utils.md5HexDigest(JSON.parse(item.properties.itemId).url);
 		keys.push(key);
-		var client = HoerSuppe.save(JSON.parse(item.properties.itemId), {
+		var client = HoerSuppe.saveAudioFile(JSON.parse(item.properties.itemId), {
 			onsaved : function() {
 				item.down.opacity = 0;
 				item.progress.opacity = 0;
@@ -238,10 +238,11 @@ module.exports = function(_e) {
 		}
 		closing = true;
 		console.log('Info: detecting of androidback event');
+		/*
 		Ti.UI.createNotification({
 			message : 'Download läuft im Hintergrund weiter'
 		}).show();
-
+*/
 		setTimeout(function() {
 			console.log('Info: detecting of androidback event ==> try to close window');
 			self.close();

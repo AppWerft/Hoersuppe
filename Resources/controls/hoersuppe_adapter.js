@@ -1,12 +1,18 @@
-var DB = Ti.Database.install('/models/hoersuppe.sqlite', 'hoersuppe');
-DB.close();
+function getFilehandle(file) {
+	return (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, file) : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, filename + '.meta');
+}
 
-var Hoersuppe = {
-	save : function(item, callback) {
+var Hoersuppe = function() {
+	this.eventhandlers = [];
+	return this;
+};
+
+Hoersuppe.prototype = {
+	saveAudioFile : function(item, callback) {
+		var that= this;
 		var filename = Ti.Utils.md5HexDigest(item.url);
-		var audiofile = (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, filename) : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, filename);
-		var metafile = (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, filename + '.meta') : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, filename + '.meta');
-
+		var audiofile = getFilehandle(filename);
+		var metafile = getFilehandle(filename + '.meta');
 		var xhr = Ti.Network.createHTTPClient({
 			onload : function() {
 				console.log('Info: XHR-STATUS: ' + this.status);
@@ -20,7 +26,7 @@ var Hoersuppe = {
 				};
 			},
 			ondatastream : function(e) {
-				Ti.App.fireEvent('app:downloadprogress:'+filename, {
+				that.trigger('progress:' + filename, {
 					progress : 100 * parseFloat(e.progress)
 				});
 			}
@@ -31,28 +37,47 @@ var Hoersuppe = {
 		return xhr;
 	},
 	getAll : function() {
-		var folder = (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory) : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory);
-		var dir_files = folder.getDirectoryListing();
+		var folder = getFilehandle('');
+		var dir_files = folder.getDirectoryListing('');
 		var metalist = [];
 		for (var i = 1; i < dir_files.length; i++) {
 			if (!dir_files[i].match(/\.meta$/))
 				continue;
 			mp3name = dir_files[i].replace('.meta', '');
-			var meta = (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, dir_files[i]) : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, dir_files[i]);
-			var mp3 = (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, mp3name) : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, mp3name);
+			var meta = getFilehandle(dir_files[i]);
+			var mp3 = getFilehandle(mp3name);
 			if (mp3.exists()) {
 				var item = JSON.parse(meta.read().text);
 				item.url = mp3.nativePath;
 				metalist.unshift(item);
 			}
-
 		}
 		return metalist;
 	},
 	isSaved : function(url) {
-		var filename = Ti.Utils.md5HexDigest(url);
-		var file = (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, filename) : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, filename);
+		var file = getFilehandle(Ti.Utils.md5HexDigest(url));
 		return file.exist();
-	}
+	},
+	trigger : function(_event, _payload) {
+		console.log('Info: try to fire event ' + _event);
+		if (this.eventhandlers[_event]) {
+			for (var i = 0; i < this.eventhandlers[_event].length; i++) {
+				this.eventhandlers[_event][i].call(this, _payload);
+			}
+		}
+	},
+	on : function(_event, _callback) {
+		if (!this.eventhandlers[_event])
+			this.eventhandlers[_event] = [];
+		this.eventhandlers[_event].push(_callback);
+	},
+	off : function(_event, _callback) {
+		if (!this.eventhandlers[_event])
+			return;
+		var newArray = this.eventhandlers[_event].filter(function(element) {
+			return element != _callback;
+		});
+		this.eventhandlers[_event] = newArray;
+	},
 };
 module.exports = Hoersuppe;

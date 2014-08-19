@@ -33,6 +33,7 @@ module.exports = function() {
 
 		};
 	});
+	require('vendor/versionsreminder')();
 	return self;
 };
 // Jan Lorenzen 040 428133 105
