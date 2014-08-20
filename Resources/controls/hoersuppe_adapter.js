@@ -46,7 +46,7 @@ Module.prototype = {
 		for (var i = 0; i < cats.ul.li.length; i++) {
 			sections.push({
 				key : cats.ul.li[i].a.href.replace('#mz_', ''),
-				title : cats.ul.li[i].a.content
+				title : cats.ul.li[i].a.content,enabled:true
 			});
 		}
 		var sectionndx = -1;
@@ -65,9 +65,6 @@ Module.prototype = {
 					logo : 'http://hoersuppe.de/feature/cache/' + key + '.jpg'
 				});
 			}
-		}
-		for (var i = 0; i < items.length; i++) {
-			sections[i].setItems(items[i]);
 		}
 		return sections;
 
