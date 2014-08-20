@@ -1,29 +1,36 @@
 module.exports = function(_e) {
-	var closing = false;
-	var keys = [];
+	var AudioDownloaderns = {};
+	// ref lists of doanloader
+	var options = {};
 	var onClick = function(e) {
 		var item = e.section.getItemAt(e.itemIndex);
-		var onProgress = function(_p) {
-			if (!closing) {
-				var percent = Math.round(_p.progress);
-				item.down.image = (percent % 2) ? '/assets/down.png' : '/assets/down_.png';
+		var id = Ti.Utils.md5HexDigest(item.properties.itemId);
+		var eventhandler = {
+			onprogress : function(_p) {
+				var percent = _p.progress;
+				var old = (new Date()).getMilliseconds();
+				item.down.image = ((new Date()).getSeconds() % 2) ? '/assets/down.png' : '/assets/down_.png';
 				item.progress.width = percent + '%';
 				e.section.updateItemAt(e.itemIndex, item);
-			}
-		};
-		var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
-		var key = Ti.Utils.md5HexDigest(JSON.parse(item.properties.itemId).url);
-		keys.push(key);
-		var client = HoerSuppe.saveAudioFile(JSON.parse(item.properties.itemId), {
-			onsaved : function() {
+				var neu = (new Date()).getMilliseconds();
+				console.log(parseInt(neu) - parseInt(old));
+			},
+			onready : function() {
+				AudioDownloader.removeEventListener('progress');
+				AudioDownloader.removeEventListener('ready');
+				delete AudioDownloaderns[id];
 				item.down.opacity = 0;
 				item.progress.opacity = 0;
 				Ti.UI.createNotification({
 					message : 'Podcast erfolgreich auf diesem Dings runtergeladen.'
 				}).show();
 			}
-		});
-		Ti.App.addEventListener('app:downloadprogress:' + key, onProgress);
+		};
+		var AudioDownloader = new (require('controls/audiodownloader_adapter'))();
+		AudioDownloader.saveAudioFile(JSON.parse(item.properties.itemId));
+		AudioDownloader.addEventListener('ready', eventhandler.onready);
+		AudioDownloader.addEventListener('progress', eventhandler.onprogress);
+		AudioDownloaderns[id] = AudioDownloader;
 	};
 
 	var options = JSON.parse(_e);
@@ -160,9 +167,11 @@ module.exports = function(_e) {
 		if (!_items) {
 			alert('Dieser Feed kann nicht gelesen werden.');
 			self.close();
+			return;
 		}
 		var dataitems = [];
-		actionbar.setSubtitle(_items.length + ' Beiträge');
+		options.subtitle = _items.length + ' Beiträge';
+		actionbar && actionbar.setSubtitle(options.subtitle);
 		for (var i = 0; i < _items.length; i++) {
 			var item = _items[i];
 			var url = item.enclosure && item.enclosure.url;
@@ -203,50 +212,41 @@ module.exports = function(_e) {
 				actionbar = activity.actionBar;
 				actionbar.setDisplayHomeAsUp(true);
 				actionbar.setTitle(options.title);
+				options.subtitle && actionbar.setSubtitle(options.subtitle);
 				actionbar.onHomeIconItemSelected = function() {
-					Ti.UI.createNotification({
-						message : 'Download läuft im Hintergrund weiter'
-					}).show();
-					closing = true;
-					setTimeout(function() {
-						self.close();
-					}, 1000);
+
 				};
 				activity.onCreateOptionsMenu = function(e) {
 					e.menu.add({
-						title : 'Bestellen',
 						itemId : '0',
-						showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM,
-						icon : Ti.App.Android.R.drawable.ic_action_favorite
+						checkable : true,
+						checked : false,
+						title : 'Merkliste',
+						showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER,
 					}).addEventListener("click", function() {
+						var item = e.menu.findItem('0');
+						item.setChecked((item.isChecked()) ? false : true);
 						if (Ti.App.Properties.hasProperty('myfavs')) {
 							var favs = Ti.App.Properties.getList('myfavs');
 						} else
 							favs = [];
-						console.log(favs);
 						favs.unshift(options);
 						Ti.App.Properties.setList('myfavs', favs);
-						e.menu.findItem('0').setEnabled(false);
+
 					});
 				};
 			}
 		});
 	};
 	self.addEventListener('androidback', function() {
-		for (var i = 0; i < keys.length; i++) {
-			//Ti.App.removeEventListener('app:downloadprogress:' + keys[], onProgress);
+		for (var id in AudioDownloaderns) {
+			AudioDownloaderns[id].removeEventListener('ready');
+			AudioDownloaderns[id].removeEventListener('progress');
 		}
-		closing = true;
-		console.log('Info: detecting of androidback event');
-		/*
-		Ti.UI.createNotification({
-			message : 'Download läuft im Hintergrund weiter'
-		}).show();
-*/
 		setTimeout(function() {
 			console.log('Info: detecting of androidback event ==> try to close window');
 			self.close();
-		}, 500);
+		}, 10);
 	});
 	return self;
 };

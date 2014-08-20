@@ -1,42 +1,78 @@
+/* helper function to detect save place */
 function getFilehandle(file) {
 	return (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, file) : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, filename + '.meta');
 }
 
-var Hoersuppe = function() {
+/* Constructor */
+var Module = function() {
 	this.eventhandlers = [];
+	// collector for handlers
 	return this;
 };
 
-Hoersuppe.prototype = {
+/* prototyped methods */
+Module.prototype = {
 	saveAudioFile : function(item, callback) {
-		var that= this;
+		var that = this;
 		var filename = Ti.Utils.md5HexDigest(item.url);
 		var audiofile = getFilehandle(filename);
 		var metafile = getFilehandle(filename + '.meta');
 		var xhr = Ti.Network.createHTTPClient({
 			onload : function() {
-				console.log('Info: XHR-STATUS: ' + this.status);
 				if (this.status == 200) {
-					console.log('Info: STATUS 200');
 					audiofile.write(this.responseData);
-					console.log('Info: AUDIO saved');
 					metafile.write(JSON.stringify(item));
-					console.log('Info: META saved');
-					callback.onsaved && callback.onsaved();
+					that.trigger('ready', {});
 				};
 			},
-			ondatastream : function(e) {
-				that.trigger('progress:' + filename, {
-					progress : 100 * parseFloat(e.progress)
-				});
+			/* sending of progress for all subscribers */
+			ondatastream : function(_e) {
+				if (Math.round((new Date()).getTime() / 1000) % 2) {
+					that.trigger('progress', {
+						progress : Math.round(100 * parseFloat(_e.progress))
+					});
+				};
 			}
 		});
-		xhr.open('GET', item.url);
-		xhr.send();
+		xhr.open('GET', item.url, true);
+		xhr.send(null);
 		Ti.Media.vibrate();
 		return xhr;
+		// to have a reference for caler to abort()
 	},
-	getAll : function() {
+	getAllPodcasts : function() {
+		var cats = require('model/podcasts');
+		var sections = [];
+		for (var i = 0; i < cats.ul.li.length; i++) {
+			sections.push({
+				key : cats.ul.li[i].a.href.replace('#mz_', ''),
+				title : cats.ul.li[i].a.content
+			});
+		}
+		var sectionndx = -1;
+		var items = [];
+		for (var i = 0; i < cats.a.length; i++) {
+			if (cats.a[i].id) {
+				sectionndx++;
+				items[sectionndx] = [];
+				continue;
+			}
+			if (cats.a[i].content) {
+				var key = cats.a[i].href.substr(9);
+				items[sectionndx].push({
+					key : key,
+					title : cats.a[i].content,
+					logo : 'http://hoersuppe.de/feature/cache/' + key + '.jpg'
+				});
+			}
+		}
+		for (var i = 0; i < items.length; i++) {
+			sections[i].setItems(items[i]);
+		}
+		return sections;
+
+	},
+	getAllAudioFiles : function() {
 		var folder = getFilehandle('');
 		var dir_files = folder.getDirectoryListing('');
 		var metalist = [];
@@ -59,19 +95,20 @@ Hoersuppe.prototype = {
 		return file.exist();
 	},
 	trigger : function(_event, _payload) {
-		console.log('Info: try to fire event ' + _event);
+		//console.log('Info: try to fire event ' + _event);
 		if (this.eventhandlers[_event]) {
 			for (var i = 0; i < this.eventhandlers[_event].length; i++) {
 				this.eventhandlers[_event][i].call(this, _payload);
 			}
 		}
 	},
-	on : function(_event, _callback) {
+	addEventListener : function(_event, _callback) {
+		console.log('Info: try to add event ');
 		if (!this.eventhandlers[_event])
 			this.eventhandlers[_event] = [];
 		this.eventhandlers[_event].push(_callback);
 	},
-	off : function(_event, _callback) {
+	removeEventListener : function(_event, _callback) {
 		if (!this.eventhandlers[_event])
 			return;
 		var newArray = this.eventhandlers[_event].filter(function(element) {
@@ -80,4 +117,5 @@ Hoersuppe.prototype = {
 		this.eventhandlers[_event] = newArray;
 	},
 };
-module.exports = Hoersuppe;
+
+module.exports = Module;

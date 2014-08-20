@@ -1,6 +1,7 @@
-var HoerSuppe = require('controls/hoersuppe_adapter');
+
 
 module.exports = function() {
+	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
 	});
@@ -73,7 +74,7 @@ module.exports = function() {
 		headerTitle : null
 	})];
 	var updateList = function() {
-		var offs = HoerSuppe.getAll(), items = [];
+		var offs = HoerSuppe.getAllAudioFiles(), items = [];
 		if (!offs)
 			return;
 		for (var i = 0; i < offs.length; i++) {

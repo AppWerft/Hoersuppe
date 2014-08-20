@@ -19,24 +19,37 @@ module.exports = function(_key, _callback) {
 		self.open('GET', 'http://hoersuppe.de/podcast/' + _key, true);
 		self.send();
 	}
-
 	getUrl(_key, function(_url) {
-		if (Ti.App.Properties.hasProperty('ITEMS' + _url)) {
-			//callback(Ti.App.Properties.getList('ITEMS' + _url));
+		var cache = Ti.Filesystem.getFile(Ti.Filesystem.getApplicationCacheDirectory(),'CACHE_' + Ti.Utils.md5HexDigest(_url));
+		if (cache.exists()) {
+			var md5 = Ti.Utils.md5HexDigest(cache.read().text);
+			var items = JSON.parse(cache.read().text);
+			_callback(items);
 		}
+		Ti.UI.createNotification({
+			message : 'Hole den Feed aus dem Netz.'
+		}).show();
 		var xhr = Ti.Network.createHTTPClient({
 			onload : function() {
-				console.log(this.responseText.substr(32));
 				Ti.UI.createNotification({
 					message : Math.round(this.responseText.length / 1000) + ' kB'
 				}).show();
 				try {
-					var items = new (require("vendor/XMLTools"))(this.responseXML).toObject().channel.item;
-					console.log(items);				
-					Ti.App.Properties.setList('ITEMS' + url, items);
-					_callback(items);
+					var rssobj = new (require("vendor/XMLTools"))(this.responseXML).toObject();
+					_callback(rssobj.channel.item);
+					cache.write(JSON.stringify(rssobj.channel.item));
+					console.log('Info: ITEMS saved');
 				} catch(E) {
-					_callback(null);
+					var yql = 'SELECT * FROM xml WHERE url="http://' + _url + '"';
+					console.log(yql);
+					Ti.Yahoo.yql(yql, function(_y) {
+						if (_y.data) {
+							var items = _y.data.rss.channel.item;
+							cache.write(JSON.stringify(items));
+							_callback(items);
+						} else _callback(null);
+					});
+					//_callback(null);
 					console.log(E);
 				}
 			}

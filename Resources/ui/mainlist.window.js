@@ -1,10 +1,10 @@
-module.exports = function() {
+module.exports = function(HoerSuppe) {
 	var self = Ti.UI.createWindow({
 		title : 'Hörsuppe',
 		backgroundColor : '#fff',
 		fullscreen : true,
 		exitOnClose : true
-		
+
 	});
 	self.list = Ti.UI.createListView({
 		templates : {
@@ -12,6 +12,8 @@ module.exports = function() {
 		},
 		defaultItemTemplate : 'main',
 	});
+	console.log(HoerSuppe);
+	console.log(HoerSuppe.getAllPodcasts());
 	var cats = require('model/podcasts');
 	var sections = [];
 	for (var i = 0; i < cats.ul.li.length; i++) {
@@ -59,7 +61,6 @@ module.exports = function() {
 					image : 'http://hoersuppe.de/feature/cache/' + key + '.jpg'
 				}
 			});
-
 		}
 	}
 	for (var i = 0; i < items.length; i++) {
@@ -69,7 +70,8 @@ module.exports = function() {
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
 		require('ui/rsslist.window')(_e.itemId).open();
-	});if (Ti.Android) {
+	});
+	if (Ti.Android) {
 		self.addEventListener("open", function() {
 			var activity = self.getActivity();
 			if (activity && activity.actionBar) {
