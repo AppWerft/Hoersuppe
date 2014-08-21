@@ -1,4 +1,4 @@
-module.exports = function(_e) {
+module.exports = function(HoerSuppe, _e) {
 	var AudioDownloaderns = {};
 	// ref lists of doanloader
 	var options = {};
@@ -41,6 +41,11 @@ module.exports = function(_e) {
 		title : options.title,
 		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 	});
+	var style;
+	self.spinner = Ti.UI.createActivityIndicator({
+		style : (Ti.Android) ? Ti.UI.ActivityIndicatorStyle.BIG : Ti.UI.iPhone.ActivityIndicatorStyle.BIG,
+	});
+	self.add(self.spinner);
 	self.list = Ti.UI.createListView({
 		templates : {
 			'rss' : {
@@ -163,7 +168,9 @@ module.exports = function(_e) {
 		})]
 	});
 	self.add(self.list);
+	self.spinner.show();
 	require('controls/getrss')(options.key, function(_items) {
+		self.spinner.hide();
 		if (!_items) {
 			alert('Dieser Feed kann nicht gelesen werden.');
 			self.close();
@@ -210,7 +217,7 @@ module.exports = function(_e) {
 			var activity = self.getActivity();
 			if (activity && activity.actionBar) {
 				actionbar = activity.actionBar;
-				actionbar.setDisplayHomeAsUp(true);
+				actionbar.setDisplayHomeAsUp(false);
 				actionbar.setTitle(options.title);
 				options.subtitle && actionbar.setSubtitle(options.subtitle);
 				actionbar.onHomeIconItemSelected = function() {
@@ -220,19 +227,18 @@ module.exports = function(_e) {
 					e.menu.add({
 						itemId : '0',
 						checkable : true,
-						checked : false,
+						checked : HoerSuppe.isFav(options),
 						title : 'Merkliste',
 						showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER,
 					}).addEventListener("click", function() {
 						var item = e.menu.findItem('0');
-						item.setChecked((item.isChecked()) ? false : true);
-						if (Ti.App.Properties.hasProperty('myfavs')) {
-							var favs = Ti.App.Properties.getList('myfavs');
-						} else
-							favs = [];
-						favs.unshift(options);
-						Ti.App.Properties.setList('myfavs', favs);
-
+						if (item.isChecked()) {
+							item.setChecked(false);
+							HoerSuppe.removeFav(options);
+						} else {
+							item.setChecked(true);
+							HoerSuppe.addFav(options);
+						}
 					});
 				};
 			}

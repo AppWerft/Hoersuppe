@@ -6,68 +6,82 @@ function getFilehandle(file) {
 /* Constructor */
 var Module = function() {
 	this.eventhandlers = [];
-	// collector for handlers
 	return this;
 };
 
 /* prototyped methods */
 Module.prototype = {
-	saveAudioFile : function(item, callback) {
-		var that = this;
-		var filename = Ti.Utils.md5HexDigest(item.url);
-		var audiofile = getFilehandle(filename);
-		var metafile = getFilehandle(filename + '.meta');
-		var xhr = Ti.Network.createHTTPClient({
-			onload : function() {
-				if (this.status == 200) {
-					audiofile.write(this.responseData);
-					metafile.write(JSON.stringify(item));
-					that.trigger('ready', {});
-				};
-			},
-			/* sending of progress for all subscribers */
-			ondatastream : function(_e) {
-				if (Math.round((new Date()).getTime() / 1000) % 2) {
-					that.trigger('progress', {
-						progress : Math.round(100 * parseFloat(_e.progress))
-					});
-				};
-			}
+	getAllFavs : function() {
+		if (Ti.App.Properties.hasProperty('myfavs')) {
+			var favs = Ti.App.Properties.getList('myfavs');
+		} else
+			favs = [];
+		return favs;
+	},
+	addFav : function(fav) {
+		var favs = this.getAllFavs();
+		favs.unshift(fav);
+		Ti.App.Properties.setList('myfavs', favs);
+	},
+	removeFav : function(delfav) {
+		var oldfavs = this.getAllFavs();
+		var newfavs = [];
+		oldfavs.forEach(function(thisfav) {
+			if (delfav.key != thisfav.key)
+				newfavs.push(thisfav);
 		});
-		xhr.open('GET', item.url, true);
-		xhr.send(null);
-		Ti.Media.vibrate();
-		return xhr;
-		// to have a reference for caler to abort()
+		oldfavs = null;
+		Ti.App.Properties.setList('myfavs', newfavs);
+	},
+	isFav : function(fav) {
+		var favs = this.getAllFavs();
+		var found = false;
+		favs.forEach(function(f) {
+			console.log(f.key + '  ' + fav.key);
+			if (fav.key == f.key)
+				found = true;
+		});
+		return found;
+
+	},
+	setSelectedPodcasts : function(_res) {
+		console.log('Info: Setting Auswahl');
+		console.log(_res);
+		if (_res)
+			Ti.App.Properties.setList('LIST_OFSELECTEDPODCASTCATEGORIES', _res.selected);
 	},
 	getAllPodcasts : function() {
-		var cats = require('model/podcasts');
 		var sections = [];
-		for (var i = 0; i < cats.ul.li.length; i++) {
+		var selects = Ti.App.Properties.getList('LIST_OFSELECTEDPODCASTCATEGORIES');
+		var cats = require('model/podcasts');
+		cats.ul.li.forEach(function(cat) {
+			var selected = (selects == null || selects == [] || selects.indexOf(cat.a.content) != -1)//
+			? true : false;
 			sections.push({
-				key : cats.ul.li[i].a.href.replace('#mz_', ''),
-				title : cats.ul.li[i].a.content,enabled:true
+				key : cat.a.href.split('_')[1],
+				title : cat.a.content,
+				selected : selected,
+				podcasts : []
 			});
-		}
+		});
 		var sectionndx = -1;
 		var items = [];
-		for (var i = 0; i < cats.a.length; i++) {
-			if (cats.a[i].id) {
+		cats.a.forEach(function(cat) {
+			if (cat.id) {
 				sectionndx++;
 				items[sectionndx] = [];
-				continue;
-			}
-			if (cats.a[i].content) {
-				var key = cats.a[i].href.substr(9);
-				items[sectionndx].push({
+			} else if (cat.content) {
+				var key = cat.href.substr(9);
+				sections[sectionndx].podcasts.push({
 					key : key,
-					title : cats.a[i].content,
+					title : cat.content,
+					summary : cat.summary,
 					logo : 'http://hoersuppe.de/feature/cache/' + key + '.jpg'
 				});
 			}
-		}
+		});
+		console.log(sections);
 		return sections;
-
 	},
 	getAllAudioFiles : function() {
 		var folder = getFilehandle('');

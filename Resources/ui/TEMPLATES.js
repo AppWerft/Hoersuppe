@@ -18,6 +18,7 @@ exports.main = {
 		properties : {
 			layout : 'vertical',
 			left : 100,
+			top : 5,
 			height : Ti.UI.SIZE,
 		},
 		childTemplates : [{
@@ -33,7 +34,22 @@ exports.main = {
 				},
 				left : 0,
 				right : 20,
-				top : 5
+				top : 0
+			}
+		}, {
+			type : 'Ti.UI.Label',
+			bindId : 'summary',
+			properties : {
+				color : '#555',
+				width : Ti.UI.FILL,
+				height : Ti.UI.SIZE,
+				font : {
+					fontSize : 16,
+				},
+				left : 0,
+				right : 20,
+				top : 5,
+				bottom : 10
 			}
 		}]
 	}],

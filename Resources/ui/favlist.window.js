@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function(HoerSuppe) {
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
 	});
@@ -12,7 +12,7 @@ module.exports = function() {
 		headerTitle : null
 	})];
 	var updateList = function() {
-		var favs = Ti.App.Properties.getList('myfavs'), items = [];
+		var favs = HoerSuppe.getAllFavs(), items = [];
 		if (!favs) return;
 		for (var i = 0; i < favs.length; i++) {
 			var fav = favs[i];
@@ -38,7 +38,7 @@ module.exports = function() {
 	};
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
-		require('ui/rsslist.window')(_e.itemId).open();
+		require('ui/rsslist.window')(HoerSuppe,_e.itemId).open();
 	});
 	self.addEventListener('focus', updateList);
 	return self;

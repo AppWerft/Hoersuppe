@@ -4,6 +4,9 @@ module.exports = function(_key, _callback) {
 			callback(Ti.App.Properties.getString('RSSURL' + key));
 			return;
 		}
+		Ti.UI.createNotification({
+			message : 'Hole FeedAdresse aus dem Netz.'
+		}).show();
 		var self = Ti.Network.createHTTPClient({
 			onload : function() {
 				var page = this.responseText;
@@ -26,8 +29,8 @@ module.exports = function(_key, _callback) {
 			var items = JSON.parse(cache.read().text);
 			_callback(items);
 		}
-		Ti.UI.createNotification({
-			message : 'Hole den Feed aus dem Netz.'
+		else Ti.UI.createNotification({
+			message : 'Hole den Feed aus dem Netz …'
 		}).show();
 		var xhr = Ti.Network.createHTTPClient({
 			onload : function() {

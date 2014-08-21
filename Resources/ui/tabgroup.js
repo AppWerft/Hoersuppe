@@ -4,6 +4,7 @@ module.exports = function(HoerSuppe) {
 		exitOnClose : true,
 		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 	});
+
 	var tab1 = Ti.UI.createTab({
 		window : require('ui/mainlist.window')(HoerSuppe),
 		title : 'alle Podcasts'
@@ -21,37 +22,65 @@ module.exports = function(HoerSuppe) {
 	self.addTab(tab3);
 
 	self.addEventListener('open', function() {
-		var Dialogs = require("yy.tidialogs");
 		var activity = self.getActivity();
 		if (!activity.actionBar) {
 			console.log('Warning: no actionbar');
 			return;
 		}
-		//var abx = require('com.alcoapps.actionbarextras');
-		//abx.setTitleFont('Sprint');
 		activity.actionBar.setTitle('Hörsuppe');
-		activity.actionBar.setSubtitle('deutsche podcasts');
+		activity.actionBar.setSubtitle('deutschsprachige podcasts');
 		activity.onCreateOptionsMenu = function(e) {
+			var searchadded = false;
+			e.menu.add({
+				itemId : '1',
+				title : 'Suche',
+				showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM,
+				icon : Ti.App.Android.R.drawable.ic_action_search
+			}).addEventListener("click", function() {
+				console.log('~~~~~~~~~~~~~~~~');
+				self.setActiveTab(0);
+				var list = tab1.getWindow().list;
+				if (list.searchView) {
+					console.log('Info: try to hide searchBar');
+					list.searchView.setHeight(0);
+				} else {
+					list.searchView = Ti.UI.Android.createSearchView({
+						hintText : "Podcast-Suche",
+						height : 50
+					});
+				}
+
+			});
 			e.menu.add({
 				itemId : '0',
 				title : '  ',
 				showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM,
-				icon : Ti.App.Android.R.drawable.ic_action_view_as_list
+				icon : Ti.App.Android.R.drawable.ic_action_filter
 			}).addEventListener("click", function() {
-				var picker = Dialogs.createMultiPicker({
+				self.setActiveTab(0);
+				var sections = HoerSuppe.getAllPodcasts();
+				var options = [], selected = [];
+				sections.forEach(function(section) {
+					options.push(section.title);
+					if (section.selected)
+						selected.push(section.title);
+				});
+
+				var picker = require("yy.tidialogs").createMultiPicker({
 					title : "Podcastkategoriefilter",
-					options : ["Genießen", "Geschichten", "Gesellschaft", "Interview", "Kultur", "Lernen", "Medien", "Podcasting", "Spiele", "Sport", "Technik", "Wissenschaft", " … unsortiert"],
-					selected : ["B", "C"], // <-- optional
-					okButtonTitle : "Übernehmen", // <-- optional
-					cancelButtonTitle : "Abbruch" // <-- optional
+					options : options,
+					selected : selected,
+					okButtonTitle : "Übernehmen",
+					cancelButtonTitle : "Abbruch"
 				});
 				picker.addEventListener('click', function(e) {
-					var indexes = e.indexes;
-					console.log(indexes);
-					// selected indexes
-					var selections = e.selections;
-					console.log(selections);
-					// the actual selected options.
+					console.log(e.selections);
+					console.log(e.indexes);
+					HoerSuppe.setSelectedPodcasts({
+						selected : e.selections,
+						options : options
+					});
+					tab1.getWindow().updateList();
 				});
 				picker.show();
 			});
