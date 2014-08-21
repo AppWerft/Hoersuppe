@@ -49,7 +49,37 @@ exports.main = {
 				left : 0,
 				right : 20,
 				top : 5,
-				bottom : 10
+				bottom : 5
+			}
+		}, {
+			type : 'Ti.UI.Label',
+			bindId : 'entries',
+			properties : {
+				color : '#555',
+				width : Ti.UI.FILL,
+				height : Ti.UI.SIZE,
+				font : {
+					fontSize : 14,
+				},
+				left : 0,
+				right : 20,
+				top : 0,
+				bottom : 2
+			}
+		}, {
+			type : 'Ti.UI.Label',
+			bindId : 'lastitem',
+			properties : {
+				color : '#555',
+				width : Ti.UI.FILL,
+				height : Ti.UI.SIZE,
+				font : {
+					fontSize : 14,
+				},
+				left : 0,
+				right : 20,
+				top : 2,
+				bottom : 2
 			}
 		}]
 	}],

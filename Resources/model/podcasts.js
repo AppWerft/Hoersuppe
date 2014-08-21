@@ -626,46 +626,46 @@ module.exports = {
 		"name" : "mz_podcasting"
 	}, {
 		"href" : "/podcast/das-podcast-ding",
-		"summary" : "",
+		"summary" : "In der PodWG trifft sich das Team von Das Podcast-Ding mit Besuchern und sprechen darüber, was Podcasts sind und wie sie produziert werden. Dazu laden sie ab und zu auch Gäste ein, die Ihnen erklären, wie es wirklich geht. ",
 		"content" : "Das Podcast-Ding"
 	}, {
 		"href" : "/podcast/discussa",
-		"summary" : "",
+		"summary" : "Jan und Henrik sind seit einiger Zeit Podcaster und betreiben bereits einige Podcasts. Jetzt sprechen sie über die Formate anderer Podcaster.",
 		"content" : "Discussa"
 	}, {
 		"href" : "/podcast/lautsprecher",
-		"summary" : "",
+		"summary" : "Der Lautsprecher ist ein Forum für Podcaster und solche, die es vielleicht werden wollen. Tim Pritlove spricht mit ausgewählten Gästen über Technik, Kultur und Methoden des Podcastings.",
 		"content" : "Lautsprecher"
 	}, {
 		"href" : "/podcast/ohrenbluten",
-		"summary" : "",
+		"summary" : "Kritik hat zwei Namen! Tackleman und der_sema hören Ihnen bis dato unbekannte Podcasts und bewerten diese nach bestem Gewissen. Kriterien hierbei sind Unterhaltungswert, Audioqualität, sowie Inhalt und selbstverständlich persönlicher Eindruck.",
 		"content" : "Ohrenbluten"
 	}, {
 		"href" : "/podcast/podunion-magazin",
-		"summary" : "",
+		"summary" : "Im PodUnion Podcast Magazin sprechen wir regelmässig in einer stetig wechselnden Zusammensetzung über aktuelle Themen rund um das Podcasting. ",
 		"content" : "PodUnion Magazin"
 	}, {
 		"href" : "/podcast/sendungsbewusststein",
-		"summary" : "",
+		"summary" : "Ich spreche Podcastern über Ihre Casts, wie sie dazu gekommen sind und was Ihnen an dieser Verbreitungsform so gefällt. Es geht primär nicht um die Technik, sondern um die Person. ",
 		"content" : "Sendungsbewusststein"
 	}, {
 		"href" : "/podcast/wir-hoeren-stimmen",
-		"summary" : "",
+		"summary" : "Wir besprechen hier in einem kurzen Format neue oder relativ unbekannte Podcasts, die unseres Erachtens mehr Aufmerksamkeit verdient haben. That's about it.",
 		"content" : "Wir hören Stimmen"
 	}, {
 		"id" : "mz_spiele",
 		"name" : "mz_spiele"
 	}, {
 		"href" : "/podcast/angespielt",
-		"summary" : "",
+		"summary" : "Der Versuch, mehrere Meinungen zu einem Spiel oder Metathema zusammenzubringen und auszudiskutieren. Meistens sind es genau so viele Leute wie Meinungen, selten weniger, mindestens aber immer eine Frau. Es werden keine Sterne, Noten oder Prozentwertungen vergeben. Stattdessen wird festgelegt, wie viel das Spiel dem Spieler wert ist. Und falls wir tatsächlich mal ein Spiel durchgespielt haben, heißt es: [angespoilt].",
 		"content" : "Angespielt"
 	}, {
 		"href" : "/podcast/dsaintime",
-		"summary" : "",
+		"summary" : "Das Schwarze Auge Rollenspiel Podcast",
 		"content" : "DSA In Time"
 	}, {
 		"href" : "/podcast/gameone",
-		"summary" : "",
+		"summary" : "Die MTV GameOne-Redaktion lässt TV mal TV sein und schwingt sich beschwingt vor's Podcast-Mikro, um der gepflegten Dampfplauderei zu frönen. Angesagt sind aktuelle Themen aus der Videospiel-Welt, großangelegte Retro-Runden mit Nostalgiebonus und kritische Kino-Konversationen.",
 		"content" : "Gameone Plauschangriff"
 	}, {
 		"href" : "/podcast/games-and-macs",

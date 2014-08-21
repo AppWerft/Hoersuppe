@@ -40,7 +40,7 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:versionCode="17" android:versionName="1.0.17">
-            <application android:theme="@style/Theme.Hoersuppe">
+            <application android:theme="@style/Theme.Hoersuppe" android:largeHeap="true">
                 <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="16"/>
             </application>
         </manifest>

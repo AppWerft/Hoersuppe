@@ -28,7 +28,7 @@ module.exports = function(HoerSuppe) {
 			return;
 		}
 		activity.actionBar.setTitle('Hörsuppe');
-		activity.actionBar.setSubtitle('deutschsprachige podcasts');
+		activity.actionBar.setSubtitle('Deutschsprachige Podcasts');
 		activity.onCreateOptionsMenu = function(e) {
 			var searchadded = false;
 			e.menu.add({

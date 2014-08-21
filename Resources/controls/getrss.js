@@ -36,7 +36,7 @@ module.exports = function(_key, _callback) {
 			onload : function() {
 				Ti.UI.createNotification({
 					message : Math.round(this.responseText.length / 1000) + ' kB'
-				}).show();
+				});
 				try {
 					var rssobj = new (require("vendor/XMLTools"))(this.responseXML).toObject();
 					_callback(rssobj.channel.item);
