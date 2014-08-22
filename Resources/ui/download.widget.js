@@ -1,5 +1,5 @@
 module.exports = function(_feed) {
-	var getStrip = function(_eventname, _text) {
+	var getStrip = function(_eventname) {
 		var view = Ti.UI.createView({
 			top : 0,
 			height : Ti.UI.SIZE,
@@ -13,7 +13,6 @@ module.exports = function(_feed) {
 		label = Ti.UI.createLabel({
 			top : 10,
 			left : 0,
-			text : _text,
 			width : Ti.UI.FILL,
 			textAlign : 'left',
 			font : {
@@ -34,7 +33,7 @@ module.exports = function(_feed) {
 		RSSADAPTER.addEventListener(_eventname + ':start', function(_e) {
 			bar.show();
 			console.log('Info: ' + _eventname + ':start received ' + _e.value);
-			label.setLeft(15);
+			label.setLeft(20);
 			if (_e && _e.message)
 				label.setText(_e.message);
 			spinner.show();
@@ -43,7 +42,7 @@ module.exports = function(_feed) {
 			console.log('Info: ' + _eventname + ':progress ' + _e.value);
 			if (_e && _e.message)
 				label.setText(_e.message);
-			label.setLeft(15);
+			label.setLeft(20);
 			bar.setValue(_e.value);
 		});
 		RSSADAPTER.addEventListener(_eventname + ':ready', function(_e) {
@@ -55,9 +54,10 @@ module.exports = function(_feed) {
 			spinner.hide();
 		});
 		return view;
+
+		return view;
 	};
 	/* START */
-	var RSSADAPTER = new (require('controls/rss_adapter'))(_feed.key);
 	var self = Ti.UI.createView();
 	self.add(Ti.UI.createView({
 		backgroundColor : '#000',
@@ -66,32 +66,22 @@ module.exports = function(_feed) {
 	}));
 	self.list = Ti.UI.createView({
 		layout : 'vertical',
-		width : 200,
+		width : 240,
 		backgroundColor : 'white',
 		height : Ti.UI.SIZE
 	});
-	/*self.list.add(Ti.UI.createLabel({
-		text : _feed.title,
-		color : 'white',
-		backgroundColor : 'black',
-		height : Ti.UI.SIZE,
-		width : Ti.UI.FILL,
-		top : 0,
-		font : {
-			fontFamily : 'Sprint',
-			fontSize : 20
-		}
-	}));*/
 	self.list.add(Ti.UI.createImageView({
 		image : _feed.logo,
 		defaultImage : '/assets/default.png',
 		width : Ti.UI.FILL,
-		height : 200,
-		top : 0
+		height : 240,
+		top : 0,
+		bottom : 20
 	}));
-	self.list.add(getStrip('geturl', 'Hole Podcast-Adresse'));
-	self.list.add(getStrip('getfeed', 'Hole Podcast-Feed'));
-	self.list.add(getStrip('parse', 'Analyse Podcast'));
+	var RSSADAPTER = new (require('controls/rss_adapter'))();
+	self.list.add(getStrip('geturl'));
+	self.list.add(getStrip('getfeed'));
+	RSSADAPTER.start(_feed.key);
 	self.add(self.list);
 	return self;
 };
