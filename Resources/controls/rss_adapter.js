@@ -105,7 +105,7 @@ var Module = function(_key) {
 								result : items
 							});
 						} else {
-							console.log('Error: Feed nicht lesbar')
+							console.log('Error: Feed nicht lesbar');
 						}
 					});
 					//_callback(null);
