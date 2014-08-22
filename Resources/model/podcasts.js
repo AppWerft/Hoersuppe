@@ -839,9 +839,7 @@ module.exports = {
 		"content" : "Gadget Radio"
 	}, {
 		"href" : "/podcast/geek-week",
-		"summary" : "Nothing But Tech - Aus Deutschland, der Schweiz und den USA. geek-week.de berichtet jede Woche mit immer wechselnden Gesprächspartner über die neusten Entwicklungen aus der Online- und Technik-Welt. geek-week wird von Frederic Lardinois in den USA, Marcus Schuler in München und Jean-Claude Frick in Bern gemacht.
-
-",
+		"summary" : "Nothing But Tech - Aus Deutschland, der Schweiz und den USA. geek-week.de berichtet jede Woche mit immer wechselnden Gesprächspartner über die neusten Entwicklungen aus der Online- und Technik-Welt. geek-week wird von Frederic Lardinois in den USA, Marcus Schuler in München und Jean-Claude Frick in Bern gemacht.",
 		"content" : "Geek-Week"
 	}, {
 		"href" : "/podcast/geekstammtisch",

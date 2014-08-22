@@ -1,9 +1,7 @@
-module.exports = function(_channel,_items) {
+module.exports = function(_channel, _items) {
 	var feed = _items;
 	var channel = _channel;
-	console.log(channel);
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
-
 	var AudioDownloaderns = {};
 	// ref lists of downloader
 	var options = {};
@@ -214,28 +212,27 @@ module.exports = function(_channel,_items) {
 			var activity = self.getActivity();
 			if (activity && activity.actionBar) {
 				actionbar = activity.actionBar;
-				actionbar.setDisplayHomeAsUp(false);
+				actionbar.setDisplayHomeAsUp(true);
 				actionbar.setTitle(channel.title);
 				options.subtitle && actionbar.setSubtitle(options.subtitle);
 				actionbar.onHomeIconItemSelected = function() {
-
+					self.close();
 				};
 				activity.onCreateOptionsMenu = function(e) {
-
 					e.menu.add({
 						itemId : '0',
 						checkable : true,
-						checked : HoerSuppe.isFav(options),
+						checked : HoerSuppe.isFav(channel),
 						title : 'Merkliste',
 						showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER,
 					}).addEventListener("click", function() {
 						var item = e.menu.findItem('0');
 						if (item.isChecked()) {
 							item.setChecked(false);
-							HoerSuppe.removeFav(options);
+							HoerSuppe.removeFav(channel);
 						} else {
 							item.setChecked(true);
-							HoerSuppe.addFav(options);
+							HoerSuppe.addFav(channel);
 						}
 					});
 					//activity.invalidateOptionsMenu();

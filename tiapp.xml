@@ -38,9 +38,9 @@
             </dict>
         </plist>
     </ios>
-    <version>1.0.19</version>
+    <version>1.1.0</version>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="19" android:versionName="1.0.19">
+        <manifest android:versionCode="20" android:versionName="1.1.1">
             <application android:theme="@style/Theme.Hoersuppe" android:largeHeap="true">
                 <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="16"/>
             </application>

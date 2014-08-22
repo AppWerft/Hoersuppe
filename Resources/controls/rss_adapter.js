@@ -42,7 +42,7 @@ Module.prototype = {
 				counter += 0.05;
 			}, 500);
 			var xhr = Ti.Network.createHTTPClient({
-				timeout : 30000,
+				timeout : 30000,autoRedirect :false,cache:false,
 				ondatastream : function(_e) {
 					if (_e.progress > 0)
 						that.fireEvent('getfeed:progress', {
@@ -58,10 +58,10 @@ Module.prototype = {
 				},
 				onload : function() {
 					clearInterval(cron);
-					var head = this.responseText.substr(0, 50);
+					var head = this.responseText;
 					console.log(this.getResponseHeader('Server'));
 					console.log(this.getResponseHeader('Content-Type'));
-					console.log(head);
+					
 					if (this.responseXML) {
 						var rssobj = new (require("vendor/XMLTools"))(this.responseXML).toObject();
 						that.fireEvent('getfeed:ready', {
@@ -70,6 +70,7 @@ Module.prototype = {
 						});
 						that.cache.write(JSON.stringify(rssobj.channel.item));
 					} else {
+						console.log(head);
 						var counter = 0;
 						/*var cron = setInterval(function() {
 							counter += 0.1;
@@ -102,8 +103,9 @@ Module.prototype = {
 				}
 			});
 			xhr.open('GET', _url, true);
-			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2');
+			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (KHTML, like Gecko FeedBurn planet)');
 			xhr.setRequestHeader('Accept', 'application/rss+xml');
+			xhr.setRequestHeader('Cookie', null);
 			xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate');
 			xhr.send();
 		});
@@ -157,7 +159,6 @@ Module.prototype = {
 		self.open('GET', 'http://hoersuppe.de/podcast/' + key, true);
 		self.send();
 	},
-
 	fireEvent : function(_event, _payload) {
 		//console.log('Info: try to fire event ' + _event);
 		if (this.eventhandlers[_event]) {

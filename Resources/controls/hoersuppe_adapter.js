@@ -19,11 +19,15 @@ HoersuppenModule.prototype = {
 		return favs;
 	},
 	addFav : function(fav) {
+		console.log('addfav');
+		console.log(fav);
 		var favs = this.getAllFavs();
 		favs.unshift(fav);
 		Ti.App.Properties.setList('myfavs', favs);
 	},
 	removeFav : function(delfav) {
+		console.log('delfav');
+		console.log(delfav);
 		var oldfavs = this.getAllFavs();
 		var newfavs = [];
 		oldfavs.forEach(function(thisfav) {
@@ -34,6 +38,8 @@ HoersuppenModule.prototype = {
 		Ti.App.Properties.setList('myfavs', newfavs);
 	},
 	isFav : function(fav) {
+		console.log('isfav');
+		console.log(fav);
 		var favs = this.getAllFavs();
 		var found = false;
 		favs.forEach(function(f) {

@@ -84,7 +84,21 @@ module.exports = function() {
 				setTimeout(function() {
 					self.remove(dialog);
 				}, 100);
+			} else {
+				dialog.list.animate({
+					duration : 700,
+					transform : Ti.UI.create2DMatrix({
+						scale : 0.01,
+						rotate : 800
+					})
+				}, function() {
+					self.remove(dialog);
+				});
+				Ti.UI.createNotification({
+					message : 'Feed leider nicht auswertbar …'
+				}).show();
 			}
+
 		};
 		var dialog = require('ui/download.widget')(channel, doOpenFeedWindow);
 		self.add(dialog);
