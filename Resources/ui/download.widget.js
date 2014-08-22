@@ -1,26 +1,26 @@
 module.exports = function(_feed, _callback) {
 	var getStrip = function(_eventname) {
-		var view = Ti.UI.createView({
+		this.view = Ti.UI.createView({
 			top : 0,
 			height : Ti.UI.SIZE,
 			width : '90%'
 		});
-		var spinner = Ti.UI.createActivityIndicator({
+		this.spinner = Ti.UI.createActivityIndicator({
 			top : 10,
 			left : 0
 		});
-		view.add(spinner);
-		label = Ti.UI.createLabel({
+		this.view.add(this.spinner);
+		this.label = Ti.UI.createLabel({
 			top : 10,
 			left : 0,
-			width : Ti.UI.FILL,
+			width : Ti.UI.FILL,height:20,
 			textAlign : 'left',
 			font : {
 				fontSize : 12
 			}
 		});
-		view.add(label);
-		var bar = Ti.UI.createProgressBar({
+		this.view.add(this.label);
+		this.bar = Ti.UI.createProgressBar({
 			top : 10,
 			height : 30,
 			width : Ti.UI.FILL,
@@ -29,28 +29,29 @@ module.exports = function(_feed, _callback) {
 			bottom : 5,
 			max : 1
 		});
-		view.add(bar);
-		bar.show();
+		this.view.add(this.bar);
+		this.bar.show();
+		var that = this;
 		FeedAdapter.addEventListener(_eventname + ':start', function(_e) {
-			label.setLeft(20);
+			that.label.setLeft(20);
 			if (_e && _e.message)
-				label.setText(_e.message);
-			spinner.show();
+				that.label.setText(_e.message);
+			that.spinner.show();
 		});
 		FeedAdapter.addEventListener(_eventname + ':progress', function(_e) {
 			if (_e && _e.message)
-				label.setText(_e.message);
-			label.setLeft(20);
-			bar.setValue(_e.value);
+				that.label.setText(_e.message);
+			that.label.setLeft(20);
+			that.bar.setValue(_e.value);
 		});
 		FeedAdapter.addEventListener(_eventname + ':ready', function(_e) {
-			label.setLeft(0);
+			that.label.setLeft(0);
 			if (_e && _e.message)
-				label.setText(_e.message);
-			bar.setValue(1);
-			spinner.hide();
+				that.label.setText(_e.message);
+			that.bar.setValue(1);
+			that.spinner.hide();
 		});
-		return view;
+		return this.view;
 	};
 	/* START */
 	var self = Ti.UI.createView();

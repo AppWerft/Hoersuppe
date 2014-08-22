@@ -1,4 +1,4 @@
-const USINGCACHE = false;
+const USINGCACHE = true;
 
 var Module = function(_key) {
 	if (_key && ( typeof _key) == 'String')
@@ -12,7 +12,7 @@ Module.prototype = {
 			this.key = _key;
 		var that = this;
 		this.fireEvent('geturl:start', {
-			message : 'Feed-Suche für ' + this.key
+			message : 'Feed-Suche für „' + this.key + '“'
 		});
 		this._getUrl(this.key, function(_url) {
 			var contentLength = -1;
@@ -35,7 +35,7 @@ Module.prototype = {
 				}
 			}
 			that.fireEvent('getfeed:start', {
-				message : 'Feed nicht lokal, muss ich besorgen'
+				message : 'Feed nicht parat, muss ich besorgen …'
 			});
 			var counter = 0;
 			var cron = setInterval(function() {

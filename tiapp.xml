@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>de.appwerft.hoersuppe</id>
     <name>Hörsuppe</name>
-    <version>1.0.18</version>
+    
     <publisher>rainerschleevoigt</publisher>
     <url>http://</url>
     <description>not specified</description>
@@ -38,8 +38,9 @@
             </dict>
         </plist>
     </ios>
+    <version>1.0.19</version>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="18" android:versionName="1.0.18">
+        <manifest android:versionCode="19" android:versionName="1.0.19">
             <application android:theme="@style/Theme.Hoersuppe" android:largeHeap="true">
                 <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="16"/>
             </application>

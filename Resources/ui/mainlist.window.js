@@ -77,13 +77,16 @@ module.exports = function() {
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
 		var channel = JSON.parse(_e.itemId);
-		var doOpenFeed = function(items) {
+		var windowmodule = require('ui/rsslist.window');
+		var doOpenFeedWindow = function(items) {
 			if (items) {
-				self.remove(dialog);
-				require('ui/rsslist.window')(channel,items).open();
+				windowmodule(channel, items).open();
+				setTimeout(function() {
+					self.remove(dialog);
+				}, 100);
 			}
 		};
-		var dialog = require('ui/download.widget')(channel, doOpenFeed);
+		var dialog = require('ui/download.widget')(channel, doOpenFeedWindow);
 		self.add(dialog);
 
 		//

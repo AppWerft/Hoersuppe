@@ -1,11 +1,12 @@
 var Moment = require('vendor/moment');
 Moment.locale('de');
+
 module.exports = function() {
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
+	
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
 	});
-	console.log('favlist ' + HoerSuppe.toType());
 	self.list = Ti.UI.createListView({
 		templates : {
 			'main' : require('ui/TEMPLATES').main
@@ -19,7 +20,7 @@ module.exports = function() {
 		Ti.UI.createNotification({
 			message : 'Teste alle Podcasts auf Aktualität …'
 		}).show();
-		var favs = HoerSuppe.getAllFavs(), items = [];
+		
 		var getItem = function(fav, index) {
 			var item = {
 				properties : {
@@ -48,26 +49,39 @@ module.exports = function() {
 					image : fav.logo
 				}
 			};
-			var RSSADAPTER = new (require('controls/rss_adapter'))(fav.key);
-			RSSADAPTER.addEventListener('load', function(_items) {
+			var FeedAdapter = new (require('controls/rss_adapter'))(fav.key);
+			FeedAdapter.addEventListener('getfeed:ready', function(_items) {
 				if (_items) {
 					item.lastitem.text = 'Letztes: ' + Moment(_items[0].pubDate).format('LL');
 					item.entries.text = 'Anzahl: ' + _items.length;
-				}
+				} else console.log('Error: no item for ' + fav.key);
 			});
 			return item;
 
 		};
+		var favs = HoerSuppe.getAllFavs(), items = [];
+		console.log(favs);
 		if (favs)
 			for (var i = 0; i < favs.length; i++) {
-				items.push(getItem(favs[i], i));
+				favs[i].title && items.push(getItem(favs[i], i));
 			}
 		sections[0].setItems(items);
 		self.list.setSections(sections);
 	};
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
-		require('ui/rsslist.window')(HoerSuppe, _e.itemId).open();
+		var channel = JSON.parse(_e.itemId);
+		var windowmodule = require('ui/rsslist.window');
+		var doOpenFeedWindow = function(items) {
+			if (items) {
+				windowmodule(channel, items).open();
+				setTimeout(function() {
+					self.remove(dialog);
+				}, 100);
+			}
+		};
+		var dialog = require('ui/download.widget')(channel, doOpenFeedWindow);
+		self.add(dialog);
 	});
 	self.addEventListener('focus', updateList);
 	return self;
