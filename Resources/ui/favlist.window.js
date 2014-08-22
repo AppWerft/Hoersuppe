@@ -1,9 +1,11 @@
 var Moment = require('vendor/moment');
 Moment.locale('de');
-module.exports = function(HoerSuppe) {
+module.exports = function() {
+	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
 	});
+	console.log('favlist ' + HoerSuppe.toType());
 	self.list = Ti.UI.createListView({
 		templates : {
 			'main' : require('ui/TEMPLATES').main

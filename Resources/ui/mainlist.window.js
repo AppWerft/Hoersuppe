@@ -1,4 +1,7 @@
-module.exports = function(HoerSuppe) {
+module.exports = function() {
+	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
+	console.log('mainlist ' + HoerSuppe.toType());
+
 	var self = Ti.UI.createWindow({
 		title : 'Hörsuppe',
 		backgroundColor : '#fff',
@@ -73,11 +76,17 @@ module.exports = function(HoerSuppe) {
 	self.updateList();
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
-		self.add(require('ui/download.widget')(JSON.parse(_e.itemId),function(_items){
-			require('ui/rsslist.window')(HoerSuppe, _e.itemId).open();
-		}));
+		var channel = JSON.parse(_e.itemId);
+		var doOpenFeed = function(items) {
+			if (items) {
+				self.remove(dialog);
+				require('ui/rsslist.window')(channel,items).open();
+			}
+		};
+		var dialog = require('ui/download.widget')(channel, doOpenFeed);
+		self.add(dialog);
 
-//		
+		//
 	});
 	if (Ti.Android) {
 		self.addEventListener("open", function() {

@@ -1,4 +1,4 @@
-module.exports = function(_feed) {
+module.exports = function(_feed, _callback) {
 	var getStrip = function(_eventname) {
 		var view = Ti.UI.createView({
 			top : 0,
@@ -32,14 +32,14 @@ module.exports = function(_feed) {
 		view.add(bar);
 		FeedAdapter.addEventListener(_eventname + ':start', function(_e) {
 			bar.show();
-			console.log('Info: ' + _eventname + ':start received ' + _e.value);
+			//console.log('Info: ' + _eventname + ':start received ' + _e.value);
 			label.setLeft(20);
 			if (_e && _e.message)
 				label.setText(_e.message);
 			spinner.show();
 		});
 		FeedAdapter.addEventListener(_eventname + ':progress', function(_e) {
-			console.log('Info: ' + _eventname + ':progress ' + _e.value);
+			//console.log('Info: ' + _eventname + ':progress ' + _e.value);
 			if (_e && _e.message)
 				label.setText(_e.message);
 			label.setLeft(20);
@@ -47,7 +47,7 @@ module.exports = function(_feed) {
 		});
 		FeedAdapter.addEventListener(_eventname + ':ready', function(_e) {
 			label.setLeft(0);
-			console.log('Info: ' + _eventname + ':ready received');
+			//console.log('Info: ' + _eventname + ':ready received');
 			if (_e && _e.message)
 				label.setText(_e.message);
 			bar.setValue(1);
@@ -82,6 +82,14 @@ module.exports = function(_feed) {
 	self.list.add(getStrip('geturl'));
 	self.list.add(getStrip('getfeed'));
 	self.add(self.list);
+	FeedAdapter.addEventListener('getfeed:ready', function(_e) {
+		if (_e.result) {
+			_callback(_e.result);
+		}
+	});
+	FeedAdapter.addEventListener('error', function(_e) {
+			_callback(null);
+	});
 	FeedAdapter.start(_feed.key);
 	return self;
 };

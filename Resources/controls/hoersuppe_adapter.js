@@ -4,13 +4,13 @@ function getFilehandle(file) {
 }
 
 /* Constructor */
-var Module = function() {
+var HoersuppenModule = function() {
 	this.eventhandlers = [];
 	return this;
 };
 
 /* prototyped methods */
-Module.prototype = {
+HoersuppenModule.prototype = {
 	getAllFavs : function() {
 		if (Ti.App.Properties.hasProperty('myfavs')) {
 			var favs = Ti.App.Properties.getList('myfavs');
@@ -128,4 +128,4 @@ Module.prototype = {
 	},
 };
 
-module.exports = Module;
+module.exports = HoersuppenModule;

@@ -1,6 +1,11 @@
-module.exports = function(HoerSuppe, _e) {
+module.exports = function(_channel,_items) {
+	var feed = _items;
+	var channel = _channel;
+	console.log(channel);
+	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
+
 	var AudioDownloaderns = {};
-	// ref lists of doanloader
+	// ref lists of downloader
 	var options = {};
 	var onClick = function(e) {
 		var item = e.section.getItemAt(e.itemIndex);
@@ -33,7 +38,6 @@ module.exports = function(HoerSuppe, _e) {
 		AudioDownloaderns[id] = AudioDownloader;
 	};
 
-	var options = JSON.parse(_e);
 	var actionbar = null;
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
@@ -99,6 +103,7 @@ module.exports = function(HoerSuppe, _e) {
 						left : 0,
 						width : 90,
 						height : 90,
+						image : channel.logo,
 						defaultImage : '/assets/default.png'
 					}
 				}, {
@@ -169,56 +174,48 @@ module.exports = function(HoerSuppe, _e) {
 	});
 	self.add(self.list);
 	self.spinner.show();
-	var RSSADAPTER = new (require('controls/rss_adapter'))(options.key);
-	RSSADAPTER.addEventListener('load', function(_items) {
-		self.spinner.hide();
-		if (!_items) {
-			alert('Dieser Feed kann nicht gelesen werden.');
-			self.close();
-			return;
-		}
-		var dataitems = [];
-		options.subtitle = _items.length + ' Beiträge';
-		actionbar && actionbar.setSubtitle(options.subtitle);
-		for (var i = 0; i < _items.length; i++) {
-			var item = _items[i];
-			var url = item.enclosure && item.enclosure.url;
-			if (url)
-				dataitems.push({
-					properties : {
-						itemId : JSON.stringify({
-							url : url,
-							title : item.title,
-							logo : options.logo
-						})
-					},
-					title : {
-						text : item.title
-					},
-					play : {
-						opacity : 1
-					},
-					down : {
-						opacity : 1
-					},
-					progress : {},
-					description : {
-						html : item.description
-					},
-					logo : {
-						image : options.logo
-					}
-				});
-		}
-		self.list.sections[0].setItems(dataitems);
-	});
+	var dataitems = [];
+	options.subtitle = feed.length + ' Beiträge';
+	actionbar && actionbar.setSubtitle(options.subtitle);
+	for (var i = 0; i < feed.length; i++) {
+		var item = feed[i];
+		var url = item.enclosure && item.enclosure.url;
+		if (url)
+			dataitems.push({
+				properties : {
+					itemId : JSON.stringify({
+						url : url,
+						title : item.title,
+						logo : channel.logo
+					})
+				},
+				title : {
+					text : item.title
+				},
+				play : {
+					opacity : 1
+				},
+				down : {
+					opacity : 1
+				},
+				progress : {},
+				description : {
+					html : item.description
+				},
+				logo : {
+					image : channel.logo
+				}
+			});
+	}
+	self.list.sections[0].setItems(dataitems);
+
 	if (Ti.Android) {
 		self.addEventListener("open", function() {
 			var activity = self.getActivity();
 			if (activity && activity.actionBar) {
 				actionbar = activity.actionBar;
 				actionbar.setDisplayHomeAsUp(false);
-				actionbar.setTitle(options.title);
+				actionbar.setTitle(channel.title);
 				options.subtitle && actionbar.setSubtitle(options.subtitle);
 				actionbar.onHomeIconItemSelected = function() {
 
@@ -250,8 +247,11 @@ module.exports = function(HoerSuppe, _e) {
 	};
 	self.addEventListener('androidback', function() {
 		for (var id in AudioDownloaderns) {
-			AudioDownloaderns[id].removeEventListener('ready');
-			AudioDownloaderns[id].removeEventListener('progress');
+			console.log(id + ' ' + AudioDownloaderns[id].hasOwnProperty());
+			if (!AudioDownloaderns[id].hasOwnProperty()) {
+				//	AudioDownloaderns[id].removeEventListener('ready');
+				//	AudioDownloaderns[id].removeEventListener('progress');
+			}
 		}
 		setTimeout(function() {
 			console.log('Info: detecting of androidback event ==> try to close window');

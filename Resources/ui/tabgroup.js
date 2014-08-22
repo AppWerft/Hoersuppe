@@ -1,20 +1,21 @@
-module.exports = function(HoerSuppe) {
+module.exports = function() {
+	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
+
 	var self = Ti.UI.createTabGroup({
 		fullscreen : true,
 		exitOnClose : true,
 		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 	});
-
 	var tab1 = Ti.UI.createTab({
-		window : require('ui/mainlist.window')(HoerSuppe),
+		window : require('ui/mainlist.window')(),
 		title : 'alle Podcasts'
 	});
 	var tab2 = Ti.UI.createTab({
-		window : require('ui/favlist.window')(HoerSuppe),
+		window : require('ui/favlist.window')(),
 		title : 'Merkliste'
 	});
 	var tab3 = Ti.UI.createTab({
-		window : require('ui/offlist.window')(HoerSuppe),
+		window : require('ui/offlist.window')(),
 		title : 'Gespeichertes'
 	});
 	self.addTab(tab1);
@@ -43,16 +44,16 @@ module.exports = function(HoerSuppe) {
 				if (searchvisible == true) {
 					console.log('Info: try to hide searchBar');
 					list.searchView.blur();
-					list.searchView.setTop('-45'	); 
-					
+					list.searchView.setTop('-45');
+
 				} else {
 					list.searchView = Ti.UI.createSearchBar({
 						hintText : "Podcast-Suche",
 						softKeyboardOnFocus : Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
 						height : 45,
-						top :0,
+						top : 0,
 						submitEnabled : false
-						
+
 					});
 					list.searchView.focus();
 					searchvisible = true;

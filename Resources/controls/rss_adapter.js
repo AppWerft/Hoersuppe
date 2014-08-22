@@ -12,9 +12,10 @@ Module.prototype = {
 			this.key = _key;
 		var that = this;
 		this.fireEvent('geturl:start', {
-			message : 'Start der URL-Suche für ' + this.key
+			message : 'Feed-Suche für ' + this.key
 		});
 		this._getUrl(this.key, function(_url) {
+			var contentLength = -1;
 			that.cache = Ti.Filesystem.getFile(Ti.Filesystem.getApplicationCacheDirectory(), 'CACHE_' + Ti.Utils.md5HexDigest(_url));
 			that.fireEvent('geturl:ready', {
 				message : 'Podcast-URL OK'
@@ -27,9 +28,6 @@ Module.prototype = {
 					var md5 = Ti.Utils.md5HexDigest(that.cache.read().text);
 					var items = JSON.parse(that.cache.read().text);
 					that.fireEvent('getfeed:ready', {
-						message : 'lokaler Feed schon geparst',
-					});
-					that.fireEvent('getfeed:ready', {
 						message : items.length + ' Feeds vom lokalen Speicher',
 						result : items
 					});
@@ -39,45 +37,67 @@ Module.prototype = {
 			that.fireEvent('getfeed:start', {
 				message : 'Feed nicht lokal, muss ich besorgen'
 			});
+			var counter = 0;
+			var cron = setInterval(function() {
+				counter += 0.05;
+			}, 500);
 			var xhr = Ti.Network.createHTTPClient({
 				timeout : 30000,
 				ondatastream : function(_e) {
-					that.fireEvent('getfeed:progress', {
-						value : _e.progress
-					});
+					if (_e.progress > 0)
+						that.fireEvent('getfeed:progress', {
+							value : _e.progress
+						});
+					else
+						that.fireEvent('getfeed:progress', {
+							value : counter
+						});
+				},
+				onerror : function() {
+					clearInterval(cron);
 				},
 				onload : function() {
-					var head = this.responseText.substr(0, 5);
+					clearInterval(cron);
+					var head = this.responseText.substr(0, 50);
+					console.log(this.getResponseHeader('Server'));
+					console.log(this.getResponseHeader('Content-Type'));
 					console.log(head);
-					try {
-						// xml => json:
+					if (this.responseXML) {
 						var rssobj = new (require("vendor/XMLTools"))(this.responseXML).toObject();
 						that.fireEvent('getfeed:ready', {
 							result : rssobj.channel.item,
-							message : rssobj.channel.item.length + ' Feeds erhalten.'
+							message : rssobj.channel.item.length + ' Beiträge erhalten.'
 						});
-						if (USINGCACHE)
-							that.cache.write(JSON.stringify(rssobj.channel.item));
-					} catch(E) {
+						that.cache.write(JSON.stringify(rssobj.channel.item));
+					} else {
+						var counter = 0;
+						/*var cron = setInterval(function() {
+							counter += 0.1;
+							that.fireEvent('getfeed:progress', {
+								value : counter
+							});
+						}, 1000);*/
 						var yql = 'SELECT * FROM xml WHERE url="http://' + _url + '"';
 						that.fireEvent('getfeed:start', {
 							message : 'Feed über yql besorgen …'
 						});
 						Ti.Yahoo.yql(yql, function(_y) {
+							//clearInterval(cron);
 							if (_y.data) {
 								var items = _y.data.rss.channel.item;
-								if (USINGCACHE)
-									that.cache.write(JSON.stringify(items));
+
+								that.cache.write(JSON.stringify(items));
 								that.fireEvent('getfeed:ready', {
-									message : items.length + ' Feeds gefunden',
+									message : items.length + ' Beiträge gefunden',
 									result : items
 								});
 							} else {
 								console.log('Error: Feed nicht lesbar');
+								that.fireEvent('error');
 							}
 						});
 						//_callback(null);
-						console.log(E);
+
 					}
 				}
 			});
@@ -90,24 +110,27 @@ Module.prototype = {
 	},
 	_getUrl : function(key, callback) {
 		var that = this;
-		if (USINGCACHE) {
-			if (Ti.App.Properties.hasProperty('RSSURL' + key)) {
-				var url = Ti.App.Properties.getString('RSSURL' + key);
-				that.fireEvent('geturl:ready', {
-					message : 'Feed-URL OK'
-				});
-				callback(url);
-				return;
-			}
-		}
+		if (Ti.App.Properties.hasProperty('RSSURL' + key)) {
+			var url = Ti.App.Properties.getString('RSSURL' + key);
+			that.fireEvent('geturl:ready', {
+				message : 'Feed-URL OK'
+			});
+			callback(url);
+			return;
+		}var counter =0;
+		var cron = setInterval(function() {
+				counter += 0.05;
+			}, 500);
 		var self = Ti.Network.createHTTPClient({
 			onerror : function() {
+				clearInterval(cron);
 				that.fireEvent('geturl:error', {
 					message : this.error
 				});
 				console.log('Error: ' + this.error);
 			},
 			onload : function() {
+				clearInterval(cron);
 				var page = this.responseText;
 				var regex = /"pcast:\/\/(.*?)"/mg;
 				var res = regex.exec(page);
@@ -126,10 +149,9 @@ Module.prototype = {
 			},
 			ondatastream : function(_e) {
 				that.fireEvent('geturl:progress', {
-					value : _e.progress,
-					message : 'Fortschritt: ' + Math.round(100 * _e.progress) + '%'
+					value : counter,
+					message : 'Fortschritt: ' + Math.round(100 * counter) + '%'
 				});
-
 			}
 		});
 		self.open('GET', 'http://hoersuppe.de/podcast/' + key, true);
