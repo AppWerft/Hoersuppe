@@ -19,6 +19,7 @@ exports.main = {
 			layout : 'vertical',
 			left : 100,
 			top : 5,
+			right : 25,
 			height : Ti.UI.SIZE,
 		},
 		childTemplates : [{
@@ -27,14 +28,15 @@ exports.main = {
 			properties : {
 				color : '#555',
 				width : Ti.UI.FILL,
+				top:0,
+				textAlign : 'left',
 				height : Ti.UI.SIZE,
 				font : {
 					fontSize : 22,
 					fontWeight : 'bold'
 				},
 				left : 0,
-				right : 20,
-				top : 0
+				right : 0
 			}
 		}, {
 			type : 'Ti.UI.Label',
@@ -43,12 +45,11 @@ exports.main = {
 				color : '#555',
 				width : Ti.UI.FILL,
 				height : Ti.UI.SIZE,
+				textAlign : 'left',
 				font : {
 					fontSize : 16,
 				},
-				left : 0,
-				right : 20,
-				top : 5,
+				top : 0,
 				bottom : 5
 			}
 		}, {
@@ -58,11 +59,10 @@ exports.main = {
 				color : '#555',
 				width : Ti.UI.FILL,
 				height : Ti.UI.SIZE,
+				textAlign : 'left',
 				font : {
 					fontSize : 14,
 				},
-				left : 0,
-				right : 20,
 				top : 0,
 				bottom : 2
 			}

@@ -41,11 +41,11 @@ module.exports = function(HoerSuppe, _e) {
 		title : options.title,
 		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 	});
-	var style;
+
 	self.spinner = Ti.UI.createActivityIndicator({
 		style : (Ti.Android) ? Ti.UI.ActivityIndicatorStyle.BIG : Ti.UI.iPhone.ActivityIndicatorStyle.BIG,
 	});
-	self.add(self.spinner);
+	//self.add(self.spinner);
 	self.list = Ti.UI.createListView({
 		templates : {
 			'rss' : {
@@ -169,7 +169,8 @@ module.exports = function(HoerSuppe, _e) {
 	});
 	self.add(self.list);
 	self.spinner.show();
-	require('controls/getrss')(options.key, function(_items) {
+	var RSSADAPTER = new (require('controls/rss_adapter'))(options.key);
+	RSSADAPTER.addEventListener('load', function(_items) {
 		self.spinner.hide();
 		if (!_items) {
 			alert('Dieser Feed kann nicht gelesen werden.');
@@ -211,7 +212,6 @@ module.exports = function(HoerSuppe, _e) {
 		}
 		self.list.sections[0].setItems(dataitems);
 	});
-
 	if (Ti.Android) {
 		self.addEventListener("open", function() {
 			var activity = self.getActivity();
@@ -224,6 +224,7 @@ module.exports = function(HoerSuppe, _e) {
 
 				};
 				activity.onCreateOptionsMenu = function(e) {
+
 					e.menu.add({
 						itemId : '0',
 						checkable : true,
@@ -240,7 +241,10 @@ module.exports = function(HoerSuppe, _e) {
 							HoerSuppe.addFav(options);
 						}
 					});
+					//activity.invalidateOptionsMenu();
+					//activity.openOptionsMenu();
 				};
+
 			}
 		});
 	};

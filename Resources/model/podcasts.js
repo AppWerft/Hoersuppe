@@ -587,39 +587,39 @@ module.exports = {
 		"content" : "Medienradio"
 	}, {
 		"href" : "/podcast/nerdtalk",
-		"summary" : "",
+		"summary" : "Zwei Filmfreude, viele Filme, ein Podcast. Nicht immer journalistisch korrekt wertet ein guter Cameo ein Film auf oder wird der Mega-Blockbuster boshaft verrissen. Hier gibt es Filmstarts der Woche, Gesehene Filme, Webtipps, Gewinnspiele. Subjektiv, klar heraus, manchmal ganz ernst, manchmal ganz unerzogen, aber immer mit viel Spaß am Podcasten.",
 		"content" : "nerdtalk"
 	}, {
 		"href" : "/podcast/ponytime",
-		"summary" : "",
+		"summary" : "Die Ponytime ist ein Podcast über My Little Pony: Friendship is Magic mit Reviews der Folgen und Diskussionen um die Geschehnisse drum herum.",
 		"content" : "Ponytime"
 	}, {
 		"href" : "/podcast/retinacast",
-		"summary" : "",
+		"summary" : "Retinacast ist ein Podcast über Fernsehserien, der alle drei Wochen donnerstags erscheint. In jeder Ausgabe der regulären Folge stellen wir eine bestimmte Serie vor.Dabei kommen meistens sowohl Setting und Charaktere der Serie als auch ähnliche Serien oder Filme als Referenzen zur Sprache. Am Ende jeder Folge stehen die „Picks“, bei denen jedes Team-Mitglied „gebeten“ wird, etwas zu empfehlen. Die Auswahl der Serien variiert stark. Wir versuchen, eine gute Mischung aus neuen, aktuellen Serien und den Klassikern aus diversen Genres anzusprechen.In diesem zusätzlichen Format, der Pilotenprüfung, veröffentlichen wir in unregelmäßigen Abständen Kurzbesprechungen aktueller Pilotfolgen, die wir direkt nach dem Anschauen dieser aufgezeichnet haben und versuchen eine Einschätzung über Potential und Zukunft der neuen Serie zu geben.Die Retinauten sind das neueste, bahnbrechende, alle zwei Wochen erscheinende Talkformat-Spinoff des Medien-Konglomerats Retinacast. Hier lassen wir uns jeden zweiten Sonntagabend (auch im Livestream!) über diverse Themen der Popkultur von Fernsehserien über Filme, Bücher bis hin zu den süßesten Katzenvideos auf YouTube aus.",
 		"content" : "Retinacast"
 	}, {
 		"href" : "/podcast/second-unit",
-		"summary" : "",
+		"summary" : "Der wöchentliche Filmeabend mit Tamino Muth und Christian Steiner. In jeder Ausgabe besprechen die beiden einen Film und verköstigen die Diskussion mit einem Getränk ihrer Wahl.",
 		"content" : "Second Unit"
 	}, {
 		"href" : "/podcast/sneakpod",
-		"summary" : "",
+		"summary" : "Hören, was wir gesehen haben. Sneakpod der Sneak-Preview-Podcast. Jede Woche eine Filmkritik zu einem aktuellen Kinofilm.",
 		"content" : "Sneakpod"
 	}, {
 		"href" : "/podcast/talker-lounge",
-		"summary" : "",
+		"summary" : "Die Talker-Lounge ist ein Podcast über alles was mit Hörspiele und Hörmedien zu tun hat. Hörspiel-Rezensionen, Interviews mit Synchronsprechern und Hörspiel-Machern, News, Quiz und vieles mehr sind Bestandteil dieser Show!",
 		"content" : "Talker-Lounge"
 	}, {
 		"href" : "/podcast/trekcast",
-		"summary" : "",
+		"summary" : "Der Audiopodcast des Deutschen StarTrek-Index (DSi) zu Star Trek TNG auf Blu-ray - Die drei Star Trek-Experten Yann-Patrick Schlame, Thorsten Kroke und Malte Kirchner diskutieren in loser Folge die Neuerscheinungen und viele andere spannende Aspekte rund um die Lieblingsserie vieler Fans.",
 		"content" : "Trekcast"
 	}, {
 		"href" : "/podcast/wasmitmedien",
-		"summary" : "",
+		"summary" : "Daniel Fiene & Herr Pähler werfen einmal die Woche einen Blick auf die wichtigsten Medienthemen der Woche. Das Medienmagazin richtet sich an alle, die einmal „was mit Medien“ machen möchten, oder an die, die es schon längst tun - aber immer noch nicht genau wissen, wie die Medien funktionieren. Unermüdlich und neugierig blicken Daniel und Herr Pähler in Interviews, Reportagen und Beiträgen auf die wichtigsten Themen der Woche. Die Heimat von „Was mit Medien“ ist bei DRadioWissen. Dort hört ihr die Sendung live jeden Donnerstag zwischen 18:00 Uhr und 19:30 Uhr.",
 		"content" : "Was mit Medien"
 	}, {
 		"href" : "/podcast/zombiebunker",
-		"summary" : "",
+		"summary" : "Ein Podcast über alte B-Movies aus den 30er bis 80er Jahren!",
 		"content" : "Zombiebunker"
 	}, {
 		"id" : "mz_podcasting",
@@ -779,67 +779,69 @@ module.exports = {
 		"content" : "Bahncast"
 	}, {
 		"href" : "/podcast/binaergewitter",
-		"summary" : "",
+		"summary" : "Ein Podcast, der sich mit dem Web, Technologie und Open Source Software auseinander setzt.",
 		"content" : "Binärgewitter"
 	}, {
 		"href" : "/podcast/c-radar",
-		"summary" : "",
+		"summary" : "C-Radar ist die monatliche Radiosendung des Chaos in Darmstadt.",
 		"content" : "C-RadaR"
 	}, {
 		"href" : "/podcast/cafeleak",
-		"summary" : "",
+		"summary" : "Wie kommt man an Informationen? Das Internet bietet mehr als man verarbeiten kann, mit stark schwankender Verlässlichkeit. Was man gerne hätte, wäre ein Filter und die Meinung eines Fachmanns dazu. Wir laden Sie ein mit dabei zu sein, wenn sich verschiedene Experten zum Austausch in unserem virtuellen Cafe treffen und über aktuelle Themen diskutieren. Per Kommentar-Funktion dürfen Sie sich auch gerne einbringen und eigene Themen vorschlagen oder aber auch nur einfach während einer Tasse Kaffee zuhören, was am Nebentisch so spannendes diskutiert wird.",
 		"content" : "Cafeleak"
 	}, {
 		"href" : "/podcast/channelcast",
-		"summary" : "",
+		"summary" : "Mit Channelcast bieten wir als Marktbeobachter einen meinungsstarken, unterhaltsamen und informativen Podcast aus der Branche für die Branche an. Wir beleuchten, analysieren, kommentieren und diskutieren über aktuelle Themen im IT-Handel, der Distribution und bei den IT-Herstellern. Wir nehmen uns Zeit, den Dingen auf den Grund zu gehen. Wir reden aber aber auch über Themen, die uns abseits des Treibens im IT-Channel sonst noch so bewegen. ",
 		"content" : "Channelcast"
 	}, {
 		"href" : "/podcast/chaosradio",
-		"summary" : "",
+		"summary" : "Chaosradio ist der unterhaltsame Live-Talk-Radio-Klassiker des Chaos Computer Clubs aus Berlin und eines der ältesten Tech-Radios überhaupt. Chaosradio informiert seit 1995 über wechselnde Themen rund um Technologie und Gesellschaft. Chaosradio sendet in der Regel am jeweils letzten Donnerstag eines Monats, an ungeraden Monaten auch auf dem Radiosender Fritz (RBB), jeweils von 22 bis 0 Uhr und lädt zur aktiven Teilnahme via Telefon und IRC ein. Unter der Rufnummer +49 (1801) 99 33 22 99 55 könnt ihr Audio-Feedback zur Sendung via Telefon hinterlassen. ",
 		"content" : "Chaosradio"
 	}, {
 		"href" : "/podcast/cre",
-		"summary" : "",
+		"summary" : "Intensive und ausführliche Gespräche über Themen aus Technik, Kultur und Gesellschaft, das ist CRE. Interessante Gesprächspartner stehen Rede und Antwort zu Fragen, die man normalerweise selten gestellt bekommt. CRE möchte aufklären, weiterbilden und unterhalten.",
 		"content" : "CRE"
 	}, {
 		"href" : "/podcast/datenkanal",
-		"summary" : "",
+		"summary" : "Das Datenradio beim Offenen Kanal Jena",
 		"content" : "Datenkanal"
 	}, {
 		"href" : "/podcast/datenschorle",
-		"summary" : "",
+		"summary" : "Die Mate im Speck",
 		"content" : "Datenschorle"
 	}, {
 		"href" : "/podcast/deimhart",
-		"summary" : "",
+		"summary" : "DeimHart ist ein Podcast von Dirk Deimeke und Roman Hanhart, bei dem vor allem Inhalte aus der freien Linux-, und OpenSource-Welt besprochen werden. Der Fokus liegt häufig bei Ubuntu und dessen Derivate. Nebenbei kommen auch gesellschaftliche Themen zur Sprache, die sich um das Feld der OpenSource-Gemeinschaft finden lassen.",
 		"content" : "DeimHart"
 	}, {
 		"href" : "/podcast/fanb0ys",
-		"summary" : "",
+		"summary" : "Regelmässiges Kaffeekränzchen in Sachen Nerdkram",
 		"content" : "fanb0ys"
 	}, {
 		"href" : "/podcast/faselcast2",
-		"summary" : "",
+		"summary" : "Sebastian und Philip reden über ihre alltäglichen Technik-Wohlstandsprobleme",
 		"content" : "Faselcast 2"
 	}, {
 		"href" : "/podcast/fnordfunk",
-		"summary" : "",
+		"summary" : "Alle 4 Wochen reden wir zwei Stunden lang über aktuelles oder Interessantes aus der Welt rund um das Leben als Nerd, dem Clubumfeld und allem was interessant ist. ",
 		"content" : "Fnordfunk"
 	}, {
 		"href" : "/podcast/freak-show",
-		"summary" : "",
+		"summary" : "Die muntere Talk Show um Leben mit Technik, das Netz und Technikkultur. Bisweilen Apple-lastig aber selten einseitig. Wir leben und lieben Technologie und reden darüber. Mit Tim, hukl, roddi, Clemens und Denis. Freak Show hieß irgendwann mal mobileMacs.",
 		"content" : "Freak Show"
 	}, {
 		"href" : "/podcast/funkenstrahlen",
-		"summary" : "",
+		"summary" : "Ein kleiner Podcast über dies und das aus der weiten Internetwelt. Über alles was mich gerade interessiert und beschäftigt.",
 		"content" : "Funkenstrahlen"
 	}, {
 		"href" : "/podcast/gadget-radio",
-		"summary" : "",
+		"summary" : "Gadget Radio – zwei Geeks erklären die Welt",
 		"content" : "Gadget Radio"
 	}, {
 		"href" : "/podcast/geek-week",
-		"summary" : "",
+		"summary" : "Nothing But Tech - Aus Deutschland, der Schweiz und den USA. geek-week.de berichtet jede Woche mit immer wechselnden Gesprächspartner über die neusten Entwicklungen aus der Online- und Technik-Welt. geek-week wird von Frederic Lardinois in den USA, Marcus Schuler in München und Jean-Claude Frick in Bern gemacht.
+
+",
 		"content" : "Geek-Week"
 	}, {
 		"href" : "/podcast/geekstammtisch",

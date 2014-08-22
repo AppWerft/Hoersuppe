@@ -30,7 +30,7 @@ module.exports = function(HoerSuppe) {
 		activity.actionBar.setTitle('Hörsuppe');
 		activity.actionBar.setSubtitle('Deutschsprachige Podcasts');
 		activity.onCreateOptionsMenu = function(e) {
-			var searchadded = false;
+			var searchvisible = false;
 			e.menu.add({
 				itemId : '1',
 				title : 'Suche',
@@ -40,14 +40,22 @@ module.exports = function(HoerSuppe) {
 				console.log('~~~~~~~~~~~~~~~~');
 				self.setActiveTab(0);
 				var list = tab1.getWindow().list;
-				if (list.searchView) {
+				if (searchvisible == true) {
 					console.log('Info: try to hide searchBar');
-					list.searchView.setHeight(0);
+					list.searchView.blur();
+					list.searchView.setTop('-45'	); 
+					
 				} else {
-					list.searchView = Ti.UI.Android.createSearchView({
+					list.searchView = Ti.UI.createSearchBar({
 						hintText : "Podcast-Suche",
-						height : 50
+						softKeyboardOnFocus : Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
+						height : 45,
+						top :0,
+						submitEnabled : false
+						
 					});
+					list.searchView.focus();
+					searchvisible = true;
 				}
 
 			});

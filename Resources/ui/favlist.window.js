@@ -46,7 +46,8 @@ module.exports = function(HoerSuppe) {
 					image : fav.logo
 				}
 			};
-			require('controls/getrss')(fav.key, function(_items) {
+			var RSSADAPTER = new (require('controls/rss_adapter'))(fav.key);
+			RSSADAPTER.addEventListener('load', function(_items) {
 				if (_items) {
 					item.lastitem.text = 'Letztes: ' + Moment(_items[0].pubDate).format('LL');
 					item.entries.text = 'Anzahl: ' + _items.length;

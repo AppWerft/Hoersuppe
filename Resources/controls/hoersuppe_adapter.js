@@ -37,7 +37,6 @@ Module.prototype = {
 		var favs = this.getAllFavs();
 		var found = false;
 		favs.forEach(function(f) {
-			console.log(f.key + '  ' + fav.key);
 			if (fav.key == f.key)
 				found = true;
 		});

@@ -7,10 +7,10 @@ module.exports = function(HoerSuppe) {
 
 	});
 	self.list = Ti.UI.createListView({
-
 		templates : {
 			'main' : require('ui/TEMPLATES').main
 		},
+		caseInsensitiveSearch : true,
 		defaultItemTemplate : 'main'
 	});
 	self.updateList = function() {
@@ -41,7 +41,7 @@ module.exports = function(HoerSuppe) {
 							title : pod.title,
 							logo : pod.logo
 						}),
-						searchableText  : pod.summary +' ' + pod.title,
+						searchableText : pod.summary + ' ' + pod.title,
 						accessoryType : Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL
 					},
 					title : {
@@ -52,6 +52,12 @@ module.exports = function(HoerSuppe) {
 					},
 					summary : {
 						text : pod.summary
+					},
+					entries : {
+						height : 0
+					},
+					lastitem : {
+						height : 0
 					}
 				});
 			});
@@ -67,7 +73,11 @@ module.exports = function(HoerSuppe) {
 	self.updateList();
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
-		require('ui/rsslist.window')(HoerSuppe, _e.itemId).open();
+		self.add(require('ui/download.widget')(JSON.parse(_e.itemId),function(_items){
+			require('ui/rsslist.window')(HoerSuppe, _e.itemId).open();
+		}));
+
+//		
 	});
 	if (Ti.Android) {
 		self.addEventListener("open", function() {
