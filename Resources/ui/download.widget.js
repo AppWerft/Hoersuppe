@@ -30,7 +30,7 @@ module.exports = function(_feed) {
 			max : 1
 		});
 		view.add(bar);
-		RSSADAPTER.addEventListener(_eventname + ':start', function(_e) {
+		FeedAdapter.addEventListener(_eventname + ':start', function(_e) {
 			bar.show();
 			console.log('Info: ' + _eventname + ':start received ' + _e.value);
 			label.setLeft(20);
@@ -38,14 +38,14 @@ module.exports = function(_feed) {
 				label.setText(_e.message);
 			spinner.show();
 		});
-		RSSADAPTER.addEventListener(_eventname + ':progress', function(_e) {
+		FeedAdapter.addEventListener(_eventname + ':progress', function(_e) {
 			console.log('Info: ' + _eventname + ':progress ' + _e.value);
 			if (_e && _e.message)
 				label.setText(_e.message);
 			label.setLeft(20);
 			bar.setValue(_e.value);
 		});
-		RSSADAPTER.addEventListener(_eventname + ':ready', function(_e) {
+		FeedAdapter.addEventListener(_eventname + ':ready', function(_e) {
 			label.setLeft(0);
 			console.log('Info: ' + _eventname + ':ready received');
 			if (_e && _e.message)
@@ -78,10 +78,10 @@ module.exports = function(_feed) {
 		top : 0,
 		bottom : 20
 	}));
-	var RSSADAPTER = new (require('controls/rss_adapter'))();
+	var FeedAdapter = new (require('controls/rss_adapter'))(_feed.key);
 	self.list.add(getStrip('geturl'));
 	self.list.add(getStrip('getfeed'));
-	RSSADAPTER.start(_feed.key);
 	self.add(self.list);
+	FeedAdapter.start(_feed.key);
 	return self;
 };

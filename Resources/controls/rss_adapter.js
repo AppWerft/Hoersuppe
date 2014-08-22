@@ -1,18 +1,21 @@
-const USINGCACHE = true;
+const USINGCACHE = false;
 
-var Module = function() {
+var Module = function(_key) {
+	if (_key && ( typeof _key) == 'String')
+		this.key = _key;
 	this.eventhandlers = [];
 	return this;
 };
 Module.prototype = {
 	start : function(_key) {
-		/* START */
+		if (_key)
+			this.key = _key;
 		var that = this;
 		this.fireEvent('geturl:start', {
-			message : 'Start der URL-Suche für ' + _key
+			message : 'Start der URL-Suche für ' + this.key
 		});
-		this._getUrl(_key, function(_url) {
-			console.log(_url);
+		this._getUrl(this.key, function(_url) {
+			that.cache = Ti.Filesystem.getFile(Ti.Filesystem.getApplicationCacheDirectory(), 'CACHE_' + Ti.Utils.md5HexDigest(_url));
 			that.fireEvent('geturl:ready', {
 				message : 'Podcast-URL OK'
 			});
@@ -20,10 +23,9 @@ Module.prototype = {
 				message : 'Versuche Feed zu laden …'
 			});
 			if (USINGCACHE) {
-				var cache = Ti.Filesystem.getFile(Ti.Filesystem.getApplicationCacheDirectory(), 'CACHE_' + Ti.Utils.md5HexDigest(_url));
-				if (cache.exists()) {
-					var md5 = Ti.Utils.md5HexDigest(cache.read().text);
-					var items = JSON.parse(cache.read().text);
+				if (that.cache.exists()) {
+					var md5 = Ti.Utils.md5HexDigest(that.cache.read().text);
+					var items = JSON.parse(that.cache.read().text);
 					that.fireEvent('getfeed:ready', {
 						message : 'lokaler Feed schon geparst',
 					});
@@ -45,7 +47,8 @@ Module.prototype = {
 					});
 				},
 				onload : function() {
-					console.log(this.responseText.substr(0, 12));
+					var head = this.responseText.substr(0, 5);
+					console.log(head);
 					try {
 						// xml => json:
 						var rssobj = new (require("vendor/XMLTools"))(this.responseXML).toObject();
@@ -53,7 +56,8 @@ Module.prototype = {
 							result : rssobj.channel.item,
 							message : rssobj.channel.item.length + ' Feeds erhalten.'
 						});
-						cache.write(JSON.stringify(rssobj.channel.item));
+						if (USINGCACHE)
+							that.cache.write(JSON.stringify(rssobj.channel.item));
 					} catch(E) {
 						var yql = 'SELECT * FROM xml WHERE url="http://' + _url + '"';
 						that.fireEvent('getfeed:start', {
@@ -62,7 +66,8 @@ Module.prototype = {
 						Ti.Yahoo.yql(yql, function(_y) {
 							if (_y.data) {
 								var items = _y.data.rss.channel.item;
-								cache.write(JSON.stringify(items));
+								if (USINGCACHE)
+									that.cache.write(JSON.stringify(items));
 								that.fireEvent('getfeed:ready', {
 									message : items.length + ' Feeds gefunden',
 									result : items
@@ -127,7 +132,7 @@ Module.prototype = {
 
 			}
 		});
-		self.open('GET', 'http://hoersuppe.de/podcast/' + _key, true);
+		self.open('GET', 'http://hoersuppe.de/podcast/' + key, true);
 		self.send();
 	},
 
