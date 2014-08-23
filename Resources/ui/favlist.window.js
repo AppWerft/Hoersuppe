@@ -20,7 +20,6 @@ module.exports = function() {
 		Ti.UI.createNotification({
 			message : 'Teste alle Podcasts auf Aktualität …'
 		}).show();
-		
 		var getItem = function(fav, index) {
 			var item = {
 				properties : {
@@ -49,13 +48,15 @@ module.exports = function() {
 					image : fav.logo
 				}
 			};
-			var FeedAdapter = new (require('controls/rss_adapter'))(fav.key);
+			var FeedAdapter = new (require('controls/rss_adapter'))();
 			FeedAdapter.addEventListener('getfeed:ready', function(_items) {
+				console.log(_items);
 				if (_items) {
 					item.lastitem.text = 'Letztes: ' + Moment(_items[0].pubDate).format('LL');
 					item.entries.text = 'Anzahl: ' + _items.length;
 				} else console.log('Error: no item for ' + fav.key);
 			});
+			FeedAdapter.start(fav.key,true);
 			return item;
 
 		};

@@ -843,23 +843,23 @@ module.exports = {
 		"content" : "Geek-Week"
 	}, {
 		"href" : "/podcast/geekstammtisch",
-		"summary" : "",
+		"summary" : "Mehr oder weniger regelmäßiger Stammtisch rund um Nerdthemen und Webdevelopment",
 		"content" : "Geekstammtisch"
 	}, {
 		"href" : "/podcast/geektalk",
-		"summary" : "",
+		"summary" : "#GeekTalk - der europäische Tech-Podcast Geeks aus der Schweiz und Deutschland unterhalten sich über aktuelle Themen rund um Technik, Web und Gadgets. ",
 		"content" : "Geektalk"
 	}, {
 		"href" : "/podcast/geektalk-gadgets",
-		"summary" : "",
+		"summary" : "#GeekTalk - der europäische Tech-Podcast zu finden auf www.GeekTalk.chIn diesem Kanal stellen wir euch interessante und nutzvolle Gadgets vor die euch das tägliche Leben erleichtern.Mehr über den #GeekTalk, das Team dahinter, sowie die Links zu den separaten Feeds findet ihr auf unserem Blog www.GeekTalk.ch",
 		"content" : "GeekTalk Gadgets"
 	}, {
 		"href" : "/podcast/geektalk-news",
-		"summary" : "",
+		"summary" : "#GeekTalk - der europäische Tech-Podcast zu finden auf www.GeekTalk.chIn diesem Kanal findet ihr unsere regelmässigen Folgen mit dem neusten und interessantesten aus der Technik- und Gadget-Welt. Im Team oder auch mal in einer Solo-Folge vom @pokipsie.Mehr über den #GeekTalk, das Team dahinter, sowie die Links zu den separaten Feeds findet ihr auf unserem Blog www.GeekTalk.ch",
 		"content" : "GeekTalk News"
 	}, {
 		"href" : "/podcast/geektalk-sonderfolgen",
-		"summary" : "",
+		"summary" : "#GeekTalk - der europäische Tech-Podcast zu finden auf www.GeekTalk.chIn diesem Kanal findet ihr unsere monothematischen Sonderfolgen.Mehr über den #GeekTalk, das Team dahinter, sowie die Links zu den separaten Feeds findet ihr auf unserem Blog www.GeekTalk.ch",
 		"content" : "GeekTalk Sonderfolgen"
 	}, {
 		"href" : "/podcast/hackerfunk",
@@ -867,59 +867,59 @@ module.exports = {
 		"content" : "Hackerfunk"
 	}, {
 		"href" : "/podcast/happy-shooting",
-		"summary" : "",
+		"summary" : "Der neue Foto-Podcast mit Boris und Chris, zwei alten Hasen in Podcastland. Alles was ihr über Fotografie immer wissen wolltet, aber euch nie zu fragen getraut habt.",
 		"content" : "Happy Shooting"
 	}, {
 		"href" : "/podcast/hard-reset",
-		"summary" : "",
+		"summary" : "Ein Podcast für Geeks/Nerds und Technik interessierte Menschen. Pascal und Chris versuchen euch Wöchentlich auf dem laufenden zu halten beim Thema Technik. Wir befassen uns aber auch gerne mit Themen ausführlicher oder beantworten Fragen der Hörer. Hard-Reset lebt von seiner Community also macht mit und beteiligt euch!",
 		"content" : "Hard Reset"
 	}, {
 		"href" : "/podcast/heldenfunk",
-		"summary" : "",
+		"summary" : "Der HELDENFunk ist der offizielle Systemhelden.com Podcast. Jeden Monat neu bringen wir Euch HELDENGeschichten, HELDENNews und hochkaraetige HELDENGaeste ins Studio, um Euch stets auf dem Laufenden zu halten!",
 		"content" : "Heldenfunk"
 	}, {
 		"href" : "/podcast/incerio",
-		"summary" : "",
+		"summary" : "Technik. News. Gadgets. Games. | Interessanten Themen aus der Welt der digitalen Medien, neuen Entwicklungen aus dem Bereich Gaming, OpenSource und Technik stehen bei INCERIO an der Tagesordnung.",
 		"content" : "INCERIO"
 	}, {
 		"href" : "/podcast/kolophon",
-		"summary" : "",
+		"summary" : "Der O'Reilly Kolophon Podcast mit Tim Pritlove ist ein unregelmäßiger Podcast, der Einblicke in die Arbeit und Themen von O'Reilly bietet und die Bücher und Autoren des Verlags vorstellt. Dabei stehen die Themen im Mittelpunkt und werden in ausführlichen Gesprächen näher gebracht.",
 		"content" : "Kolophon"
 	}, {
 		"href" : "/podcast/koptercast",
-		"summary" : "",
+		"summary" : "Der einzig #gude Podcast zum Thema Kopter und andere mehr oder weniger autonome Fluggeräte. ",
 		"content" : "koptercast"
 	}, {
 		"href" : "/podcast/macintalk",
-		"summary" : "",
+		"summary" : "Macintalk bereitet News rund um Apple und seine Produkte in regelmäßigen Sendungen auf und liefert dazu eine Besprechung in gemütlicher Runde.",
 		"content" : "Macintalk"
 	}, {
 		"href" : "/podcast/macmontag",
-		"summary" : "",
+		"summary" : "MacMontag, der wöchentliche Mac-Podcast mit Frank Müller und Nadine Juliana Dressler. ",
 		"content" : "macmontag"
 	}, {
 		"href" : "/podcast/nerdbureau",
-		"summary" : "",
+		"summary" : "Wissenschaft, Technik und andere Zufälle",
 		"content" : "Nerd Bureau"
 	}, {
 		"href" : "/podcast/nerdic-talking",
-		"summary" : "",
+		"summary" : "Zwei mal im Monat bieten euch Bastian, Mario und Thorsten einen bunten Blumenstrauß von Themen. Alles was „Jungs“ Spaß macht und uns gerade beschäftigt. Videogames, Hard- und Software, Computer, Apple, Home Entertainment und was uns sonst so interessiert.",
 		"content" : "Nerdic Talking"
 	}, {
 		"href" : "/podcast/nerdsfm",
-		"summary" : "",
+		"summary" : "Alle zwei Wochen laden Robb und Max uns spannende Nerds ein, die Software & Hardware kreativ nutzen und erweitern.",
 		"content" : "nerds.fm"
 	}, {
 		"href" : "/podcast/netzgesprache",
-		"summary" : "",
+		"summary" : "Netzgespräche: Der Podcast, bei dem Abschalten Spaß macht",
 		"content" : "Netzgespräche"
 	}, {
 		"href" : "/podcast/neuland",
-		"summary" : "",
+		"summary" : "Neuland, der Podcast mit Caschy und Palle zu aktuellen Netz und Mobilecomputing Themen",
 		"content" : "Neuland"
 	}, {
 		"href" : "/podcast/noobcore",
-		"summary" : "",
+		"summary" : "Mit wechselnden Spezialexperten surfen wir auf der Datenautobahn. Und mit Multimedia.",
 		"content" : "noobcore"
 	}, {
 		"href" : "/podcast/open-dev",
@@ -927,15 +927,15 @@ module.exports = {
 		"content" : "open-dev"
 	}, {
 		"href" : "/podcast/pandroid",
-		"summary" : "",
+		"summary" : "Alles, nur nicht der Norm entsprechend, kommen Themen zur Sprache und werden allein oder auch mal mit Gästen beleuchtet und diskutiert. Dabei ist der Weg das Ziel und so wird direkt auf Struktur und feste Vorgaben verzichtet. Einfach Audio vom offenen Output in den offenen Input.",
 		"content" : "pandroid"
 	}, {
 		"href" : "/podcast/pentacast",
-		"summary" : "",
+		"summary" : "Pentacast sind themenspezifische Sendungen des Chaos Computer Club Dresden. ",
 		"content" : "Pentacast"
 	}, {
 		"href" : "/podcast/pentaradio",
-		"summary" : "",
+		"summary" : "Pentaradio sind die Sendungen des Chaos Computer Club Dresden auf coloRadio, bestehend aus einem informativen Rahmenprogramm und Beiträgen zu einem sendungsspezifischen Thema. ",
 		"content" : "Pentaradio"
 	}, {
 		"href" : "/podcast/phasentheater",

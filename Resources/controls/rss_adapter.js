@@ -1,13 +1,13 @@
 const USINGCACHE = true;
 
-var Module = function(_key) {
+var Module = function(_key,_reload) {
 	if (_key && ( typeof _key) == 'String')
 		this.key = _key;
 	this.eventhandlers = [];
 	return this;
 };
 Module.prototype = {
-	start : function(_key) {
+	start : function(_key, _reload) {
 		if (_key)
 			this.key = _key;
 		var that = this;
@@ -23,7 +23,7 @@ Module.prototype = {
 			that.fireEvent('getfeed:start', {
 				message : 'Versuche Feed zu laden …'
 			});
-			if (USINGCACHE) {
+			if (USINGCACHE && !_reload) {
 				if (that.cache.exists()) {
 					var md5 = Ti.Utils.md5HexDigest(that.cache.read().text);
 					var items = JSON.parse(that.cache.read().text);
@@ -35,14 +35,16 @@ Module.prototype = {
 				}
 			}
 			that.fireEvent('getfeed:start', {
-				message : 'Feed nicht parat, muss ich besorgen …'
+				message : (_reload) ? '' : 'Feed nicht parat, muss ich besorgen …'
 			});
 			var counter = 0;
 			var cron = setInterval(function() {
 				counter += 0.05;
 			}, 500);
 			var xhr = Ti.Network.createHTTPClient({
-				timeout : 30000,autoRedirect :false,cache:false,
+				timeout : 20000,
+				autoRedirect : false,
+				cache : false,
 				ondatastream : function(_e) {
 					if (_e.progress > 0)
 						that.fireEvent('getfeed:progress', {
@@ -55,13 +57,18 @@ Module.prototype = {
 				},
 				onerror : function() {
 					clearInterval(cron);
+					that.fireEvent('error');
 				},
 				onload : function() {
 					clearInterval(cron);
 					var head = this.responseText;
 					console.log(this.getResponseHeader('Server'));
 					console.log(this.getResponseHeader('Content-Type'));
-					
+					that.fireEvent('getfeed:progress', {
+						progress : 1,
+						message : (this.responseText.length / 1024).toFixed(1) + ' kB von ' + this.getResponseHeader('Server') + '  erhalten.'
+					});
+					console.log(_url);
 					if (this.responseXML) {
 						var rssobj = new (require("vendor/XMLTools"))(this.responseXML).toObject();
 						that.fireEvent('getfeed:ready', {
@@ -73,11 +80,11 @@ Module.prototype = {
 						console.log(head);
 						var counter = 0;
 						/*var cron = setInterval(function() {
-							counter += 0.1;
-							that.fireEvent('getfeed:progress', {
-								value : counter
-							});
-						}, 1000);*/
+						 counter += 0.1;
+						 that.fireEvent('getfeed:progress', {
+						 value : counter
+						 });
+						 }, 1000);*/
 						var yql = 'SELECT * FROM xml WHERE url="http://' + _url + '"';
 						that.fireEvent('getfeed:start', {
 							message : 'Feed über yql besorgen …'
@@ -103,7 +110,7 @@ Module.prototype = {
 				}
 			});
 			xhr.open('GET', _url, true);
-			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (KHTML, like Gecko FeedBurn planet)');
+			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (KHTML, like Gecko)');
 			xhr.setRequestHeader('Accept', 'application/rss+xml');
 			xhr.setRequestHeader('Cookie', null);
 			xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate');
@@ -119,10 +126,11 @@ Module.prototype = {
 			});
 			callback(url);
 			return;
-		}var counter =0;
+		}
+		var counter = 0;
 		var cron = setInterval(function() {
-				counter += 0.05;
-			}, 500);
+			counter += 0.05;
+		}, 500);
 		var self = Ti.Network.createHTTPClient({
 			onerror : function() {
 				clearInterval(cron);
@@ -168,7 +176,6 @@ Module.prototype = {
 		}
 	},
 	addEventListener : function(_event, _callback) {
-		console.log('Info: try to add event ' + _event);
 		if (!this.eventhandlers[_event])
 			this.eventhandlers[_event] = [];
 		this.eventhandlers[_event].push(_callback);
