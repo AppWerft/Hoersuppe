@@ -1,6 +1,6 @@
 const USINGCACHE = true;
 
-var Module = function(_key,_reload) {
+var Module = function(_key, _reload) {
 	if (_key && ( typeof _key) == 'String')
 		this.key = _key;
 	this.eventhandlers = [];
@@ -10,6 +10,10 @@ Module.prototype = {
 	start : function(_key, _reload) {
 		if (_key)
 			this.key = _key;
+		else {
+			that.fireEvent('error', {});
+			return;
+		};
 		var that = this;
 		this.fireEvent('geturl:start', {
 			message : 'Feed-Suche für „' + this.key + '“'
@@ -63,19 +67,37 @@ Module.prototype = {
 					clearInterval(cron);
 					var head = this.responseText;
 					console.log(this.getResponseHeader('Server'));
-					console.log(this.getResponseHeader('Content-Type'));
 					that.fireEvent('getfeed:progress', {
 						progress : 1,
 						message : (this.responseText.length / 1024).toFixed(1) + ' kB von ' + this.getResponseHeader('Server') + '  erhalten.'
 					});
-					console.log(_url);
+					console.log('URL http://' + _url);
 					if (this.responseXML) {
-						var rssobj = new (require("vendor/XMLTools"))(this.responseXML).toObject();
+						var elements = this.responseXML.documentElement.getElementsByTagName('item');
+						var data = [];
+						for (var i = 0; i < elements.length; i++) {
+							var element = elements.item(i);
+							try {
+								var description = (element.getElementsByTagName('description').item(0)) ? element.getElementsByTagName('description').item(0).textContent : '';
+								data.push({
+									enclosure : {
+										url : element.getElementsByTagName('enclosure').item(0).getAttribute('url'),
+										length : element.getElementsByTagName('enclosure').item(0).getAttribute('length')
+									},
+									description : description,
+									title : element.getElementsByTagName('title').item(0).textContent,
+									pubDate : element.getElementsByTagName('pubDate').item(0).textContent
+								});
+							} catch(E) {
+								console.log('Error: ' + E);
+							}
+						};
+						console.log(data);
 						that.fireEvent('getfeed:ready', {
-							result : rssobj.channel.item,
-							message : rssobj.channel.item.length + ' Beiträge erhalten.'
+							result : data,
+							message : data.length + ' Beiträge erhalten.'
 						});
-						that.cache.write(JSON.stringify(rssobj.channel.item));
+						that.cache.write(JSON.stringify(data));
 					} else {
 						console.log(head);
 						var counter = 0;
@@ -109,7 +131,7 @@ Module.prototype = {
 					}
 				}
 			});
-			xhr.open('GET', _url, true);
+			xhr.open('GET', 'http://' + _url, true);
 			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (KHTML, like Gecko)');
 			xhr.setRequestHeader('Accept', 'application/rss+xml');
 			xhr.setRequestHeader('Cookie', null);

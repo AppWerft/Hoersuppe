@@ -214,7 +214,7 @@ module.exports = {
 		"href" : "/podcast/sssdk",
 		"summary" : "Dieser Podcast ist das Logbuch des Writing Jams von Lars (Geschichten aus der Dose), Kai (Hobbykoch Podcast, Spiegelfelder), Stefan (Spoileralert) und Elektrobier (Radio Fnordwind). Die Idee eines Writing Jams besteht darin, es in einem kurzen Zeitraum von der Idee bis zur fertigen Kurzgeschichte zu bringen. Wir haben uns dafür ein Wochenende vorgenommen. Hier werden wir immer mal wieder während des Writing Jams aufgezeichnete Gespräche veröffentlichen.",
 		"content" : "Schreib so schnell du kannst"
-	},{
+	}, {
 		"href" : "/podcast/segelradio",
 		"summary" : "Im Segelradio spricht Hinnerk Weiler mit Leuten, die auf dem Meer unterwegs sind. Skipper, Crews, Hafenmeister. Geschichten zum Träumen und Lernen. Je nach Gesprächspartner sind einzelne Folgen englisch. / This Podcast is about people living at sea. Every now and then there will be an english episode.",
 		"content" : "Segelradio"
@@ -774,6 +774,11 @@ module.exports = {
 		"summary" : "Der Podcast für Geeks mit dem Hang zum angebissenen Apfel! Die StandUp-Podcaster Runde quatscht regelmäßig über Apple, Apps, iPhone, iPad, iOS, Gadgets, Technik, Videogames und alles was sonst noch Spaß macht.",
 		"content" : "apfelklatsch"
 	}, {
+		"summary" : "Titanium ist eine Entwicklungsplattform für native, mobile Apps und nutzt Javascript als Codebasis. Rainer Schleevoigt aus Hamburg entwickelt erfolgreich mit diesem System seit vier Jahren und plaudert hier aus dem Nähkästchen.",
+		"logo" : "http://webapp.org.ua/wp-content/uploads/2012/02/TITANIUM_logo1.png",
+		"content" : "Appcelerator Titanium",
+		"href" : "http://hamburger-appwerft.de",
+	}, {
 		"href" : "/podcast/bahncast",
 		"summary" : "Im BahnCast möchte ich mich mit Menschen über das Thema Bahn unterhalten. Ich möchte mit Menschen reden die von ihren Geschichten und Berufe rund um die Bahn erzählen. Auch möchte ich die Technik die hinter dem Bahnbetrieb steckt mit Gesprächspartnern erläutern. Wie sieht der Tag eines Lokführers aus? Wie bleibt die Bahn auf der Schiene und entgleist nicht? Das sind fragen die ich in Interviews und Reportagen klären möchte.",
 		"content" : "Bahncast"
@@ -939,150 +944,150 @@ module.exports = {
 		"content" : "Pentaradio"
 	}, {
 		"href" : "/podcast/phasentheater",
-		"summary" : "",
+		"summary" : "Die Technik-Welt ist groß und man kann dort viel erleben. Wir bereisen die Windows-, Mac OS X-, iOS-, Android- und Podcasting-Welt.",
 		"content" : "Phasentheater"
 	}, {
 		"href" : "/podcast/phonolog",
-		"summary" : "",
+		"summary" : "Phonolog ist ein unregelmäßig erscheinender Podcast von Bony Stoev und Matthias Fromm, rund um die Aufnahme und Gestaltung von Tönen, Klängen und Geräuschen. Dieser Podcast soll relevante Aspekte erläutern und ein grundlegendes Verständnis für den Umgang mit Tönen schaffen, vor allem aber Tipps und Tricks in der praktischen Anwendung vermitteln. Dabei wollen wir alle Seiten beleuchten – von der Ideenfindung, über die Vorbereitungen, die Aufnahme, die Audiobearbeitung und Postproduktion, das Finishing, den Playout sowie die Veröffentlichung und anschließende Aktivitäten.Wir richten uns dabei nicht ausschließlich an Bands, sondern wollen all jene ansprechen die mit Sprache, Geräuschen, vor allem aber Musik arbeiten.",
 		"content" : "Phonolog"
 	}, {
 		"href" : "/podcast/ploppcast",
-		"summary" : "",
+		"summary" : "Ploppcasts ist ein ein- bis zweiwöchentlicher Podcast in Deutscher Sprache über alles was mit Ruby, Rails, Webentwicklung und Freelancertum zu tun hat.Die festen Mitspieler sind: Dennis Reimann (@dennisreimann) aus Bremen, Peter Schröder (@phoet), Daniel Harrington (@rubiii) und Jan Krutisch (@halfbyte) aus Hamburg. Gelegentlich haben wir auch Gäste.",
 		"content" : "Ploppcast"
 	}, {
 		"href" : "/podcast/podsnider",
-		"summary" : "",
+		"summary" : "Ein Podcast über Technik, Medien, Gesellschaft aber auch über andere Themen die mich (und hoffentlich auch andere) interessieren könnten. Locker aus der Hose und bisher unregelmäßig. ",
 		"content" : "PodSnider"
 	}, {
 		"href" : "/podcast/radio-osm",
-		"summary" : "",
+		"summary" : "Berichte und Neuigkeiten rund um OpenStreetMap, ​die freie Wiki-Weltkarte",
 		"content" : "Radio OSM"
 	}, {
 		"href" : "/podcast/radiotux",
-		"summary" : "",
+		"summary" : "Rund um Open Source, Freie Software, Linux und gesellschaftspolitische Themen",
 		"content" : "RadioTux"
 	}, {
 		"href" : "/podcast/robotiklabor",
-		"summary" : "",
+		"summary" : "Beim Robotiklabor handelt es sich um einen Audio-Podcast rund um Robotikthemen. Dieser Podcast erscheint in der Regel jeden letzten Freitag im Monat und informiert und unterhält dich über Robotik und alles was im weitesten Sinne dazugehört. Im weitesten Sinne heißt, wir reden hier nicht nur über Roboter, sondern auch und gerade um die Technik rund um die Robotik.Wichtig ist uns hierbei, dass es eine sehr lockere Form der Unterhaltung und Darstellung ist.Wir beschränken uns also nicht auf die Vorstellung einzelner Roboter. Vielmehr soll es darum gehen euch einen tieferen Einblick zu geben, was dahinter steckt. Also zum Beispiel:Wie kann man überhaupt einen Roboter bauen? Was gibt es für Bauteile? Wie funktionieren diese? Was für Software benötige ich? Was für Werkzeuge? Und so weiter...Auch Neuigkeiten aus dem weiten Bereich der Robotik wollen wir dir natürlich nicht vorenthalten und regelmäßig über Interessantes und Spannendes berichten. Nicht zuletzt werden wir auch laufend über eigene Projekte, wie den Bau des eigenen Roboters, erzählen.Alle Informationen die du hier im Podcast hörst, werden wir selbstverständlich auf dieser Website verlinken. Auch deine Kommentare und Anregungen kannst du hier gerne hinterlassen.Wenn du automatisch über die nächste Ausgabge informiert werden willst, abonniere den RSS-Feed über die Website oder folge uns auf Twitter @robotiklabor oder App.Net @robotiklabor.",
 		"content" : "Robotiklabor"
 	}, {
 		"href" : "/podcast/rumgelaber",
-		"summary" : "",
+		"summary" : "Rum.Gelaber ist ein Podcast von Lars Reineke mit wechselnden Gästen. Ursprünglich sollte bei jeder Phrase ein Rum als Strafe getrunken werden, aber das wurde aus verständlichen Gründen nicht sehr lange verfolgt. Dafür wird aber gern und viel geflucht.",
 		"content" : "Rum.Gelaber"
 	}, {
 		"href" : "/podcast/rumsenden-pinguin",
-		"summary" : "",
+		"summary" : "Diese Sendung ist ein Quasi-Computerkurs der Umsteiger an Ubuntu heranführen soll.",
 		"content" : "Sendung mit dem Pinguin"
 	}, {
 		"href" : "/podcast/smarter-home",
-		"summary" : "",
+		"summary" : "Smarter Home Podcast » Enhanced Feed",
 		"content" : "Smarter Home"
 	}, {
 		"href" : "/podcast/sunpod",
-		"summary" : "",
+		"summary" : "Interviews und Informationen rund um erneuerbare Energien, mit den Schwerpunkten Solarkocher und Elektrofahrzeuge",
 		"content" : "SunPod"
 	}, {
 		"href" : "/podcast/technikwurze",
-		"summary" : "",
+		"summary" : "Technikwürze ist der führende Podcast für Webentwickler im deutschsprachigen Raum. Eine auditive Sendung bekannter Macher rund um Webstandards.",
 		"content" : "Technikwürze"
 	}, {
 		"href" : "/podcast/techview",
-		"summary" : "",
+		"summary" : "Alles rund um die IT- und Techwelt",
 		"content" : "Techview"
 	}, {
 		"href" : "/podcast/touchtalk",
-		"summary" : "",
+		"summary" : "Der TouchTalk MP3 feed. TouchTalk pur. iPhone, iPod und alles was Dich berührt!",
 		"content" : "Touchtalk"
 	}, {
 		"href" : "/podcast/vier-apps",
-		"summary" : "",
+		"summary" : "Vier Apps ist ein Podcast, der es sich zu Aufgabe gemacht hat, Juwelen im AppStore zu finden und ich appetitlichen viererhäppchen aufzubereiten.",
 		"content" : "Vier Apps"
 	}, {
 		"href" : "/podcast/vier-diskussionen",
-		"summary" : "",
+		"summary" : "Eine regelmäßige Diskussionsrunde über die alltäglichen Herausforderungen eines Webschaffenden, mit etwas Abstand und einem konzeptionellen Blick betrachtet.",
 		"content" : "Vier Diskussionen"
 	}, {
 		"href" : "/podcast/vier",
-		"summary" : "",
+		"summary" : "Hier geht es viel um Hardware, Software, geistiges Eigentum anderer und das klebrige Zeug auf Fliegenfängern.",
 		"content" : "Vier Themen"
 	}, {
 		"href" : "/podcast/working-draft",
-		"summary" : "",
+		"summary" : "Wöchentlicher News-Podcast für Webdesigner und -entwickler",
 		"content" : "working draft"
 	}, {
 		"href" : "/podcast/wrint-fotografie",
-		"summary" : "",
+		"summary" : "Wrint ist eine Sammlung von Podcasts, in denen Holger Klein auf allerlei Wegen mit allerlei Menschen über allerlei Dinge redet. Hier ist der Sammelfeed für alle WRINT-Produktionen.",
 		"content" : "Wrint: Fotografie"
 	}, {
 		"href" : "/podcast/zukunftsarchitekten",
-		"summary" : "",
+		"summary" : "Der Podcast für Ingenieure, die maßgeblich komplexe Systeme gestalten. Fragen werden möglichst persönlich, unterhaltsam und auf gleicher Augenhöhe mit dem Hörer vermittelt. Maik Pfingsten gibt sein Wissen und seine Erfahrung aus über 12 Jahren als Troubleshooter in der Automobilentwicklung. Damit Ihr erfolgreich und stolz sein können auf die Systeme, die Ihr entwickelt. Entdecke, wie ihr mit pragmatischen Vorgehensweisen eure Systeme besser umsetzen und eure Projekte wirkungsvoll führen könnt. Agile, Lean, Führung, Leadership, Projektmanagement, Lastenheft, Pflichtenheft, Requirement Engineering, Requirement Management, Mechatronik, Softwareentwicklung, Systemarchitektur und alles was hilft, um besser zu verstehen, wie ihr eure Projekte umsetzen könnt.",
 		"content" : "Zukunftsarchitekten"
 	}, {
 		"id" : "mz_wissenschaft",
 		"name" : "mz_wissenschaft"
 	}, {
 		"href" : "/podcast/angegraben",
-		"summary" : "",
+		"summary" : "angegraben ist der (derzeit) einzige Podcast, der sich speziell archäologischen Themen widmet. In loser Folge erscheinen Beiträge zu einzelnen aufsehenerregenden Funden, Fundplätzen oder anderen Themen aus einer der spannendsten Themenfelder der Wissenschaft. ",
 		"content" : "angegraben"
 	}, {
 		"href" : "/podcast/astrogeo",
-		"summary" : "",
+		"summary" : "Ein Podcast über Steine, Sterne, Planeten, Monde, Rohstoffe, Energie und mehr. Am Mikrofon: Karl Urban (@pikarl) und ein Gast.",
 		"content" : "AstroGeo"
 	}, {
 		"href" : "/podcast/explorism",
-		"summary" : "",
+		"summary" : "Dieser Podcast widmet sich also den Menschen in der Wissenschaft, jenen die ergründen wollen was die Welt Im Innersten zusammenhält. Ich unterhalte mich mit Forschern. Dabei geht es mir aber nicht um jene verdienten Eminenzen, die über viele Jahre der Forschungs- und Lehrtätigkeit bereits ihr wissenschaftliches Renommee gefestigt haben, sondern um eben jene, die am Anfang ihrer Arbeit stehen und jene die gänzlich frisch in der Wissenschaftswelt sind und sich ihre wissenschaftlichen Meriten erst verdienen müssen – der wissenschaftliche Nachwuchs, die jungen Wilden im Forschungsbetrieb, jene “in progress”.",
 		"content" : "Explorism"
 	}, {
 		"href" : "/podcast/hoaxilla",
-		"summary" : "",
+		"summary" : "Der skeptische Podcast aus Hamburg - Hoaxilla beschäftigt sich mit Modernen Sagen (Urban Legends), Medien, Kultur und Wissenschaft aus Sicht der Skeptiker-Bewegung ohne sich dabei selbst zu ernst zu nehmen.",
 		"content" : "Hoaxilla"
 	}, {
 		"href" : "/podcast/konscience",
-		"summary" : "",
+		"summary" : "Neuigkeiten und Themen aus Wissenschaft und Forschung, wie man sie in und aus Konstanz sieht.",
 		"content" : "KonScience"
 	}, {
 		"href" : "/podcast/methodisch-inkorrekt",
-		"summary" : "",
+		"summary" : "Alle zwei Wochen treffen sich Nicolas Wöhrl und Reinhard Remfort um über interessante aktuelle Forschung, Experimente und ihren wissenschaftlichen Alltag im Allgemeinen zu reden. Fachübergreifend, abwechslungsreich, unstrukturiert, hoffnungslos subjektiv und immer garantiert methodisch inkorrekt.",
 		"content" : "Methodisch inkorrekt"
 	}, {
 		"href" : "/podcast/modellansatz",
-		"summary" : "",
+		"summary" : "Bei genauem Hinsehen finden wir die Naturwissenschaft und besonders Mathematik überall in unserem Leben, vom Wasserhahn über die automatischen Temporegelungen an Autobahnen, in der Medizintechnik bis hin zum Mobiltelefon. Woran die Forscher, Absolventen und Lehrenden in Karlsruhe gerade tüfteln, erfahren wir hier aus erster Hand.",
 		"content" : "Modellansatz"
 	}, {
 		"href" : "/podcast/omegatau",
-		"summary" : "",
+		"summary" : "Wissenschaft und Technik im Kopfhoerer / Science and Engineering in your Headphones",
 		"content" : "omega tau"
 	}, {
 		"href" : "/podcast/openscienceradio",
-		"summary" : "",
+		"summary" : "Das Open Science Radio ist ein unregelmäßig erscheinender Podcast von Matthias Fromm, der sich mit dem Thema Open Science in seinen vielseitigen und -schichtigen Aspekten beschäftigt – von Open Access über Citizen Science und Open Data bis hin zu Öffentlicher Wissenschaft und Open Education. Dieser Podcast soll ein grundlegendes Verständnis schaffen, vor allem aber auch über aktuelle Entwicklungen informieren. ",
 		"content" : "Open Science Radio"
 	}, {
 		"href" : "/podcast/physikalische-soiree",
-		"summary" : "",
+		"summary" : "Gespräche, Reportagen und Erzählungen. Frisch, stromsparend und elektrisierend. Themen: Naturwissenschaft, Gesellschaft, Technik. Produziert in Wien. Ausgestrahlt jeden ersten Montag im Monat im ORF Österreich 1 Campus Radio oder als Podcast.",
 		"content" : "Physikalische Soiree"
 	}, {
 		"href" : "/podcast/raumzeit",
-		"summary" : "",
+		"summary" : "Raumzeit ist eine Serie von Gesprächen mit Wissenschaftlern, Ingenieuren, Astronauten und Projektleitern über Raumfahrt. Jede Episode rückt einen Themenbereich in den Fokus und diskutiert ausführlich alle Aspekte und Details. ",
 		"content" : "Raumzeit"
 	}, {
 		"href" : "/podcast/resonator",
-		"summary" : "",
+		"summary" : "Eine Sammlung von Gesprächen über Wissenschaft, Wissenschaftler und Forschung.",
 		"content" : "Resonator"
 	}, {
 		"href" : "/podcast/skeptoskop",
-		"summary" : "",
+		"summary" : "Skeptoskop - Der Podcast, der in die GWUP hineinhorcht!",
 		"content" : "Skeptoskop"
 	}, {
 		"href" : "/podcast/sternengeschichten",
-		"summary" : "",
+		"summary" : "Das Universum ist voll mit Sternen, Galaxien, Planeten und jeder Menge anderer cooler Dinge. Jedes davon hat seine Geschichten und die Sternengeschichten erzählen sie.Der Podcast zum Blog „Astrodicticum Simplex“",
 		"content" : "Sternengeschichten"
 	}, {
 		"href" : "/podcast/wrint-wissenschaft",
-		"summary" : "",
+		"summary" : "Worin Holger Klein und Florian Freistetter ohne wissenschaftlichen Anspruch über Wissenschaft plaudern.",
 		"content" : "Wrint: Wissenschaft"
 	}, {
 		"href" : "/podcast/wwww",
-		"summary" : "",
+		"summary" : "Thomas Wanhoffs Podcast mit Wissenschaftsnachrichten",
 		"content" : "WWWW"
 	}, {
 		"id" : "rest",

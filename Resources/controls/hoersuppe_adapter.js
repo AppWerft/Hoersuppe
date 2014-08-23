@@ -76,12 +76,13 @@ HoersuppenModule.prototype = {
 				sectionndx++;
 				items[sectionndx] = [];
 			} else if (cat.content) {
-				var key = cat.href.substr(9);
+				var key =   (cat.href) ? cat.href.substr(9) : nulls;
 				sections[sectionndx].podcasts.push({
 					key : key,
 					title : cat.content,
 					summary : cat.summary,
-					logo : 'http://hoersuppe.de/feature/cache/' + key + '.jpg'
+					url : (cat.url) ? cat.url : null,
+					logo : (cat.logo) ? cat.logo : 'http://hoersuppe.de/feature/cache/' + key + '.jpg'
 				});
 			}
 		});
