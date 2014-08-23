@@ -230,6 +230,7 @@ module.exports = function(_channel, _items) {
 						if (item.isChecked()) {
 							item.setChecked(false);
 							HoerSuppe.removeFav(channel);
+							self.close();
 						} else {
 							item.setChecked(true);
 							HoerSuppe.addFav(channel);

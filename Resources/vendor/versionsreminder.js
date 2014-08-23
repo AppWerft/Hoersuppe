@@ -12,7 +12,7 @@ module.exports = function() {
 				});
 				r.addEventListener("click", function(_t) {
 					if (_t.index != _t.source.cancel)
-						Ti.Platform.openURL('https://play.google.com/store/apps/details?de.appwerft.hoersuppe');
+						Ti.Platform.openURL(url);
 				}), r.show();
 			} else
 				Ti.Android && Ti.UI.createNotification({
