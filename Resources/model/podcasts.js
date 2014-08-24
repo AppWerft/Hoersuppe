@@ -775,7 +775,7 @@ module.exports = {
 		"content" : "apfelklatsch"
 	}, {
 		"summary" : "Titanium ist eine Entwicklungsplattform für native, mobile Apps und nutzt Javascript als Codebasis. Rainer Schleevoigt aus Hamburg entwickelt erfolgreich mit diesem System seit vier Jahren und plaudert hier aus dem Nähkästchen.",
-		"logo" : "https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/Resources/assets/tischwatz.png",
+		"logo" : "https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/Resources/assets/tischwatz.png?x",
 		"content" : "Appcelerator Titanium",
 		"href" : "http://hamburger-appwerft.de",
 	}, {

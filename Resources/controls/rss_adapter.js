@@ -10,10 +10,6 @@ Module.prototype = {
 	start : function(_key, _reload) {
 		if (_key)
 			this.key = _key;
-		else {
-			that.fireEvent('error', {});
-			return;
-		};
 		var that = this;
 		this.fireEvent('geturl:start', {
 			message : 'Feed-Suche für „' + this.key + '“'
@@ -78,7 +74,7 @@ Module.prototype = {
 						for (var i = 0; i < elements.length; i++) {
 							var element = elements.item(i);
 							try {
-								var description = (element.getElementsByTagName('description').item(0)) ? element.getElementsByTagName('description').item(0).textContent : '';
+								var description = (element.getElementsByTagName('description').item(0)) ? element.getElementsByTagName('description').item(0).textContent:'';
 								data.push({
 									enclosure : {
 										url : element.getElementsByTagName('enclosure').item(0).getAttribute('url'),
@@ -143,9 +139,6 @@ Module.prototype = {
 		var that = this;
 		if (Ti.App.Properties.hasProperty('RSSURL' + key)) {
 			var url = Ti.App.Properties.getString('RSSURL' + key);
-			that.fireEvent('geturl:ready', {
-				message : 'Feed-URL OK'
-			});
 			callback(url);
 			return;
 		}
