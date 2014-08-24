@@ -20,19 +20,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 		</generator>
 		
 		<item>
-			<title>Installation von Titanium</title>
-			<link>
-			</link>
-			<pubDate>
-				Sun, 31 Aug 2014 18:29:43 +0000
-			</pubDate>
-			<guid isPermaLink="false">
-			</guid>
-			<description>In diesem Podcast installieren wir das Titanium-Studio und bilden die erste Hallo-Welt-App.</description>
-			<enclosure url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/2.mp3" length="" type="audio/mpeg"/>
-		</item>
-		<item>
-			<title>Was ist Titanium – ein Einführung</title>
+			<title>Installation von Titanium au der lokalen Maschine</title>
 			<link>
 			</link>
 			<pubDate>
@@ -40,8 +28,20 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			</pubDate>
 			<guid isPermaLink="false">
 			</guid>
+			<description>In diesem Podcast installieren wir das Titanium-Studio und bilden die erste Hallo-Welt-App.</description>
+			<enclosure url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/2.m4a" length="" type="audio/mpeg"/>
+		</item>
+		<item>
+			<title>Was ist Titanium – ein Einführung</title>
+			<link>
+			</link>
+			<pubDate>
+				Sun, 15 Aug 2014 18:29:43 +0000
+			</pubDate>
+			<guid isPermaLink="false">
+			</guid>
 			<description>Im ersten Podcast gibt es eine Einführung in die Entwicklung von nativen Apps bei Verwendung vom Crossplattformframeworks.</description>
-			<enclosure url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/1.mp3" length="" type="audio/mpeg"/>
+			<enclosure url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/1.m4a" length="" type="audio/mpeg"/>
 		</item>
 	</channel>
 </rss>
