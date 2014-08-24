@@ -127,7 +127,8 @@ Module.prototype = {
 					}
 				}
 			});
-			xhr.open('GET', 'http://' + _url, true);
+			var url = (_url.search('http') == 0) ? _url : 'http://' + _url;
+			xhr.open('GET', url, true);
 			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (KHTML, like Gecko)');
 			xhr.setRequestHeader('Accept', 'application/rss+xml');
 			xhr.setRequestHeader('Cookie', null);
@@ -138,11 +139,11 @@ Module.prototype = {
 	_getUrl : function(key, callback) {
 		var that = this;
 		console.log('Key=' + key);
-		if (key.search('http://') == 0) {
+		if (key.search('http://') == 0 || key.search('https://') == 0) {
 			callback(key);
 			return;
 		}
-			if (Ti.App.Properties.hasProperty('RSSURL' + key)) {
+		if (Ti.App.Properties.hasProperty('RSSURL' + key)) {
 			var url = key && Ti.App.Properties.getString('RSSURL' + key);
 			callback(url);
 			return;

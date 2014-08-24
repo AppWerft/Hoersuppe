@@ -31,8 +31,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			</guid>
 			<description>
 			</description>
-			<enclosure url="" length="" type="audio/mpeg" />
-			</enclosure>
+			<enclosure url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/1.mp3" length="" type="audio/mpeg"/>
 		</item>
 	</channel>
 </rss>
