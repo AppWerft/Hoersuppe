@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+xmlns:atom="http://www.w3.org/2005/Atom"
+xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podlove.org/simple-chapters" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:fh="http://purl.org/syndication/history/1.0" >
+	<channel>
+		<title>
+			TiSchwatz
+		</title>
+		<link>
+			http://hamburger-appwerft.de
+		</link>
+		<description>
+		</description>
+		<lastBuildDate>
+		</lastBuildDate>
+		<language>
+			de-DE
+		</language>
+		<generator>
+		</generator>
+		<item>
+			<title>
+				Was ist Titanium – ein Einführung
+			</title>
+			<link>
+			</link>
+			<pubDate>
+				Sun, 24 Aug 2014 18:29:43 +0000
+			</pubDate>
+			<guid isPermaLink="false">
+			</guid>
+			<description>
+			</description>
+			<enclosure url="" length="" type="audio/mpeg" />
+			</enclosure>
+		</item>
+	</channel>
+</rss>

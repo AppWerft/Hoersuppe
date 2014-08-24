@@ -1,13 +1,15 @@
-
-
 module.exports = function() {
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
+	var Adapter = new (require('controls/audiodownloader_adapter'))();
+								
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
 	});
 	var lasturl = null;
 	var lastitem = null, lastsection = null, lastindex = null;
+
 	self.list = Ti.UI.createListView({
+		bottom : 20,
 		templates : {
 			'rss' : {
 				properties : {
@@ -17,15 +19,48 @@ module.exports = function() {
 					type : 'Ti.UI.ImageView',
 					bindId : 'play',
 					properties : {
-						top : 53,
-						left : 80,
-						width : 40,
-						height : 40,
+						top : 99,
+						left : 5,
+						width : 32,
+						height : 32,
 
 						image : '/assets/loud.png'
 					},
 					events : {
 						click : function(e) {
+
+						}
+					},
+				}, {
+					type : 'Ti.UI.ImageView',
+					bindId : 'trash',
+					properties : {
+						top : 100,
+						left : 55,
+						width : 27,
+						height : 27,
+						bottom : 10,
+						image : '/assets/trash.png'
+					},
+					events : {
+						click : function(trash_event) {
+							var item = trash_event.section.getItemAt(trash_event.itemIndex);
+							var dialog = Ti.UI.createAlertDialog({
+								cancel : 1,
+								buttonNames : ['Löschen', 'Behalten'],
+								message : 'Den Podcast „' + item.title.text + '“ vom lokalen Speicher löschen?',
+								title : 'Podcastlöschen '
+							});
+							dialog.addEventListener('click', function(dialog_evt) {
+								if (dialog_evt.index != dialog_evt.source.cancel) {
+									console.log('Info: removing of listitem');
+									console.log(JSON.parse(item.properties.itemId));
+									Adapter.deleteAudioFile(JSON.parse(item.properties.itemId));
+									trash_event.section.deleteItemsAt( trash_event.itemIndex, 1);
+								}
+							});
+							dialog.show();
+
 						}
 					},
 				}, {
@@ -42,7 +77,7 @@ module.exports = function() {
 					type : 'Ti.UI.View',
 					properties : {
 						layout : 'vertical',
-						left : 130,
+						left : 100,
 						top : 0,
 						height : Ti.UI.SIZE,
 						right : 5,
@@ -101,6 +136,7 @@ module.exports = function() {
 	};
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
+		return;
 		var item = _e.section.getItemAt(_e.itemIndex);
 		if (null != lastitem) {
 			console.log('Info: was lastitem,restore old view');

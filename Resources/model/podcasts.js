@@ -777,7 +777,7 @@ module.exports = {
 		"summary" : "Titanium ist eine Entwicklungsplattform für native, mobile Apps und nutzt Javascript als Codebasis. Rainer Schleevoigt aus Hamburg entwickelt erfolgreich mit diesem System seit vier Jahren und plaudert hier aus dem Nähkästchen.",
 		"logo" : "https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/Resources/assets/tischwatz.png?x",
 		"content" : "Appcelerator Titanium",
-		"href" : "http://hamburger-appwerft.de",
+		"url" : "http://hamburger-appwerft.de",
 	}, {
 		"href" : "/podcast/bahncast",
 		"summary" : "Im BahnCast möchte ich mich mit Menschen über das Thema Bahn unterhalten. Ich möchte mit Menschen reden die von ihren Geschichten und Berufe rund um die Bahn erzählen. Auch möchte ich die Technik die hinter dem Bahnbetrieb steckt mit Gesprächspartnern erläutern. Wie sieht der Tag eines Lokführers aus? Wie bleibt die Bahn auf der Schiene und entgleist nicht? Das sind fragen die ich in Interviews und Reportagen klären möchte.",

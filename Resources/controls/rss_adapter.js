@@ -74,7 +74,7 @@ Module.prototype = {
 						for (var i = 0; i < elements.length; i++) {
 							var element = elements.item(i);
 							try {
-								var description = (element.getElementsByTagName('description').item(0)) ? element.getElementsByTagName('description').item(0).textContent:'';
+								var description = (element.getElementsByTagName('description').item(0)) ? element.getElementsByTagName('description').item(0).textContent : '';
 								data.push({
 									enclosure : {
 										url : element.getElementsByTagName('enclosure').item(0).getAttribute('url'),
@@ -137,8 +137,13 @@ Module.prototype = {
 	},
 	_getUrl : function(key, callback) {
 		var that = this;
-		if (Ti.App.Properties.hasProperty('RSSURL' + key)) {
-			var url = Ti.App.Properties.getString('RSSURL' + key);
+		console.log('Key=' + key);
+		if (key.search('http://') == 0) {
+			callback(key);
+			return;
+		}
+			if (Ti.App.Properties.hasProperty('RSSURL' + key)) {
+			var url = key && Ti.App.Properties.getString('RSSURL' + key);
 			callback(url);
 			return;
 		}

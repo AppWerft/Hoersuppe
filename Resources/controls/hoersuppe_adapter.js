@@ -76,9 +76,9 @@ HoersuppenModule.prototype = {
 				sectionndx++;
 				items[sectionndx] = [];
 			} else if (cat.content) {
-				var key =   (cat.href) ? cat.href.substr(9) : nulls;
+				var key =   (cat.href || !cat.url) ? cat.href.substr(9) : null;
 				sections[sectionndx].podcasts.push({
-					key : key,
+					key : key || cat.url,
 					title : cat.content,
 					summary : cat.summary,
 					url : (cat.url) ? cat.url : null,

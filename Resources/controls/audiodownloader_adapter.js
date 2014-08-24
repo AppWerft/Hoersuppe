@@ -12,6 +12,15 @@ var Module = function() {
 
 /* prototyped methods */
 Module.prototype = {
+	deleteAudioFile : function(item) {
+		if (!item || !item.url)
+			return;
+		var filename = Ti.Utils.md5HexDigest(item.url);
+		var audiofile = Ti.Filesystem.getFile(item.url);
+		audiofile.deleteFile();
+		var metafile = Ti.Filesystem.getFile(item.url + '.meta');
+		metafile.deleteFile();
+	},
 	saveAudioFile : function(item, callback) {
 		var that = this;
 		var filename = Ti.Utils.md5HexDigest(item.url);
