@@ -18,7 +18,18 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 		</language>
 		<generator>
 		</generator>
-		
+		<item>
+			<title>Wir bauen „Halle Welt“ schauen uns die Projektstruktur an.</title>
+			<link>
+			</link>
+			<pubDate>
+				Sun, 24 Aug 2014 18:19:13 +0000
+			</pubDate>
+			<guid isPermaLink="false">
+			</guid>
+			<description>In diesem Podcast installieren wir das Titanium-Studio und die SDKs</description>
+			<enclosure   length="3700"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/3.m4a" type="audio/mpeg"/>
+		</item>
 		<item>
 			<title>Installation von Titanium auf der lokalen Maschine</title>
 			<link>
@@ -28,7 +39,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			</pubDate>
 			<guid isPermaLink="false">
 			</guid>
-			<description>In diesem Podcast installieren wir das Titanium-Studio und bilden die erste Hallo-Welt-App.</description>
+			<description>In diesem Podcast installieren wir das Titanium-Studio und die SDKs</description>
 			<enclosure   length="3700"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/2.m4a" type="audio/mpeg"/>
 		</item>
 		<item>
