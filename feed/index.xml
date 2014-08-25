@@ -27,9 +27,11 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			</pubDate>
 			<guid isPermaLink="false">
 			</guid>
-			<description>In diesem Podcast installieren wir das Titanium-Studio und die SDKs</description>
+			<description>In diesem Podcast unternehmen wor erste zaghafte Schritte in der Tataniumwelt und bauen eine erste Dumm-App</description>
 			<enclosure   length="3700"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/3.m4a" type="audio/mpeg"/>
 		</item>
+		
+		
 		<item>
 			<title>Installation von Titanium auf der lokalen Maschine</title>
 			<link>
@@ -42,6 +44,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			<description>In diesem Podcast installieren wir das Titanium-Studio und die SDKs</description>
 			<enclosure   length="3700"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/2.m4a" type="audio/mpeg"/>
 		</item>
+		
 		<item>
 			<title>Was ist Titanium – ein Einführung</title>
 			<link>
