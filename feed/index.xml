@@ -20,11 +20,11 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 		</generator>
 		
 		<item>
-			<title>Installation von Titanium au der lokalen Maschine</title>
+			<title>Installation von Titanium auf der lokalen Maschine</title>
 			<link>
 			</link>
 			<pubDate>
-				Sun, 24 Aug 2014 18:29:43 +0000
+				Sun, 24 Aug 2014 18:19:13 +0000
 			</pubDate>
 			<guid isPermaLink="false">
 			</guid>
@@ -40,7 +40,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			</pubDate>
 			<guid isPermaLink="false">
 			</guid>
-			<description>Im ersten Podcast gibt es eine Einführung in die Entwicklung von nativen Apps bei Verwendung vom Crossplattformframeworks.</description>
+			<description>Im ersten Podcast gibt es eine Einführung in die Entwicklung von nativen Apps bei Verwendung vom Crossplattformframeworks. Wir klären das am Schlagwort „CI-driven“ und „Platform-driven“.</description>
 			<enclosure length="11000" url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/1.mp3"  type="audio/mpeg"/>
 		</item>
 	</channel>
