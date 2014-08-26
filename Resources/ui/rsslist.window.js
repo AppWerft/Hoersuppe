@@ -177,10 +177,10 @@ module.exports = function(_channel, _items) {
 					text : item.title
 				},
 				local : {
-					opacity : (item.islocal) ? 1 : 0.4
+					opacity : (item.islocal) ? 1 : 0.3
 				},
 				cloud : {
-					opacity : (item.islocal) ? 0.4 : 1
+					opacity : (item.islocal) ? 0.3 : 1
 				},
 				description : {
 					html : item.description
@@ -191,7 +191,6 @@ module.exports = function(_channel, _items) {
 			});
 	}
 	self.list.sections[0].setItems(dataitems);
-
 	if (Ti.Android) {
 		self.addEventListener("open", function() {
 			var activity = self.getActivity();
