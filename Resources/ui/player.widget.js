@@ -1,5 +1,4 @@
 module.exports = function(item) {
-	/* START */
 	var self = Ti.UI.createView();
 	self.add(Ti.UI.createView({
 		backgroundColor : '#000',
@@ -7,10 +6,9 @@ module.exports = function(item) {
 		top : 0
 	}));
 	self.list = Ti.UI.createView({
-		//layout : 'vertical',
 		width : 240,
 		backgroundColor : 'white',
-		height : Ti.UI.SIZE
+		height : Ti.UI.SIZE   
 	});
 	self.list.add(Ti.UI.createImageView({
 		image : item.logo,
@@ -44,14 +42,3 @@ module.exports = function(item) {
 	self.player.play();
 	return self;
 };
-/* var item = e.section.getItemAt(e.itemIndex);
- var url = JSON.parse(item.properties.itemId).url;
- if (Ti.App.AudioPlayer.playing) {
- item.play.opacity = 1;
- Ti.App.AudioPlayer.release();
- Ti.App.AudioPlayer.stop();
- } else {
- Ti.App.AudioPlayer.setUrl(url);
- item.play.opacity = 0.3;
- Ti.App.AudioPlayer.play();
- }*/
