@@ -22,12 +22,13 @@ Module.prototype = {
 		metafile.deleteFile();
 	},
 	isLocal : function(item) {
+		console.log('localtext');
 		console.log(item);
 		if (!item || !item.url)
 			return false;
 		var filename = Ti.Utils.md5HexDigest(item.url);
-		var audiofile = Ti.Filesystem.getFile(item.url);
-		return audiofile.exists();
+		return getFilehandle(filename).exists();
+		
 	},
 	saveAudioFile : function(item, callback) {
 		var that = this;

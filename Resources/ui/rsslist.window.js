@@ -58,37 +58,20 @@ module.exports = function(_channel, _items) {
 					type : 'Ti.UI.ImageView',
 					bindId : 'local',
 					properties : {
-						top : 92,
+						top : 90,
 						left : 50,
 						width : 30,
 						height : 24,
 						image : '/assets/local.png'
-					},
-					events : {
-						click : function(e) {
-							return;
-							var item = e.section.getItemAt(e.itemIndex);
-							var url = JSON.parse(item.properties.itemId).url;
-							if (Ti.App.AudioPlayer.playing) {
-								item.play.opacity = 1;
-								Ti.App.AudioPlayer.release();
-								Ti.App.AudioPlayer.stop();
-							} else {
-								Ti.App.AudioPlayer.setUrl(url);
-								item.play.opacity = 0.3;
-								Ti.App.AudioPlayer.play();
-							}
-							e.section.updateItemAt(e.itemIndex, item);
-						}
-					},
+					}
 				}, {
 					type : 'Ti.UI.ImageView',
 					bindId : 'cloud',
 					properties : {
-						left : 5,
+						left : 8,
 						width : 32,
 						height : 24,
-						top : 93,
+						top : 90,
 						image : '/assets/cloud.png'
 					},
 					events : {
@@ -170,7 +153,8 @@ module.exports = function(_channel, _items) {
 						url : item.url,
 						title : item.title,
 						islocal : item.islocal,
-						logo : channel.logo
+						logo : channel.logo,
+						description : item.description
 					})
 				},
 				title : {
@@ -228,10 +212,16 @@ module.exports = function(_channel, _items) {
 		});
 	};
 	self.addEventListener('androidback', function() {
-		setTimeout(function() {
-			console.log('Info: detecting of androidback event ==> try to close window');
+		if (self.overlay) {
+			self.remove(self.overlay);
+			self.overlay = null;
+		} else
 			self.close();
-		}, 10);
+
+	});
+	self.list.addEventListener('itemclick', function(_item) {
+		self.overlay = require('ui/player.widget')(JSON.parse(_item.itemId));
+		self.add(self.overlay);
 	});
 	return self;
 };
