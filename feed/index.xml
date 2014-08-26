@@ -19,6 +19,18 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 		<generator>
 		</generator>
 		<item>
+			<title>Zertifikate …</title>
+			<link>
+			</link>
+			<pubDate>
+				Mon, 25 Aug 2014 18:19:13 +0000
+			</pubDate>
+			<guid isPermaLink="false">
+			</guid>
+			<description>In diesem Podcast bauen wir die notwendigen Keys und Zertifikate, die für die Geräte notwendig sind</description>
+			<enclosure   length="24300"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/4.m4a" type="audio/mpeg"/>
+		</item>
+		<item>
 			<title>Wir bauen „Halle Welt“ schauen uns die Projektstruktur an.</title>
 			<link>
 			</link>
@@ -27,7 +39,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			</pubDate>
 			<guid isPermaLink="false">
 			</guid>
-			<description>In diesem Podcast unternehmen wor erste zaghafte Schritte in der Tataniumwelt und bauen eine erste Dumm-App</description>
+			<description>In diesem Podcast unternehmen wor erste zaghafte Schritte in der Titaniumwelt und bauen eine erste Dummy-App</description>
 			<enclosure   length="26300"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/3.m4a" type="audio/mpeg"/>
 		</item>
 		
