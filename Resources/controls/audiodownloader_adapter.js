@@ -21,6 +21,13 @@ Module.prototype = {
 		var metafile = Ti.Filesystem.getFile(item.url + '.meta');
 		metafile.deleteFile();
 	},
+	isLocal : function(item) {
+		if (!item || !item.url)
+			return;
+		var filename = Ti.Utils.md5HexDigest(item.url);
+		var audiofile = Ti.Filesystem.getFile(item.url);
+		return audiofile.exists();
+	},
 	saveAudioFile : function(item, callback) {
 		var that = this;
 		var filename = Ti.Utils.md5HexDigest(item.url);

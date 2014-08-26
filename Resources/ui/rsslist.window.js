@@ -2,7 +2,7 @@ module.exports = function(_channel, _items) {
 	var feed = _items;
 	var channel = _channel;
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
-	var AudioDownloaderns = {};
+	var AudioDownloader = new (require('controls/audiodownloader_adapter'))();
 	// ref lists of downloader
 	var options = {};
 	var onClick = function(e) {
@@ -56,16 +56,17 @@ module.exports = function(_channel, _items) {
 				},
 				childTemplates : [{
 					type : 'Ti.UI.ImageView',
-					bindId : 'play',
+					bindId : 'local',
 					properties : {
-						top : 90,
+						top : 95,
 						left : 50,
-						width : 36,
-						height : 36,
-						image : '/assets/loud.png'
+						width : 30,
+						height : 24,
+						image : '/assets/local.png'
 					},
 					events : {
 						click : function(e) {
+							return;
 							var item = e.section.getItemAt(e.itemIndex);
 							var url = JSON.parse(item.properties.itemId).url;
 							if (Ti.App.AudioPlayer.playing) {
@@ -86,12 +87,12 @@ module.exports = function(_channel, _items) {
 					properties : {
 						left : 5,
 						width : 32,
-						height : 32,
+						height : 24,
 						top : 93,
-						image : '/assets/down.png'
+						image : '/assets/cloud.png'
 					},
 					events : {
-						click : onClick
+						//click : onClick
 					}
 				}, {
 					type : 'Ti.UI.ImageView',
@@ -104,25 +105,6 @@ module.exports = function(_channel, _items) {
 						image : channel.logo,
 						defaultImage : '/assets/default.png'
 					}
-				}, {
-					type : 'Ti.UI.View',
-					properties : {
-						top : 130,
-						left : 5,
-						bottom : 20,
-						width : 80,
-						height : 5,
-						backgroundColor : '#ddd'
-					},
-					childTemplates : [{
-						type : 'Ti.UI.View',
-						bindId : 'progress',
-						properties : {
-							left : 0,
-							backgroundColor : '#408B4D',
-							width : 0,
-						},
-					}]
 				}, {
 					type : 'Ti.UI.View',
 					properties : {
@@ -177,24 +159,26 @@ module.exports = function(_channel, _items) {
 	actionbar && actionbar.setSubtitle(options.subtitle);
 	for (var i = 0; i < feed.length; i++) {
 		var item = feed[i];
-		var url = item.enclosure && item.enclosure.url;
-		if (url)
+		item.url = item.enclosure && item.enclosure.url;
+		item.islocal =  AudioDownloader.isLocal(item);
+		if (item.url)
 			dataitems.push({
 				properties : {
 					itemId : JSON.stringify({
-						url : url,
+						url : item.url,
 						title : item.title,
+						islocal: item.islocal,
 						logo : channel.logo
 					})
 				},
 				title : {
 					text : item.title
 				},
-				play : {
-					opacity : 1
+				local : {
+					opacity : (item.islocal) ? 0.4:1
 				},
-				down : {
-					opacity : 1
+				cloud : {
+					opacity : (item.islocal) ? 1:0.4
 				},
 				progress : {},
 				description : {
