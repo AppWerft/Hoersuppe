@@ -58,7 +58,7 @@ module.exports = function(_channel, _items) {
 					type : 'Ti.UI.ImageView',
 					bindId : 'local',
 					properties : {
-						top : 95,
+						top : 92,
 						left : 50,
 						width : 30,
 						height : 24,
@@ -83,7 +83,7 @@ module.exports = function(_channel, _items) {
 					},
 				}, {
 					type : 'Ti.UI.ImageView',
-					bindId : 'down',
+					bindId : 'cloud',
 					properties : {
 						left : 5,
 						width : 32,
@@ -160,14 +160,16 @@ module.exports = function(_channel, _items) {
 	for (var i = 0; i < feed.length; i++) {
 		var item = feed[i];
 		item.url = item.enclosure && item.enclosure.url;
-		item.islocal =  AudioDownloader.isLocal(item);
+		item.size = item.enclosure && item.enclosure.length;
+		delete item.enclosure;
+		item.islocal = AudioDownloader.isLocal(item);
 		if (item.url)
 			dataitems.push({
 				properties : {
 					itemId : JSON.stringify({
 						url : item.url,
 						title : item.title,
-						islocal: item.islocal,
+						islocal : item.islocal,
 						logo : channel.logo
 					})
 				},
@@ -175,12 +177,11 @@ module.exports = function(_channel, _items) {
 					text : item.title
 				},
 				local : {
-					opacity : (item.islocal) ? 0.4:1
+					opacity : (item.islocal) ? 1 : 0.4
 				},
 				cloud : {
-					opacity : (item.islocal) ? 1:0.4
+					opacity : (item.islocal) ? 0.4 : 1
 				},
-				progress : {},
 				description : {
 					html : item.description
 				},
@@ -228,13 +229,6 @@ module.exports = function(_channel, _items) {
 		});
 	};
 	self.addEventListener('androidback', function() {
-		for (var id in AudioDownloaderns) {
-			console.log(id + ' ' + AudioDownloaderns[id].hasOwnProperty());
-			if (!AudioDownloaderns[id].hasOwnProperty()) {
-				//	AudioDownloaderns[id].removeEventListener('ready');
-				//	AudioDownloaderns[id].removeEventListener('progress');
-			}
-		}
 		setTimeout(function() {
 			console.log('Info: detecting of androidback event ==> try to close window');
 			self.close();

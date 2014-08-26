@@ -23,11 +23,11 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			<link>
 			</link>
 			<pubDate>
-				Mon, 25 Aug 2014 18:19:13 +0000
+				Mon, 25 Aug 2014 11:19:13 +0000
 			</pubDate>
 			<guid isPermaLink="false">
 			</guid>
-			<description>In diesem Podcast bauen wir die notwendigen Keys und Zertifikate, die für die Geräte notwendig sind</description>
+			<description>Für Umsetzer nicht die schönste Arbeit: heute bauen wir die notwendigen Keys und Zertifikate, die für die Geräte notwendig sind</description>
 			<enclosure   length="24300"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/4.m4a" type="audio/mpeg"/>
 		</item>
 		<item>
@@ -53,8 +53,8 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podl
 			</pubDate>
 			<guid isPermaLink="false">
 			</guid>
-			<description>In diesem Podcast installieren wir das Titanium-Studio und die SDKs</description>
-			<enclosure   length=“13700"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/2.m4a" type="audio/mpeg"/>
+			<description>In diesem Podcast installieren wir das Titanium-Studio und die SDKs auf unserem Arbeitsplatzrechner.</description>
+			<enclosure   length="13700"  url="https://raw.githubusercontent.com/AppWerft/Hoersuppe/master/feed/2.m4a" type="audio/mpeg"/>
 		</item>
 		
 		<item>
