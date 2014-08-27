@@ -42,6 +42,6 @@ module.exports = function() {
 		var dialog = require('ui/download.widget')(channel, doOpenFeedWindow);
 		self.add(dialog);
 	});
-	self.addEventListener('focus', updateList);
+	self.addEventListener('open', updateList);
 	return self;
 };

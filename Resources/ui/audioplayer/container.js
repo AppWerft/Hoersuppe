@@ -24,8 +24,10 @@ module.exports = function(item) {
 		height : Ti.UI.SIZE,
 	});
 	self.downloader = new (require('./downloader.widget'))();
-	if (!item.islocale)
-		self.list.add(self.downloader);
+	if (!item.islocal) {
+		self.list.add(self.downloader.createView(item));
+		console.log('Info: downloader added');
+	}
 	self.list.add(Ti.UI.createImageView({
 		image : item.logo,
 		defaultImage : '/assets/default.png',
@@ -44,6 +46,7 @@ module.exports = function(item) {
 		ellipsize : true,
 		text : item.title
 	}));
+	
 	self.player = Ti.Media.createVideoPlayer({
 		height : 20,
 		allowsAirPlay : true,
@@ -52,12 +55,13 @@ module.exports = function(item) {
 		mediaControlStyle : Ti.Media.VIDEO_CONTROL_NONE,
 		url : item.url
 	});
+	console.log('Info: audioplayer created ' + item.url);
 	self.playercontrolview = Ti.UI.createView({
 		top : 0,
 		height : 100,
 		backgroundColor : '#224929'
 	});
-	//self.list.add(self.player);
+	self.list.add(self.player);
 	self.slider = Ti.UI.createSlider({
 		bottom : 7,
 		min : 0,
@@ -111,7 +115,7 @@ module.exports = function(item) {
 
 	self.pause = Ti.UI.createButton({
 		top : 5,
-		left : 50,
+		left : 30,
 		backgroundImage : '/assets/pause.png',
 		width : 50,
 		height : 50,
@@ -121,14 +125,14 @@ module.exports = function(item) {
 		top : 5,
 		backgroundImage : '/assets/play.png',
 		width : 50,
-		left : 110,
+		left : 90,
 		height : 50
 	});
 	self.stop = Ti.UI.createButton({
 		top : 5,
 		backgroundImage : '/assets/stop.png',
 		width : 50,
-		left : 170,
+		left : 150,
 		opacity : 0.3,
 		height : 50
 	});
@@ -139,28 +143,24 @@ module.exports = function(item) {
 	self.playercontrolview.add(self.slider);
 	self.playercontrolview.add(self.currenttime);
 	self.playercontrolview.add(self.endtime);
-
 	self.add(self.player);
+	console.log('Info: player added');
 	self.list.add(self.playercontrolview);
 	self.add(self.list);
-	self.player.play();
-	if (!item.islocal)
-		Ti.UI.createNotification({
-			message : 'Zum Runderladen des Podcasts einfach nach unten ziehen …'
-		}).show();
 	self.list.addEventListener('swipe', function(_e) {
-		/*if (_e.direction == 'down') {
-			var y = self.getRect().y;
+		if (_e.direction == 'down') {
+			var y = self.list.getRect().y;
+			console.log(y);
 			self.list.animate({
-				top : y + 50,
-				duration : 700
+				top : y + 20,
+				duration : 100
 			}, function() {
 				self.list.animate({
 					top : y
 				});
 			});
 			self.downloader.startDownload();
-		}*/
+		}
 	});
 	self.player.addEventListener('playbackstate', function(_evt) {
 		switch (_evt.playbackState) {
