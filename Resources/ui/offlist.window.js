@@ -1,7 +1,7 @@
-module.exports = function() {
+module.exports = function(parent) {
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
 	var Adapter = new (require('controls/audiodownloader_adapter'))();
-								
+
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
 	});
@@ -27,8 +27,10 @@ module.exports = function() {
 						image : '/assets/loud.png'
 					},
 					events : {
-						click : function(e) {
-
+						click : function(playevent) {
+							var item = playevent.section.getItemAt(playevent.itemIndex);
+							self.overlay = require('ui/player.widget')(JSON.parse(item.properties.itemId));
+							self.add(self.overlay);
 						}
 					},
 				}, {
@@ -53,10 +55,8 @@ module.exports = function() {
 							});
 							dialog.addEventListener('click', function(dialog_evt) {
 								if (dialog_evt.index != dialog_evt.source.cancel) {
-									console.log('Info: removing of listitem');
-									console.log(JSON.parse(item.properties.itemId));
 									Adapter.deleteAudioFile(JSON.parse(item.properties.itemId));
-									trash_event.section.deleteItemsAt( trash_event.itemIndex, 1);
+									trash_event.section.deleteItemsAt(trash_event.itemIndex, 1);
 								}
 							});
 							dialog.show();
@@ -119,7 +119,8 @@ module.exports = function() {
 					itemId : JSON.stringify({
 						url : off.url,
 						title : off.title,
-						logo : off.logo
+						logo : off.logo,
+						islocal : true
 					})
 				},
 				title : {
@@ -135,42 +136,25 @@ module.exports = function() {
 		self.list.setSections(sections);
 	};
 	self.add(self.list);
-	self.list.addEventListener('itemclick', function(_e) {
-		return;
-		var item = _e.section.getItemAt(_e.itemIndex);
-		if (null != lastitem) {
-			console.log('Info: was lastitem,restore old view');
-			console.log(lastitem);
-			lastitem.play.opacity = 1;
-			lastsection.updateItemAt(lastindex, lastitem);
-		}
-		var url = JSON.parse(item.properties.itemId).url;
-		Ti.App.AudioPlayer.release();
-		if (Ti.App.AudioPlayer.playing) {
-			console.log('Info: was playing try to stop');
-			item.play.opacity = 1;
-			Ti.App.AudioPlayer.stop();
+
+	parent.addEventListener('androidback', function() {
+		if (self.getVisible() && self.overlay) {
+			console.log('Info: overlay of player remove');
+			self.overlay.player.stop();
+			self.overlay.player.release();
+			self.remove(self.overlay);
+			self.overlay = null;
+			return false;
 		} else {
-			console.log('Info: was not  playing try set URL ' + url);
-			Ti.App.AudioPlayer.stop();
-			item.play.opacity = 0.3;
-			if (lasturl != url)
-				setTimeout(function() {
-					Ti.App.AudioPlayer.setUrl(url);
-					Ti.App.AudioPlayer.play();
-				}, 500);
+			console.log('Info: no overlay => killing app');
+			self.close();
 		}
-		if (lasturl == url) {
-			item.play.opacity = 1;
-		}
-		lasturl = url;
-		lastitem = item;
-		lastindex = _e.itemIndex;
-		lastsection = _e.section;
-		console.log('Info: update player view');
-		_e.section.updateItemAt(_e.itemIndex, item);
 
 	});
+	self.list.addEventListener('itemclick', function(_item) {
+
+	});
+
 	self.addEventListener('focus', updateList);
 	return self;
 };

@@ -7,15 +7,15 @@ module.exports = function() {
 		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 	});
 	var tab1 = Ti.UI.createTab({
-		window : require('ui/mainlist.window')(),
+		window : require('ui/mainlist.window')(self),
 		title : 'alle Podcasts'
 	});
 	var tab2 = Ti.UI.createTab({
-		window : require('ui/favlist.window')(),
+		window : require('ui/favlist.window')(self),
 		title : 'Merkliste'
 	});
 	var tab3 = Ti.UI.createTab({
-		window : require('ui/offlist.window')(),
+		window : require('ui/offlist.window')(self),
 		title : 'Gespeichertes'
 	});
 	self.addTab(tab1);

@@ -30,6 +30,40 @@ module.exports = function(item) {
 		height : Ti.UI.SIZE,
 		bottom : 80
 	});
+	self.downloader = Ti.UI.createView({
+		height : 30,
+		top : 0,
+		backgroundColor : '#224929'
+	});
+	self.progress = Ti.UI.createProgressBar({
+		left : 50,
+		min : 0,
+		max : 1,
+		top : 0,
+		width : Ti.UI.FILL,
+		height : Ti.UI.SIZE
+	});
+	self.downloader.add(self.progress);
+	self.statuscloud = Ti.UI.createImageView({
+		width : 20,
+		height : 15,
+		left : 10,
+		top : 0,
+		opacity : (item.islocale) ? 0 : 1,
+		image : '/assets/cloud.png'
+	});
+	self.statuslocal = Ti.UI.createImageView({
+		left : 10,
+		width : 20,
+		height : 15,
+		top : 0,
+		opacity : (item.islocal) ? 1 : 0,
+		image : '/assets/local.png'
+	});
+	self.downloader.add(self.statuscloud);
+	self.downloader.add(self.statuslocal);
+	if (!item.islocale)
+		self.list.add(self.downloader);
 	self.list.add(Ti.UI.createImageView({
 		image : item.logo,
 		defaultImage : '/assets/default.png',
@@ -95,31 +129,24 @@ module.exports = function(item) {
 		console.log('Info: starting Playing of ' + formatTime(duration));
 		cron = setInterval(function() {
 			var ratio = _e.source.currentPlaybackTime / duration;
-			self.slider.setValue(ratio);
+			if (!seeking)
+				self.slider.setValue(ratio);
 			self.currenttime.setText(formatTime(_e.source.currentPlaybackTime));
 			self.endtime.setText(formatTime(_e.source.duration));
 
 		}, 1000);
 
 	});
-
+	var seeking = false;
+	self.slider.addEventListener('start', function() {
+		seeking = true;
+	});
+	self.slider.addEventListener('stop', function(_evt) {
+		duration * _evt.value;
+		seeking = false;
+	});
 	self.slider.show();
-	self.statuscloud = Ti.UI.createImageView({
-		width : 20,
-		height : 15,
-		left : 10,
-		top : 10,
-		opacity : (item.islocale) ? 0 : 1,
-		image : '/assets/cloud.png'
-	});
-	self.statuslocal = Ti.UI.createImageView({
-		left : 10,
-		width : 20,
-		height : 15,
-		top : 13,
-		opacity : (item.islocal) ? 1 : 0,
-		image : '/assets/local.png'
-	});
+
 	self.pause = Ti.UI.createButton({
 		top : 5,
 		left : 50,
@@ -146,8 +173,6 @@ module.exports = function(item) {
 	self.playercontrolview.add(self.pause);
 	self.playercontrolview.add(self.play);
 	self.playercontrolview.add(self.stop);
-	self.playercontrolview.add(self.statuscloud);
-	self.playercontrolview.add(self.statuslocal);
 
 	self.playercontrolview.add(self.slider);
 	self.playercontrolview.add(self.currenttime);
@@ -166,15 +191,18 @@ module.exports = function(item) {
 			Ti.Media.vibrate();
 			var AudioDownloader = new (require('controls/audiodownloader_adapter'))();
 			AudioDownloader.saveAudioFile(item);
+			self.progress.show();
 			AudioDownloader.addEventListener('progress', function(_p) {
 				self.statuscloud.setOpacity(1 - _p.progress);
 				self.statuslocal.setOpacity(_p.progress);
+				self.progress.setValue(_p.progress);
 			});
 			AudioDownloader.addEventListener('ready', function() {
 				Ti.UI.createNotification({
 					message : 'Podcasts erfolgreich runtergeholt! Kann jetzt auch ohne Neuland gehört werden.'
 				}).show();
 				Ti.Media.vibrate();
+				self.progress.hide();
 
 			});
 		}
