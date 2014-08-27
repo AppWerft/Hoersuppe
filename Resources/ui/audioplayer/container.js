@@ -9,59 +9,21 @@ function formatTime(ms) {
 }
 
 module.exports = function(item) {
+	console.log('Info: Start Audioplayer');
+	console.log(item);
 	var self = Ti.UI.createView();
 	self.add(Ti.UI.createView({
 		backgroundColor : '#000',
 		opacity : 0.8,
 		top : 0
 	}));
-	var downbutton = Ti.UI.createImageView({
-		image : '/assets/down.png',
-		top : 0,
-		right : 0,
-		width : 60,
-		height : 80
-	});
-	//self.add(downbutton);
 	self.list = Ti.UI.createView({
 		width : 240,
 		layout : 'vertical',
 		backgroundColor : 'white',
 		height : Ti.UI.SIZE,
-		bottom : 80
 	});
-	self.downloader = Ti.UI.createView({
-		height : 30,
-		top : 0,
-		backgroundColor : '#224929'
-	});
-	self.progress = Ti.UI.createProgressBar({
-		left : 50,
-		min : 0,
-		max : 1,
-		top : 0,
-		width : Ti.UI.FILL,
-		height : Ti.UI.SIZE
-	});
-	self.downloader.add(self.progress);
-	self.statuscloud = Ti.UI.createImageView({
-		width : 20,
-		height : 15,
-		left : 10,
-		top : 0,
-		opacity : (item.islocale) ? 0 : 1,
-		image : '/assets/cloud.png'
-	});
-	self.statuslocal = Ti.UI.createImageView({
-		left : 10,
-		width : 20,
-		height : 15,
-		top : 0,
-		opacity : (item.islocal) ? 1 : 0,
-		image : '/assets/local.png'
-	});
-	self.downloader.add(self.statuscloud);
-	self.downloader.add(self.statuslocal);
+	self.downloader = new (require('./downloader.widget'))();
 	if (!item.islocale)
 		self.list.add(self.downloader);
 	self.list.add(Ti.UI.createImageView({
@@ -187,25 +149,18 @@ module.exports = function(item) {
 			message : 'Zum Runderladen des Podcasts einfach nach unten ziehen …'
 		}).show();
 	self.list.addEventListener('swipe', function(_e) {
-		if (_e.direction == 'down') {
-			Ti.Media.vibrate();
-			var AudioDownloader = new (require('controls/audiodownloader_adapter'))();
-			AudioDownloader.saveAudioFile(item);
-			self.progress.show();
-			AudioDownloader.addEventListener('progress', function(_p) {
-				self.statuscloud.setOpacity(1 - _p.progress);
-				self.statuslocal.setOpacity(_p.progress);
-				self.progress.setValue(_p.progress);
+		/*if (_e.direction == 'down') {
+			var y = self.getRect().y;
+			self.list.animate({
+				top : y + 50,
+				duration : 700
+			}, function() {
+				self.list.animate({
+					top : y
+				});
 			});
-			AudioDownloader.addEventListener('ready', function() {
-				Ti.UI.createNotification({
-					message : 'Podcasts erfolgreich runtergeholt! Kann jetzt auch ohne Neuland gehört werden.'
-				}).show();
-				Ti.Media.vibrate();
-				self.progress.hide();
-
-			});
-		}
+			self.downloader.startDownload();
+		}*/
 	});
 	self.player.addEventListener('playbackstate', function(_evt) {
 		switch (_evt.playbackState) {
