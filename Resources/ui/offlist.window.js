@@ -29,7 +29,7 @@ module.exports = function(parent) {
 					events : {
 						click : function(playevent) {
 							var item = playevent.section.getItemAt(playevent.itemIndex);
-							self.overlay = require('ui/player.widget')(JSON.parse(item.properties.itemId));
+							self.overlay = require('ui/audioplayer/container')(JSON.parse(item.properties.itemId));
 							self.add(self.overlay);
 						}
 					},

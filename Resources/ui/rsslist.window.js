@@ -222,7 +222,7 @@ module.exports = function(_channel, _items) {
 
 	});
 	self.list.addEventListener('itemclick', function(_item) {
-		self.overlay = require('ui/player.widget')(JSON.parse(_item.itemId));
+		self.overlay = require('ui/audioplayer/container')(JSON.parse(_item.itemId));
 		self.add(self.overlay);
 	});
 	return self;
