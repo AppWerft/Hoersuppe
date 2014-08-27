@@ -47,7 +47,7 @@ Module.prototype = {
 			ondatastream : function(_e) {
 				if (Math.round((new Date()).getTime() / 1000) % 2) {
 					that.trigger('progress', {
-						progress : Math.round(100 * parseFloat(_e.progress))
+						progress : _e.progress
 					});
 				};
 			}
