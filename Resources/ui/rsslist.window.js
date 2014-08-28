@@ -213,8 +213,7 @@ module.exports = function(_channel, _items) {
 	};
 	self.addEventListener('androidback', function() {
 		if (self.overlay) {
-			self.overlay.player.stop();
-			self.overlay.player.release();
+			Ti.App.AudioPlayer && Ti.App.AudioPlayer.release();
 			self.remove(self.overlay);
 			self.overlay = null;
 		} else

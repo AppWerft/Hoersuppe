@@ -140,8 +140,7 @@ module.exports = function(parent) {
 	parent.addEventListener('androidback', function() {
 		if (self.getVisible() && self.overlay) {
 			console.log('Info: overlay of player remove');
-			self.overlay.player.stop();
-			self.overlay.player.release();
+			Ti.App.AudioPlayer && Ti.App.AudioPlayer.release();
 			self.remove(self.overlay);
 			self.overlay = null;
 			return false;
