@@ -1,17 +1,6 @@
-function formatTime(ms) {
-	var s = Math.round(ms / 1000);
-	var sec = s % 60;
-	var min = (s - sec) / 60;
-	if (sec < 10) {
-		sec = '0' + sec;
-	}
-	return min + ':' + sec;
-}
-
 const OPAQUE = 0.3;
 module.exports = function(item) {
-	var duration = 0;
-	var self = Ti.UI.createView();
+	var duration = 0, self = Ti.UI.createView();
 	/* we need this dummy to determine duration, audioplayer doesn't give us this detail */
 	var dummyplayer = require('controls/mediaplayer').getduration(item.url, function(_res) {
 		duration = parseInt(_res.duration);
@@ -22,6 +11,8 @@ module.exports = function(item) {
 		self.playbutton.setOpacity(1);
 		self.playbutton.touchEnabled = true;
 		self.slider.show();
+		self.spinner.hide();
+
 	});
 	self.add(dummyplayer);
 	//videolayer only works after adding
@@ -71,7 +62,7 @@ module.exports = function(item) {
 		backgroundColor : '#224929'
 	});
 	self.slider = Ti.UI.createSlider({
-		bottom : 5,
+		bottom : 0,
 		min : 0,
 		max : 1,
 		value : 0.01,
@@ -111,8 +102,7 @@ module.exports = function(item) {
 	});
 	self.slider.addEventListener('stop', function(_evt) {
 		var position = parseFloat(_evt.value);
-		console.log('Info: seeking to ' + duration + '  ' + position + '   ' + formatTime(duration * position));
-		Ti.App.AudioPlayer.setTime(duration *_evt.value);
+		Ti.App.AudioPlayer.setTime(duration * _evt.value);
 		seeking = false;
 		Ti.App.AudioPlayer.play();
 	});
@@ -133,6 +123,12 @@ module.exports = function(item) {
 		left : 90,
 		height : 50
 	});
+	self.spinner = Ti.UI.createActivityIndicator({
+		top : 15,
+		left : 100,
+		type : Ti.UI.ActivityIndicatorStyle.BIG
+	});
+
 	self.stopbutton = Ti.UI.createButton({
 		top : 5,
 		touchEnabled : false,
@@ -144,6 +140,8 @@ module.exports = function(item) {
 	});
 	Ti.App.AudioPlayercontrolview.add(self.pausebutton);
 	Ti.App.AudioPlayercontrolview.add(self.playbutton);
+	Ti.App.AudioPlayercontrolview.add(self.spinner);
+	self.spinner.show();
 	Ti.App.AudioPlayercontrolview.add(self.stopbutton);
 	Ti.App.AudioPlayercontrolview.add(self.slider);
 	Ti.App.AudioPlayercontrolview.add(self.currenttime);
@@ -198,20 +196,20 @@ module.exports = function(item) {
 		self.playbutton.setOpacity(OPAQUE);
 	});
 	self.pausebutton.addEventListener('click', function() {
+		console.log('Info: PAUSE');
 		Ti.App.AudioPlayer.pause();
 	});
 	self.stopbutton.addEventListener('click', function() {
+		console.log('Info: STOP');
 		Ti.App.AudioPlayer.stop();
-	});
-	Ti.App.addEventListener('pause', function(e) {
-		// app is paused during phone call, so pause the stream
-		Ti.App.AudioPlayer.setPaused(true);
-		// you could also use streamer.pause()
-	});
-	Ti.App.addEventListener('resume', function(e) {
-		// app resumes when call ends, so un-pause the stream
-		Ti.App.AudioPlayer.setPaused(false);
-		// or use streamer.start()
 	});
 	return self;
 };
+
+function formatTime(ms) {
+	var s = Math.round(ms / 1000), sec = s % 60, min = (s - sec) / 60;
+	if (sec < 10) {
+		sec = '0' + sec;
+	}
+	return min + ':' + sec;
+}
