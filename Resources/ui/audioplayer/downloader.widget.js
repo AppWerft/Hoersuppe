@@ -1,4 +1,5 @@
 var Module = function() {
+	this.locked = false;
 	return this;
 };
 
@@ -50,6 +51,7 @@ Module.prototype = {
 	},
 	startDownload : function() {
 		Ti.Media.vibrate();
+		this.locked = true;
 		var that = this;
 		var AudioDownloader = new (require('controls/audiodownloader_adapter'))();
 		AudioDownloader.saveAudioFile(this.item);
