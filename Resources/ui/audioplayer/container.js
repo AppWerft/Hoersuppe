@@ -110,8 +110,9 @@ module.exports = function(item) {
 		seeking = true;
 	});
 	self.slider.addEventListener('stop', function(_evt) {
-		console.log('Info: seeking to ' + formatTime(duration * parseInt(_evt.value) ));
-		Ti.App.AudioPlayer.setTime(parseInt(duration) * parseInt(_evt.value));
+		var position = parseFloat(_evt.value);
+		console.log('Info: seeking to ' + duration + '  ' + position + '   ' + formatTime(duration * position));
+		Ti.App.AudioPlayer.setTime(duration *_evt.value);
 		seeking = false;
 		Ti.App.AudioPlayer.play();
 	});
