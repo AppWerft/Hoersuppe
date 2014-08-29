@@ -11,6 +11,7 @@ function formatTime(ms) {
 exports.getduration = function(_url, _ondurationavailable) {
 	var self = Ti.Media.createVideoPlayer({
 		height : 20,
+		width:42,
 		url : _url
 	});
 	self.addEventListener('durationavailable', function(_e) {
@@ -19,7 +20,7 @@ exports.getduration = function(_url, _ondurationavailable) {
 		_ondurationavailable({
 			duration : duration
 		});
-		
+
 	});
 	return self;
 };

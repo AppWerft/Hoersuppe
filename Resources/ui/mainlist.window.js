@@ -1,7 +1,5 @@
 module.exports = function() {
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
-	console.log('mainlist ' + HoerSuppe.toType());
-
 	var self = Ti.UI.createWindow({
 		title : 'Hörsuppe',
 		backgroundColor : '#fff',

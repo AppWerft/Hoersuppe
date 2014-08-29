@@ -62,12 +62,10 @@ Module.prototype = {
 				onload : function() {
 					clearInterval(cron);
 					var head = this.responseText;
-					console.log(this.getResponseHeader('Server'));
 					that.fireEvent('getfeed:progress', {
 						progress : 1,
 						message : (this.responseText.length / 1024).toFixed(1) + ' kB von ' + this.getResponseHeader('Server') + '  erhalten.'
 					});
-					console.log('URL http://' + _url);
 					if (this.responseXML) {
 						var elements = this.responseXML.documentElement.getElementsByTagName('item');
 						var data = [];
@@ -88,14 +86,12 @@ Module.prototype = {
 								console.log('Error: ' + E);
 							}
 						};
-						console.log(data);
 						that.fireEvent('getfeed:ready', {
 							result : data,
 							message : data.length + ' Beiträge erhalten.'
 						});
 						that.cache.write(JSON.stringify(data));
 					} else {
-						console.log(head);
 						var counter = 0;
 						/*var cron = setInterval(function() {
 						 counter += 0.1;
@@ -138,7 +134,6 @@ Module.prototype = {
 	},
 	_getUrl : function(key, callback) {
 		var that = this;
-		console.log('Key=' + key);
 		if (key.search('http://') == 0 || key.search('https://') == 0) {
 			callback(key);
 			return;

@@ -22,8 +22,6 @@ Module.prototype = {
 		metafile.deleteFile();
 	},
 	isLocal : function(item) {
-		console.log('localtext');
-		console.log(item);
 		if (!item || !item.url)
 			return false;
 		var filename = Ti.Utils.md5HexDigest(item.url);
@@ -67,7 +65,6 @@ Module.prototype = {
 		}
 	},
 	addEventListener : function(_event, _callback) {
-		console.log('Info: try to add event ');
 		if (!this.eventhandlers[_event])
 			this.eventhandlers[_event] = [];
 		this.eventhandlers[_event].push(_callback);

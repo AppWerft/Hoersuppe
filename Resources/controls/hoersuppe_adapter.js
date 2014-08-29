@@ -19,15 +19,11 @@ HoersuppenModule.prototype = {
 		return favs;
 	},
 	addFav : function(fav) {
-		console.log('addfav');
-		console.log(fav);
 		var favs = this.getAllFavs();
 		favs.unshift(fav);
 		Ti.App.Properties.setList('myfavs', favs);
 	},
 	removeFav : function(delfav) {
-		console.log('delfav');
-		console.log(delfav);
 		var oldfavs = this.getAllFavs();
 		var newfavs = [];
 		oldfavs.forEach(function(thisfav) {
@@ -38,8 +34,6 @@ HoersuppenModule.prototype = {
 		Ti.App.Properties.setList('myfavs', newfavs);
 	},
 	isFav : function(fav) {
-		console.log('isfav');
-		console.log(fav);
 		var favs = this.getAllFavs();
 		var found = false;
 		favs.forEach(function(f) {
@@ -50,8 +44,6 @@ HoersuppenModule.prototype = {
 
 	},
 	setSelectedPodcasts : function(_res) {
-		console.log('Info: Setting Auswahl');
-		console.log(_res);
 		if (_res)
 			Ti.App.Properties.setList('LIST_OFSELECTEDPODCASTCATEGORIES', _res.selected);
 	},
@@ -86,7 +78,6 @@ HoersuppenModule.prototype = {
 				});
 			}
 		});
-		console.log(sections);
 		return sections;
 	},
 	getAllAudioFiles : function() {
@@ -120,7 +111,6 @@ HoersuppenModule.prototype = {
 		}
 	},
 	addEventListener : function(_event, _callback) {
-		console.log('Info: try to add event ');
 		if (!this.eventhandlers[_event])
 			this.eventhandlers[_event] = [];
 		this.eventhandlers[_event].push(_callback);

@@ -31,6 +31,10 @@ module.exports = function() {
 		activity.actionBar.setTitle('Hörsuppe');
 		activity.actionBar.setSubtitle('Deutschsprachige Podcasts');
 		activity.onCreateOptionsMenu = function(e) {
+					e.menu.clear();
+					e.activity = self.activity;
+					e.actionBar = self.actionBar;
+					self.activeTab && self.activeTab.fireEvent('onCreateOptionsMenu', e);
 			var searchvisible = false;
 			e.menu.add({
 				itemId : '1',
@@ -95,6 +99,7 @@ module.exports = function() {
 			});
 
 		};
+		activity.invalidateOptionsMenu();
 	});
 	require('vendor/versionsreminder')();
 	return self;

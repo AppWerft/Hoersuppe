@@ -1,6 +1,26 @@
 const OPAQUE = 0.3;
 module.exports = function(item) {
-	var duration = 0, self = Ti.UI.createView();
+
+	/*var dummy = Ti.UI.createImageView({
+	 image : parent.toImage()
+	 });
+	 bgfile.write(dummy.toBlob());
+	 var imgblurredImage = require('bencoding.blur').applyBlurTo({
+	 image : bgfile.nativePath,
+	 blurRadius : 10
+	 });
+	 */
+	var duration = 0;
+	var self = Ti.UI.createWindow({
+		fullscreen : true,
+		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
+	});
+	var bg = Ti.UI.createImageView({
+		top : -100,
+		image : Ti.Filesystem.getFile(Ti.App.Properties.getString('BG')).read()
+	});
+	self.add(bg);
+
 	/* we need this dummy to determine duration, audioplayer doesn't give us this detail */
 	var dummyplayer = require('controls/mediaplayer').getduration(item.url, function(_res) {
 		duration = parseInt(_res.duration);
@@ -14,12 +34,12 @@ module.exports = function(item) {
 		self.spinner.hide();
 
 	});
+
 	self.add(dummyplayer);
 	//videolayer only works after adding
 	self.add(Ti.UI.createView({
 		backgroundColor : '#000',
-		opacity : 0.8,
-		top : 0
+		opacity : 0.77,
 	}));
 	self.container = Ti.UI.createView({
 		width : 240,
@@ -39,17 +59,18 @@ module.exports = function(item) {
 		height : 240,
 		top : 0,
 	}));
-	self.container.add(Ti.UI.createLabel({
-		height : 50,
-		width : Ti.UI.FILL,
-		left : 5,
-		right : 5,
-		textAlign : 'left',
-		color : '#000',
-		top : 0,
-		ellipsize : true,
-		text : item.title
-	}));
+	/*
+	 self.container.add(Ti.UI.createLabel({
+	 height : 50,
+	 width : Ti.UI.FILL,
+	 left : 5,
+	 right : 5,
+	 textAlign : 'left',
+	 color : '#000',
+	 top : 0,
+	 ellipsize : true,
+	 text : item.title
+	 }));*/
 	Ti.App.AudioPlayer = Ti.Media.createAudioPlayer({
 		allowBackground : true,
 		autoplay : false,
@@ -58,7 +79,7 @@ module.exports = function(item) {
 	});
 	Ti.App.AudioPlayercontrolview = Ti.UI.createView({
 		top : 0,
-		height : 90,
+		height : 110,
 		backgroundColor : '#224929'
 	});
 	self.slider = Ti.UI.createSlider({
@@ -124,9 +145,9 @@ module.exports = function(item) {
 		height : 50
 	});
 	self.spinner = Ti.UI.createActivityIndicator({
-		top : 15,
-		left : 100,
-		type : Ti.UI.ActivityIndicatorStyle.BIG
+		top : 20,
+		left : 105,
+		style : Ti.UI.ActivityIndicatorStyle.PLAIN
 	});
 
 	self.stopbutton = Ti.UI.createButton({
@@ -203,7 +224,26 @@ module.exports = function(item) {
 		console.log('Info: STOP');
 		Ti.App.AudioPlayer.stop();
 	});
-	return self;
+	self.addEventListener('open', function() {
+		var activity = self.getActivity();
+		if (!activity.actionBar) {
+			console.log('Warning: no actionbar');
+			return;
+		}
+		activity.actionBar.setTitle((item.feedname) ? item.feedname : '');
+		activity.actionBar.setSubtitle(item.title);
+	});
+
+	self.open({
+		animated : false
+	});
+	self.addEventListener('androidback', function() {
+		Ti.App.AudioPlayer.stop();
+		Ti.App.AudioPlayer.release();
+		self.close();
+		return true;
+	});
+
 };
 
 function formatTime(ms) {

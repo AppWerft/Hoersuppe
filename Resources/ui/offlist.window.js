@@ -5,6 +5,7 @@ module.exports = function(parent) {
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
 	});
+	var bgfile = null;
 	var lasturl = null;
 	var lastitem = null, lastsection = null, lastindex = null;
 
@@ -28,9 +29,7 @@ module.exports = function(parent) {
 					},
 					events : {
 						click : function(playevent) {
-							var item = playevent.section.getItemAt(playevent.itemIndex);
-							self.overlay = require('ui/audioplayer/container')(JSON.parse(item.properties.itemId));
-							self.add(self.overlay);
+							require('ui/audioplayer/container')(JSON.parse(playevent.section.getItemAt(playevent.itemIndex).properties.itemId));
 						}
 					},
 				}, {
@@ -120,6 +119,7 @@ module.exports = function(parent) {
 						url : off.url,
 						title : off.title,
 						logo : off.logo,
+						feedname : off.feedname,
 						islocal : true
 					})
 				},
@@ -134,22 +134,13 @@ module.exports = function(parent) {
 		}
 		sections[0].setItems(items);
 		self.list.setSections(sections);
+		bgfile = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, 'BG.png');
+		bgfile.write(self.toImage().media);
+		Ti.App.Properties.setString('BG', bgfile.nativePath);
+
 	};
+
 	self.add(self.list);
-
-	parent.addEventListener('androidback', function() {
-		if (self.getVisible() && self.overlay) {
-			console.log('Info: overlay of player remove');
-			Ti.App.AudioPlayer && Ti.App.AudioPlayer.release();
-			self.remove(self.overlay);
-			self.overlay = null;
-			return false;
-		} else {
-			console.log('Info: no overlay => killing app');
-			self.close();
-		}
-
-	});
 	self.list.addEventListener('itemclick', function(_item) {
 
 	});

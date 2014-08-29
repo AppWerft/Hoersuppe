@@ -1,5 +1,6 @@
 module.exports = function(_channel, _items) {
 	var feed = _items;
+	var bgfile = null;
 	var channel = _channel;
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
 	var AudioDownloader = new (require('controls/audiodownloader_adapter'))();
@@ -43,11 +44,6 @@ module.exports = function(_channel, _items) {
 		title : options.title,
 		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 	});
-
-	self.spinner = Ti.UI.createActivityIndicator({
-		style : (Ti.Android) ? Ti.UI.ActivityIndicatorStyle.BIG : Ti.UI.iPhone.ActivityIndicatorStyle.BIG,
-	});
-	//self.add(self.spinner);
 	self.list = Ti.UI.createListView({
 		templates : {
 			'rss' : {
@@ -136,7 +132,7 @@ module.exports = function(_channel, _items) {
 		})]
 	});
 	self.add(self.list);
-	self.spinner.show();
+
 	var dataitems = [];
 	options.subtitle = feed.length + ' Beiträge';
 	actionbar && actionbar.setSubtitle(options.subtitle);
@@ -152,6 +148,7 @@ module.exports = function(_channel, _items) {
 					itemId : JSON.stringify({
 						url : item.url,
 						title : item.title,
+						feedname : channel.title,
 						islocal : item.islocal,
 						logo : channel.logo,
 						description : item.description
@@ -209,20 +206,16 @@ module.exports = function(_channel, _items) {
 				};
 
 			}
+			setTimeout(function() {
+				bgfile = Ti.Filesystem.getFile(Ti.Filesystem.applicationCacheDirectory, 'BG.png');
+				Ti.App.Properties.setString('BG', bgfile.nativePath);
+				bgfile.write(self.toImage().media);
+			}, 700);
 		});
 	};
-	self.addEventListener('androidback', function() {
-		if (self.overlay) {
-			Ti.App.AudioPlayer && Ti.App.AudioPlayer.release();
-			self.remove(self.overlay);
-			self.overlay = null;
-		} else
-			self.close();
 
-	});
 	self.list.addEventListener('itemclick', function(_item) {
-		self.overlay = require('ui/audioplayer/container')(JSON.parse(_item.itemId));
-		self.add(self.overlay);
+		require('ui/audioplayer/container')(JSON.parse(_item.itemId));
 	});
 	return self;
 };
