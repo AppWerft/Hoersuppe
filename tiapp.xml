@@ -44,9 +44,9 @@
             </dict>
         </plist>
     </ios>
-    <version>1.2.1</version>
+    <version>1.2.5</version>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="31" android:versionName="1.2.1">
+        <manifest android:versionCode="35" android:versionName="1.2.5">
             <uses-sdk android:minSdkVersion="11"/>
             <uses-sdk android:targetSdkVersion="19"/>
             <application android:largeHeap="true" android:theme="@style/Theme.Hoersuppe">

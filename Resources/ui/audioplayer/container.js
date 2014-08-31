@@ -23,15 +23,22 @@ module.exports = function(item) {
 
 	/* we need this dummy to determine duration, audioplayer doesn't give us this detail */
 	var dummyplayer = require('controls/mediaplayer').getduration(item.url, function(_res) {
-		duration = parseInt(_res.duration);
-		self.endtime.setText(formatTime(_res.duration));
-		// kann wech!
-		self.remove(dummyplayer);
-		dummyplayer = null;
-		self.playbutton.setOpacity(1);
-		self.playbutton.touchEnabled = true;
-		self.slider.show();
-		self.spinner.hide();
+		if (_res.success) {
+			duration = parseInt(_res.duration);
+			self.endtime.setText(formatTime(_res.duration));
+			// kann wech!
+			self.remove(dummyplayer);
+			dummyplayer = null;
+			self.playbutton.setOpacity(1);
+			self.playbutton.touchEnabled = true;
+			self.slider.show();
+			self.spinner.hide();
+		} else {
+			Ti.UI.createNotification({
+				message : 'Podcast kann aus dem Netz nicht geladen werden.'
+			}).show();
+			self.close();
+		}
 
 	});
 
@@ -232,6 +239,9 @@ module.exports = function(item) {
 		}
 		activity.actionBar.setTitle((item.feedname) ? item.feedname : '');
 		activity.actionBar.setSubtitle(item.title);
+		activity.actionBar.onHomeIconItemSelected = function() {
+			self.close();
+		};
 	});
 
 	self.open({

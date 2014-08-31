@@ -14,34 +14,48 @@ module.exports = function() {
 		headerTitle : null
 	})];
 	var updateList = function() {
+		
 		Ti.UI.createNotification({
 			message : 'Teste alle Podcasts auf Aktualität …'
 		}).show();
 		var favs = HoerSuppe.getAllFavs(), items = [];
 		if (favs) {
-			for (var i = 0; i < favs.length; i++) {
-				items.push(new (require('ui/listitem.widget'))(favs[i], sections[0], i));
+			var i=0;
+			favs.forEach(function(fav) {
+				console.log(fav);
+				items.push(new (require('ui/listitem.widget'))(fav, sections[0], i++));
 				//items.push(getItem(favs[i],sections[0], i));
-			}
+			});
 		}
 		sections[0].setItems(items);
 		self.list.setSections(sections);
 	};
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
-		var channel = JSON.parse(_e.itemId);
+		var feed = JSON.parse(_e.itemId);
+		console.log(feed);
 		var windowmodule = require('ui/rsslist.window');
 		var doOpenFeedWindow = function(items) {
 			if (items) {
-				windowmodule(channel, items).open();
+				windowmodule(feed, items).open();
 				setTimeout(function() {
 					self.remove(dialog);
 				}, 100);
 			}
 		};
-		var dialog = require('ui/download.widget')(channel, doOpenFeedWindow);
+		var dialog = require('ui/download.widget')(feed, doOpenFeedWindow);
 		self.add(dialog);
 	});
-	self.addEventListener('open', updateList);
+	self.addEventListener('open', function() {
+		updateList();
+		var activity = self.getActivity();
+		if (!activity.actionBar) {
+			console.log('Warning: no actionbar');
+			return;
+		}
+		activity.onCreateOptionsMenu = function(e) {
+			console.log('ZWEITES TAB');
+		};
+	});	
 	return self;
 };

@@ -1074,10 +1074,6 @@ module.exports = {
 		"summary" : "Eine Sammlung von Gesprächen über Wissenschaft, Wissenschaftler und Forschung.",
 		"content" : "Resonator"
 	}, {
-		"href" : "/podcast/skeptoskop",
-		"summary" : "Skeptoskop - Der Podcast, der in die GWUP hineinhorcht!",
-		"content" : "Skeptoskop"
-	}, {
 		"href" : "/podcast/sternengeschichten",
 		"summary" : "Das Universum ist voll mit Sternen, Galaxien, Planeten und jeder Menge anderer cooler Dinge. Jedes davon hat seine Geschichten und die Sternengeschichten erzählen sie.Der Podcast zum Blog „Astrodicticum Simplex“",
 		"content" : "Sternengeschichten"

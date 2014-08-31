@@ -9,16 +9,23 @@ function formatTime(ms) {
 }
 
 exports.getduration = function(_url, _ondurationavailable) {
+	var timer = setTimeout(function() {
+		_ondurationavailable({
+			success : false
+		});
+	}, 11000);
 	var self = Ti.Media.createVideoPlayer({
 		height : 20,
-		width:42,
+		width : 42,
 		url : _url
 	});
+	console.log('URL='+_url);
 	self.addEventListener('durationavailable', function(_e) {
 		var duration = _e.source.duration;
-		console.log('Info: starting Playing of ' + formatTime(duration));
+		clearTimeout(timer);
 		_ondurationavailable({
-			duration : duration
+			duration : duration,
+			success : true
 		});
 
 	});

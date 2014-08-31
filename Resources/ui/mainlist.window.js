@@ -40,7 +40,8 @@ module.exports = function() {
 						itemId : JSON.stringify({
 							key : pod.key,
 							title : pod.title,
-							logo : pod.logo
+							logo : pod.logo,
+							url: pod.url
 						}),
 						searchableText : pod.summary + ' ' + pod.title,
 						accessoryType : Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL
@@ -74,11 +75,11 @@ module.exports = function() {
 	self.updateList();
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
-		var channel = JSON.parse(_e.itemId);
+		var feed = JSON.parse(_e.itemId);
 		var windowmodule = require('ui/rsslist.window');
 		var doOpenFeedWindow = function(items) {
 			if (items) {
-				windowmodule(channel, items).open();
+				windowmodule(feed, items).open();
 				setTimeout(function() {
 					self.remove(dialog);
 				}, 100);
@@ -97,8 +98,8 @@ module.exports = function() {
 				}).show();
 			}
 
-		};
-		var dialog = require('ui/download.widget')(channel, doOpenFeedWindow);
+		};console.log(feed);
+		var dialog = require('ui/download.widget')(feed, doOpenFeedWindow);
 		self.add(dialog);
 
 		//

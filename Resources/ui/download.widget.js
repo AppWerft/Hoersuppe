@@ -74,7 +74,7 @@ module.exports = function(_feed, _callback) {
 		top : 0,
 		bottom : 20
 	}));
-	var FeedAdapter = new (require('controls/rss_adapter'))(_feed.key);
+	var FeedAdapter = new (require('controls/rss_adapter'))(_feed);
 	self.list.add(new getStrip('geturl'));
 	self.list.add(new getStrip('getfeed'));
 	self.add(self.list);
@@ -86,6 +86,6 @@ module.exports = function(_feed, _callback) {
 	FeedAdapter.addEventListener('error', function(_e) {
 			_callback(null);
 	});
-	FeedAdapter.start(_feed.key);
+	FeedAdapter.start(_feed);
 	return self;
 };

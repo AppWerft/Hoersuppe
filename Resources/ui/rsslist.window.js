@@ -132,14 +132,13 @@ module.exports = function(_channel, _items) {
 		})]
 	});
 	self.add(self.list);
-
 	var dataitems = [];
 	options.subtitle = feed.length + ' Beiträge';
 	actionbar && actionbar.setSubtitle(options.subtitle);
-	for (var i = 0; i < feed.length; i++) {
-		var item = feed[i];
-		item.url = item.enclosure && item.enclosure.url;
-		item.size = item.enclosure && item.enclosure.length;
+	feed.forEach(function(item) {
+		console.log(item);
+		item.url = item.url;
+		item.size = item.length;
 		delete item.enclosure;
 		item.islocal = AudioDownloader.isLocal(item);
 		if (item.url)
@@ -170,7 +169,7 @@ module.exports = function(_channel, _items) {
 					image : channel.logo
 				}
 			});
-	}
+	});
 	self.list.sections[0].setItems(dataitems);
 	if (Ti.Android) {
 		self.addEventListener("open", function() {
@@ -186,19 +185,19 @@ module.exports = function(_channel, _items) {
 				activity.onCreateOptionsMenu = function(e) {
 					e.menu.add({
 						itemId : '0',
-						checkable : true,
-						checked : HoerSuppe.isFav(channel),
-						title : 'Merkliste',
-						showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER,
+						showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM,
+						isChecked : (HoerSuppe.isFav(channel)) ? true : false,
+						icon : (HoerSuppe.isFav(channel)) ? Ti.App.Android.R.drawable.ic_action_good : Ti.App.Android.R.drawable.ic_action_bad,
+						title : 'Merkliste'
 					}).addEventListener("click", function() {
 						var item = e.menu.findItem('0');
 						if (item.isChecked()) {
-							item.setChecked(false);
-							HoerSuppe.removeFav(channel);
+							item.setIcon(Ti.App.Android.R.drawable.ic_action_bad), item.setChecked(false);
 							self.close();
+							HoerSuppe.removeFav(channel);
 						} else {
 							item.setChecked(true);
-							HoerSuppe.addFav(channel);
+							item.setIcon(Ti.App.Android.R.drawable.ic_action_good), HoerSuppe.addFav(channel);
 						}
 					});
 					//activity.invalidateOptionsMenu();
@@ -213,7 +212,6 @@ module.exports = function(_channel, _items) {
 			}, 700);
 		});
 	};
-
 	self.list.addEventListener('itemclick', function(_item) {
 		require('ui/audioplayer/container')(JSON.parse(_item.itemId));
 	});

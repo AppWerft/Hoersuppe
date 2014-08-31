@@ -8,7 +8,8 @@ var Module = function(fav, section, index) {
 			itemId : JSON.stringify({
 				key : fav.key,
 				title : fav.title,
-				logo : fav.logo
+				logo : fav.logo,
+				url : fav.url
 			}),
 			accessoryType : Ti.UI.LIST_ACCESSORY_TYPE_DETAIL
 		},
@@ -32,14 +33,14 @@ var Module = function(fav, section, index) {
 	this.FeedAdapter.addEventListener('getfeed:ready', function(_event) {
 		var items = _event.result;
 		if (items) {
-			console.log(items);
 			Moment.locale('en');
 			var pubDate = Moment(items[0].pubDate);
 			Moment.locale('de');
 			var letztes = pubDate.format('D. MMMM YYYY');
 			var weight = 0;
 			items.forEach(function(item) {
-				weight += parseInt(item.enclosure.length);
+				if (item)
+					weight += parseInt(item.length);
 			});
 			that.item.weight.text = 'Gesamtlast: ' + (weight / 1000000000).toFixed(1) + ' GBytes';
 			that.item.lastpubdate.text = 'jüngster Podcast: ' + letztes;
@@ -48,7 +49,7 @@ var Module = function(fav, section, index) {
 			console.log('Error: no item for ' + fav.key);
 		section.updateItemAt(index, that.item);
 	});
-	this.FeedAdapter.start(fav.key, true);
+	this.FeedAdapter.start(fav, true);
 	return this.item;
 };
 

@@ -1,20 +1,22 @@
 const USINGCACHE = true;
 
-var Module = function(_key, _reload) {
-	if (_key && ( typeof _key) == 'String')
-		this.key = _key;
+var Module = function(_feed, _reload) {
+	if (_feed && ( typeof _feed.key) == 'String')
+		this.key = _feed.key;
 	this.eventhandlers = [];
 	return this;
 };
 Module.prototype = {
-	start : function(_key, _reload) {
-		if (_key)
-			this.key = _key;
+	start : function(_feed, _reload) {
+		console.log(_feed);
+		if (_feed) {
+			this.key = _feed.key;
+		}
 		var that = this;
 		this.fireEvent('geturl:start', {
 			message : 'Feed-Suche für „' + this.key + '“'
 		});
-		this._getUrl(this.key, function(_url) {
+		this._getUrl(_feed, function(_url) {
 			var contentLength = -1;
 			that.cache = Ti.Filesystem.getFile(Ti.Filesystem.getApplicationCacheDirectory(), 'CACHE_' + Ti.Utils.md5HexDigest(_url));
 			that.fireEvent('geturl:ready', {
@@ -73,11 +75,11 @@ Module.prototype = {
 							var element = elements.item(i);
 							try {
 								var description = (element.getElementsByTagName('description').item(0)) ? element.getElementsByTagName('description').item(0).textContent : '';
+								var url = element.getElementsByTagName('enclosure').item(0).getAttribute('url');
+								var length = element.getElementsByTagName('enclosure').item(0).getAttribute('length');
 								data.push({
-									enclosure : {
-										url : element.getElementsByTagName('enclosure').item(0).getAttribute('url'),
-										length : element.getElementsByTagName('enclosure').item(0).getAttribute('length')
-									},
+									url : url,
+									length : length,
 									description : description,
 									title : element.getElementsByTagName('title').item(0).textContent,
 									pubDate : element.getElementsByTagName('pubDate').item(0).textContent
@@ -132,14 +134,17 @@ Module.prototype = {
 			xhr.send();
 		});
 	},
-	_getUrl : function(key, callback) {
+	_getUrl : function(_feed, callback) {
 		var that = this;
-		if (key.search('http://') == 0 || key.search('https://') == 0) {
-			callback(key);
-			return;
-		}
-		if (Ti.App.Properties.hasProperty('RSSURL' + key)) {
-			var url = key && Ti.App.Properties.getString('RSSURL' + key);
+		console.log(_feed);
+		if (_feed.key)
+			if (_feed.key.search('http://') == 0 || _feed.key.search('https://') == 0) {
+				callback(_feed.key);
+				return;
+			}
+		if (_feed.url) callback(_feed.url);	
+		if (Ti.App.Properties.hasProperty('RSSURL' + _feed.key)) {
+			var url = _feed.key && Ti.App.Properties.getString('RSSURL' + _feed.key);
 			callback(url);
 			return;
 		}
@@ -162,7 +167,7 @@ Module.prototype = {
 				var res = regex.exec(page);
 				if (res) {
 					var url = res[1];
-					Ti.App.Properties.setString('RSSURL' + key, url);
+					Ti.App.Properties.setString('RSSURL' + _feed.key, url);
 					that.fireEvent('geturl:ready', {
 						value : url,
 						message : 'FeedURL OK'
@@ -180,7 +185,7 @@ Module.prototype = {
 				});
 			}
 		});
-		self.open('GET', 'http://hoersuppe.de/podcast/' + key, true);
+		self.open('GET', 'http://hoersuppe.de/podcast/' + _feed.key, true);
 		self.send();
 	},
 	fireEvent : function(_event, _payload) {

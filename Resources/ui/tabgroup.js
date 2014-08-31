@@ -8,33 +8,37 @@ module.exports = function() {
 	});
 	var tab1 = Ti.UI.createTab({
 		window : require('ui/mainlist.window')(self),
-		title : 'alle Podcasts'
+		title : 'Hörsuppe'
 	});
 	var tab2 = Ti.UI.createTab({
+		window : require('ui/podlove.window')(self),
+		title : 'PodLove'
+	});
+	var tab3 = Ti.UI.createTab({
 		window : require('ui/favlist.window')(self),
 		title : 'Merkliste'
 	});
-	var tab3 = Ti.UI.createTab({
+	var tab4 = Ti.UI.createTab({
 		window : require('ui/offlist.window')(self),
 		title : 'Gespeichertes'
 	});
 	self.addTab(tab1);
 	self.addTab(tab2);
 	self.addTab(tab3);
-
+	self.addTab(tab4);
 	self.addEventListener('open', function() {
 		var activity = self.getActivity();
 		if (!activity.actionBar) {
 			console.log('Warning: no actionbar');
 			return;
 		}
-		activity.actionBar.setTitle('Hörsuppe');
+		activity.actionBar.setTitle('Hörsuppe/PodLove');
 		activity.actionBar.setSubtitle('Deutschsprachige Podcasts');
 		activity.onCreateOptionsMenu = function(e) {
-					e.menu.clear();
-					e.activity = self.activity;
-					e.actionBar = self.actionBar;
-					self.activeTab && self.activeTab.fireEvent('onCreateOptionsMenu', e);
+			e.menu.clear();
+			e.activity = activity;
+			e.actionBar = activity.actionBar;
+			self.activeTab && self.activeTab.fireEvent('onCreateOptionsMenu', e);
 			var searchvisible = false;
 			e.menu.add({
 				itemId : '1',
