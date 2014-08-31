@@ -1,13 +1,6 @@
-module.exports = function() {
+module.exports = function(_parent) {
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
-	var self = Ti.UI.createWindow({
-		title : 'Hörsuppe',
-		backgroundColor : '#fff',
-		fullscreen : true,
-		exitOnClose : true
-
-	});
-	self.list = Ti.UI.createListView({
+	var self = Ti.UI.createListView({
 		templates : {
 			'main' : require('ui/TEMPLATES').main
 		},
@@ -41,7 +34,7 @@ module.exports = function() {
 							key : pod.key,
 							title : pod.title,
 							logo : pod.logo,
-							url: pod.url
+							url : pod.url
 						}),
 						searchableText : pod.summary + ' ' + pod.title,
 						accessoryType : Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL
@@ -69,19 +62,18 @@ module.exports = function() {
 					headerView : headerview
 				}));
 		});
-		self.list.setSections(sections);
+		self.setSections(sections);
 	};
 
 	self.updateList();
-	self.add(self.list);
-	self.list.addEventListener('itemclick', function(_e) {
+	self.addEventListener('itemclick', function(_e) {
 		var feed = JSON.parse(_e.itemId);
 		var windowmodule = require('ui/rsslist.window');
 		var doOpenFeedWindow = function(items) {
 			if (items) {
 				windowmodule(feed, items).open();
 				setTimeout(function() {
-					self.remove(dialog);
+					_parent.remove(dialog);
 				}, 100);
 			} else {
 				dialog.list.animate({
@@ -91,27 +83,18 @@ module.exports = function() {
 						rotate : 800
 					})
 				}, function() {
-					self.remove(dialog);
+					_parent.remove(dialog);
 				});
 				Ti.UI.createNotification({
 					message : 'Feed leider nicht auswertbar …'
 				}).show();
 			}
 
-		};console.log(feed);
+		};
 		var dialog = require('ui/download.widget')(feed, doOpenFeedWindow);
-		self.add(dialog);
+		_parent.add(dialog);
 
 		//
 	});
-	if (Ti.Android) {
-		self.addEventListener("open", function() {
-			var activity = self.getActivity();
-			if (activity && activity.actionBar) {
-				activity.actionBar.setTitle('Hörsuppe');
-				activity.actionBar.setSubtitle('deutschsprachige podcasts');
-			}
-		});
-	};
 	return self;
 };

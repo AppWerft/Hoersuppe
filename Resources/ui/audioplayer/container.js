@@ -1,4 +1,4 @@
-const OPAQUE = 0.3;
+	const OPAQUE = 0.3;
 module.exports = function(item) {
 
 	/*var dummy = Ti.UI.createImageView({
@@ -10,6 +10,8 @@ module.exports = function(item) {
 	 blurRadius : 10
 	 });
 	 */
+	var Adapter = new (require('controls/hoersuppe_adapter'))();
+	item.url = Adapter.getPath(item.url);	
 	var duration = 0;
 	var self = Ti.UI.createWindow({
 		fullscreen : true,
@@ -205,6 +207,7 @@ module.exports = function(item) {
 			self.playbutton.setOpacity(OPAQUE);
 			self.pausebutton.setOpacity(1);
 			self.stopbutton.setOpacity(1);
+			self.stopbutton.setEnabled(true);
 			break;
 		case 'paused':
 			self.playbutton.touchEnabled = true;
@@ -239,6 +242,7 @@ module.exports = function(item) {
 		}
 		activity.actionBar.setTitle((item.feedname) ? item.feedname : '');
 		activity.actionBar.setSubtitle(item.title);
+		activity.actionBar.setDisplayHomeAsUp(true);
 		activity.actionBar.onHomeIconItemSelected = function() {
 			self.close();
 		};

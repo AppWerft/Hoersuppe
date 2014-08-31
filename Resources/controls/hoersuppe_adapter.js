@@ -68,7 +68,7 @@ HoersuppenModule.prototype = {
 				sectionndx++;
 				items[sectionndx] = [];
 			} else if (cat.content) {
-				var key =   (cat.href || !cat.url) ? cat.href.substr(9) : null;
+				var key = (cat.href || !cat.url) ? cat.href.substr(9) : null;
 				sections[sectionndx].podcasts.push({
 					key : key || cat.url,
 					title : cat.content,
@@ -101,6 +101,10 @@ HoersuppenModule.prototype = {
 	isSaved : function(url) {
 		var file = getFilehandle(Ti.Utils.md5HexDigest(url));
 		return file.exist();
+	},
+	getPath : function(url) {
+		var file = getFilehandle(Ti.Utils.md5HexDigest(url));
+		return (file.exists()) ? file.nativePath : url;
 	},
 	trigger : function(_event, _payload) {
 		//console.log('Info: try to fire event ' + _event);

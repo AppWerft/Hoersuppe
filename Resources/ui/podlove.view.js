@@ -1,10 +1,5 @@
-module.exports = function() {
-
-	var self = Ti.UI.createWindow({
-		backgroundColor : '#fff',
-		fullscreen : true,
-	});
-	self.list = Ti.UI.createListView({
+module.exports = function(_parent) {
+	var self = Ti.UI.createListView({
 		templates : {
 			'main' : require('ui/TEMPLATES').main
 		},
@@ -57,19 +52,18 @@ module.exports = function() {
 			sections.push(Ti.UI.createListSection({
 				items : items,
 			}));
-			self.list.setSections(sections);
+			self.setSections(sections);
 		});
 	};
 	self.updateList();
-	self.add(self.list);
-	self.list.addEventListener('itemclick', function(_e) {
+	self.addEventListener('itemclick', function(_e) {
 		var feed = JSON.parse(_e.itemId);
 		var windowmodule = require('ui/rsslist.window');
 		var doOpenFeedWindow = function(items) {
 			if (items) {
 				windowmodule(feed, items).open();
 				setTimeout(function() {
-					self.remove(dialog);
+					_parent.remove(dialog);
 				}, 100);
 			} else {
 				dialog.list.animate({
@@ -79,7 +73,7 @@ module.exports = function() {
 						rotate : 800
 					})
 				}, function() {
-					self.remove(dialog);
+					_parent.remove(dialog);
 				});
 				Ti.UI.createNotification({
 					message : 'Feed leider nicht auswertbar …'
@@ -88,7 +82,7 @@ module.exports = function() {
 
 		};
 		var dialog = require('ui/download.widget')(feed, doOpenFeedWindow);
-		self.add(dialog);
+		_parent.add(dialog);
 
 		//
 	});

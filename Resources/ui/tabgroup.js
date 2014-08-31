@@ -7,12 +7,8 @@ module.exports = function() {
 		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 	});
 	var tab1 = Ti.UI.createTab({
-		window : require('ui/mainlist.window')(self),
+		window : require('ui/maincontainer.window')(self),
 		title : 'Hörsuppe'
-	});
-	var tab2 = Ti.UI.createTab({
-		window : require('ui/podlove.window')(self),
-		title : 'PodLove'
 	});
 	var tab3 = Ti.UI.createTab({
 		window : require('ui/favlist.window')(self),
@@ -23,7 +19,7 @@ module.exports = function() {
 		title : 'Gespeichertes'
 	});
 	self.addTab(tab1);
-	self.addTab(tab2);
+	
 	self.addTab(tab3);
 	self.addTab(tab4);
 	self.addEventListener('open', function() {
