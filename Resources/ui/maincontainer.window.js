@@ -8,7 +8,7 @@ module.exports = function(_parent) {
 	});
 	self.container = Ti.UI.createScrollableView({
 		showPagingControl : true,
-		views : [require('ui/hoersuppe.view')(self), require('ui/podbe.view')(self)]
+		views : [require('ui/hoersuppe.view')(self), require('ui/podbe.view')(self),require('ui/frauen.view')(self)]
 	});
 	self.add(self.container);
 	if (Ti.Android) {
@@ -21,7 +21,7 @@ module.exports = function(_parent) {
 		});
 		self.container.addEventListener('scrollend', function(_e) {
 			var ndx = _e.currentPage;
-			var titles = ['Hörsuppe','PodBe'];
+			var titles = ['Hörsuppe','PodBe','Frauen'];
 			_parent.activeTab.setTitle(titles[ndx]);
 		});
 	};
