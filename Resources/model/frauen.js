@@ -31,25 +31,25 @@ exports.podcasterinnen = [{
 	description : "Ein Blog mit vielen Themen, die eine Familie beschäftigen.",
 	logo : "http://www.butterzart.com/templates/default/img/logo.png"
 }, {
-	link : "",
-	title : "",
+	link : "http://www.heikeholz.de/feed/",
+	title : "Charisma und Persönlichkeit",
+	description : "Was macht eine Person zur Persönlichkeit? Persönlichkeitsstarke Menschen haben Erfolg, sprühen vor Charme, stehen im Rampenlicht – sie haben ein selbstbewusstes Auftreten. Mit Charisma ist der Umgang mit Kunden und Mitarbeitern leichter, der Erfolg bei Geschäftsverhandlungen greifbarer. Wie können Sie aus Ihrem tiefsten Innern heraus Sicherheit, Lebensfreude, Zuversicht und Begeisterung ausstrahlen? In meinem Podcast lernen Sie, wie Sie zu einer erfolgreichen Persönlichkeit werden, Einfluss und Überzeugungskraft besitzt.",
+	logo : "http://www.heikeholz.de/wp-content/uploads/HH-Podcast-Charisma-neu.jpg"
+}, {
+	link : "https://itunes.apple.com/de/podcast/der-podcast-ubers-podcasten/id668334019?mt=2",
+	title : "Brigitte Hagedorn - audiobeiträge",
 	description : "",
+	logo : "http://a4.mzstatic.com/us/r30/Podcasts4/v4/9b/ca/9a/9bca9a96-25fb-ae6d-0e06-72dab4d1080a/mza_4228633622924847821.170x170-75.jpg"
+}, {
+	link : "http://www.die-hoermupfel.de/?feed=rss2",
+	title : "die hörmupfel",
+	description : "Der Podcast aus dem Allgäu",
 	logo : ""
 }, {
-	link : "",
-	title : "",
-	description : "",
-	logo : ""
-}, {
-	link : "",
-	title : "",
-	description : "",
-	logo : ""
-}, {
-	link : "",
-	title : "",
-	description : "",
-	logo : ""
+	link : "http://distel.twoday.net/topics/podcast/index.rdf",
+	title : "Anarchistelfliege",
+	description : "back to Utopia",
+	logo : "http://www.spiritvoices.de/blog/creativity.jpg"
 }, {
 	link : "",
 	title : "",
