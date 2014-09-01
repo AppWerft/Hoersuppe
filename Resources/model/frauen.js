@@ -2,7 +2,8 @@ exports.podcasterinnen = [{
 	link : "http://andrea.podspot.de/rss",
 	title : "Andrea W. wills wissen …",
 	description : "… und zwar täglich. Jeden Tag ein neues Thema! Jeden Tag Wissenswertes! Jeden Tag nur 10 Minuten!",
-	logo : "http://andrea.podspot.de/userdata/images/andreale.jpg"
+	logo : "http://andrea.podspot.de/userdata/images/andreale.jpg",
+	hidden : true
 
 }, {
 	link : "http://sophiezen.wordpress.com/feed/",
@@ -14,7 +15,8 @@ exports.podcasterinnen = [{
 	link : "http://antjeschrupp.podspot.de/rss",
 	title : "Aus Liebe zur Freiheit",
 	description : "Notizen rund um die Arbeit der sexuellen Differenz",
-	logo : ""
+	logo : "",
+	hidden : true
 }, {
 	link : "http://blacksweetstories.com/feed/",
 	title : "Black Sweet Stories",
@@ -24,32 +26,139 @@ exports.podcasterinnen = [{
 	link : "http://podcast.hans-bredow-institut.de/feed/",
 	title : "Bredowcast",
 	description : "Wie erforschen was mit Medien.",
+	hidden : true,
 	logo : "http://podcast.hans-bredow-institut.de/wp-content/uploads/orange-kraeftig.jpg"
 }, {
 	link : "http://www.butterzart.com/blog/feed/",
 	title : "Butterzart",
+	hiddden : true,
 	description : "Ein Blog mit vielen Themen, die eine Familie beschäftigen.",
 	logo : "http://www.butterzart.com/templates/default/img/logo.png"
 }, {
 	link : "http://www.heikeholz.de/feed/",
 	title : "Charisma und Persönlichkeit",
+	hidden : true,
 	description : "Was macht eine Person zur Persönlichkeit? Persönlichkeitsstarke Menschen haben Erfolg, sprühen vor Charme, stehen im Rampenlicht – sie haben ein selbstbewusstes Auftreten. Mit Charisma ist der Umgang mit Kunden und Mitarbeitern leichter, der Erfolg bei Geschäftsverhandlungen greifbarer. Wie können Sie aus Ihrem tiefsten Innern heraus Sicherheit, Lebensfreude, Zuversicht und Begeisterung ausstrahlen? In meinem Podcast lernen Sie, wie Sie zu einer erfolgreichen Persönlichkeit werden, Einfluss und Überzeugungskraft besitzt.",
 	logo : "http://www.heikeholz.de/wp-content/uploads/HH-Podcast-Charisma-neu.jpg"
 }, {
 	link : "https://itunes.apple.com/de/podcast/der-podcast-ubers-podcasten/id668334019?mt=2",
 	title : "Brigitte Hagedorn - audiobeiträge",
 	description : "",
+	hidden : true,
 	logo : "http://a4.mzstatic.com/us/r30/Podcasts4/v4/9b/ca/9a/9bca9a96-25fb-ae6d-0e06-72dab4d1080a/mza_4228633622924847821.170x170-75.jpg"
 }, {
 	link : "http://www.die-hoermupfel.de/?feed=rss2",
 	title : "die hörmupfel",
+	hidden : true,
 	description : "Der Podcast aus dem Allgäu",
 	logo : ""
 }, {
 	link : "http://distel.twoday.net/topics/podcast/index.rdf",
 	title : "Anarchistelfliege",
+	hidden : true,
 	description : "back to Utopia",
 	logo : "http://www.spiritvoices.de/blog/creativity.jpg"
+}, {
+	link : "http://www.entspanntimgarten.de/rss/blog",
+	title : "Entspannt im Garten",
+	hidden:true,
+	description : " Die Seite zum Gartenpodcast im Tagebuchformat, Tips zum Thema Garten, Tops und Flops Jahreszeitliches und mehr ",
+	logo : "http://u.jimdo.com/www54/o/s1146578d91e7580f/img/idf5d76ed205f9d8e/1337624946/cache/image.jpg"
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
 }, {
 	link : "",
 	title : "",
