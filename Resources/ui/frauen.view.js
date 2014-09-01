@@ -11,35 +11,33 @@ module.exports = function(_parent) {
 		var pods = require('model/frauen').podcasterinnen;
 		var items = [];
 		pods.forEach(function(pod) {
-			if (pod.title)
-				var item = {
-					properties : {
-						itemId : JSON.stringify({
-							url : pod.link,
-							description : pod.description,
-							title : pod.title,
-							logo : pod.logo
-						}),
-						accessoryType : Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL
-					},
-					title : {
-						text : pod.title
-					},
-					icon : {
-						image : pod.logo
-					},
-					summary : {
-						text : pod.description
-					},
-					entries : {
-						height : 0
-					},
-					lastitem : {
-						height : 0
-					}
-				};
-			if (!pod.hidden || pod.hidden == true)
-				items.push(item);
+			var item = {
+				properties : {
+					itemId : JSON.stringify({
+						url : pod.link,
+						description : pod.description,
+						title : pod.title,
+						logo : pod.logo
+					}),
+					accessoryType : Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL
+				},
+				title : {
+					text : pod.title
+				},
+				icon : {
+					image : pod.logo
+				},
+				summary : {
+					text : pod.description
+				},
+				entries : {
+					height : 0
+				},
+				lastitem : {
+					height : 0
+				}
+			};
+			if (pod.title && !pod.hidden) items.push(item);
 		});
 		sections.push(Ti.UI.createListSection({
 			items : items,
