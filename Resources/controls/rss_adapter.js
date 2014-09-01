@@ -37,14 +37,14 @@ Module.prototype = {
 				}
 			}
 			that.fireEvent('getfeed:start', {
-				message : (_reload) ? '' : 'Feed nicht parat, muss ich besorgen …'
+				message : (_reload) ? '' : 'Feed nicht parat, muss ich besorgen'
 			});
 			var counter = 0;
 			var cron = setInterval(function() {
 				counter += 0.05;
 			}, 500);
 			var xhr = Ti.Network.createHTTPClient({
-				timeout : 20000,
+				timeout : 30000,
 				autoRedirect : false,
 				cache : false,
 				ondatastream : function(_e) {
@@ -75,6 +75,7 @@ Module.prototype = {
 							var element = elements.item(i);
 							try {
 								var description = (element.getElementsByTagName('description').item(0)) ? element.getElementsByTagName('description').item(0).textContent : '';
+								description=description.replace(/<a.*?>/igm,'').replace(/<\/a>/igm,'');
 								var url = element.getElementsByTagName('enclosure').item(0).getAttribute('url');
 								var length = element.getElementsByTagName('enclosure').item(0).getAttribute('length');
 								data.push({
@@ -136,7 +137,6 @@ Module.prototype = {
 	},
 	_getUrl : function(_feed, callback) {
 		var that = this;
-		console.log(_feed);
 		if (_feed.key)
 			if (_feed.key.search('http://') == 0 || _feed.key.search('https://') == 0) {
 				callback(_feed.key);
@@ -189,7 +189,6 @@ Module.prototype = {
 		self.send();
 	},
 	fireEvent : function(_event, _payload) {
-		//console.log('Info: try to fire event ' + _event);
 		if (this.eventhandlers[_event]) {
 			for (var i = 0; i < this.eventhandlers[_event].length; i++) {
 				this.eventhandlers[_event][i].call(this, _payload);

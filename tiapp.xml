@@ -8,7 +8,8 @@
     <property name="acs-oauth-secret-production" type="string">tRx2BCLyj2cYiUIsTk9MC0LgfgiPl7dD</property>
     <property name="acs-oauth-key-production" type="string">cd2cvIG238G58DrDD0BFnIwu3ZcpFhjl</property>
     <property name="acs-api-key-production" type="string">IBiZ5MLJEtERUlH2lXAI5GH1stcESizW</property>
-    <name>Hörsuppe</name>
+    
+    					<name>Hinhörer</name>
     <publisher>rainerschleevoigt</publisher>
     <url>http://</url>
     <description>not specified</description>
@@ -44,12 +45,12 @@
             </dict>
         </plist>
     </ios>
-    <version>1.2.5</version>
+    <version>1.2.8</version>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="35" android:versionName="1.2.5">
+        <manifest android:versionCode="38" android:versionName="1.2.8">
             <uses-sdk android:minSdkVersion="11"/>
             <uses-sdk android:targetSdkVersion="19"/>
-            <application android:largeHeap="true" android:theme="@style/Theme.Hoersuppe">
+            <application android:largeHeap="true" android:theme="@style/Theme.Hinhoerer">
                 <uses-sdk android:minSdkVersion="11	" android:targetSdkVersion="19"/>
             </application>
         </manifest>

@@ -1038,6 +1038,10 @@ module.exports = {
 		"summary" : "Dieser Podcast widmet sich also den Menschen in der Wissenschaft, jenen die ergründen wollen was die Welt Im Innersten zusammenhält. Ich unterhalte mich mit Forschern. Dabei geht es mir aber nicht um jene verdienten Eminenzen, die über viele Jahre der Forschungs- und Lehrtätigkeit bereits ihr wissenschaftliches Renommee gefestigt haben, sondern um eben jene, die am Anfang ihrer Arbeit stehen und jene die gänzlich frisch in der Wissenschaftswelt sind und sich ihre wissenschaftlichen Meriten erst verdienen müssen – der wissenschaftliche Nachwuchs, die jungen Wilden im Forschungsbetrieb, jene “in progress”.",
 		"content" : "Explorism"
 	}, {
+		"href" : "/podcast/das-geheime-kabinett",
+		"summary" : "In geheimen Kabinetten landete früher alles, was man in Museen der Öffentlichkeit vorenthalten wollte, weil man es für zu anstößig hielt. Dieser Podcast erzählt Skurriles, Witziges und Unglaubliches, was es nicht in die regulären Geschichtsbücher geschafft hat.",
+		"content" : "Das geheime Kabinett"
+	},{
 		"href" : "/podcast/hoaxilla",
 		"summary" : "Der skeptische Podcast aus Hamburg - Hoaxilla beschäftigt sich mit Modernen Sagen (Urban Legends), Medien, Kultur und Wissenschaft aus Sicht der Skeptiker-Bewegung ohne sich dabei selbst zu ernst zu nehmen.",
 		"content" : "Hoaxilla"

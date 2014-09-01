@@ -28,7 +28,7 @@ module.exports = function() {
 			console.log('Warning: no actionbar');
 			return;
 		}
-		activity.actionBar.setTitle('Hörsuppe/PodLove');
+		activity.actionBar.setTitle('HinHörer');
 		activity.actionBar.setSubtitle('Deutschsprachige Podcasts');
 		activity.onCreateOptionsMenu = function(e) {
 			e.menu.clear();
@@ -42,27 +42,27 @@ module.exports = function() {
 				showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM,
 				icon : Ti.App.Android.R.drawable.ic_action_search
 			}).addEventListener("click", function() {
-				console.log('~~~~~~~~~~~~~~~~');
+				console.log('+++Searchclick+++');
 				self.setActiveTab(0);
-				var list = tab1.getWindow().list;
+				var list = tab1.getWindow().container.views[0];
+				tab1.getWindow().container.scrollToView(0);
+				return;
 				if (searchvisible == true) {
 					console.log('Info: try to hide searchBar');
 					list.searchView.blur();
 					list.searchView.setTop('-45');
-
 				} else {
+					console.log('Info: try to show searchbar');
 					list.searchView = Ti.UI.createSearchBar({
 						hintText : "Podcast-Suche",
 						softKeyboardOnFocus : Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
 						height : 45,
 						top : 0,
 						submitEnabled : false
-
 					});
-					list.searchView.focus();
+					//list.searchView.focus();
 					searchvisible = true;
 				}
-
 			});
 			e.menu.add({
 				itemId : '0',
@@ -93,7 +93,7 @@ module.exports = function() {
 						selected : e.selections,
 						options : options
 					});
-					tab1.getWindow().updateList();
+					tab1.getWindow().container.views[0].updateList();
 				});
 				picker.show();
 			});

@@ -16,7 +16,7 @@ module.exports = function(_feed, _callback) {
 			width : Ti.UI.FILL,height:20,
 			textAlign : 'left',
 			font : {
-				fontSize : 12
+				fontSize : 11
 			}
 		});
 		this.view.add(this.label);

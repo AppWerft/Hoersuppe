@@ -1,4 +1,4 @@
-	const OPAQUE = 0.3;
+const OPAQUE = 0.3;
 module.exports = function(item) {
 
 	/*var dummy = Ti.UI.createImageView({
@@ -11,12 +11,25 @@ module.exports = function(item) {
 	 });
 	 */
 	var Adapter = new (require('controls/hoersuppe_adapter'))();
-	item.url = Adapter.getPath(item.url);	
+	item.url = Adapter.getPath(item.url).path;
+	item.local = Adapter.getPath(item.url).local;
 	var duration = 0;
 	var self = Ti.UI.createWindow({
 		fullscreen : true,
 		orientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 	});
+	self.statustext = Ti.UI.createLabel({
+		top : 50,
+		color : '#aaa',
+		text : 'Systemmeldung',
+		textAlign : 'center',
+		height : 20,
+		font : {
+			fontSize : 11
+		},
+		width : Ti.UI.FILL
+	});
+	self.statustext.setText('Ermittle Podcastlänge.');
 	var bg = Ti.UI.createImageView({
 		top : -100,
 		image : Ti.Filesystem.getFile(Ti.App.Properties.getString('BG')).read()
@@ -26,6 +39,7 @@ module.exports = function(item) {
 	/* we need this dummy to determine duration, audioplayer doesn't give us this detail */
 	var dummyplayer = require('controls/mediaplayer').getduration(item.url, function(_res) {
 		if (_res.success) {
+			self.statustext.setText('Podcast bereit zum Start');
 			duration = parseInt(_res.duration);
 			self.endtime.setText(formatTime(_res.duration));
 			// kann wech!
@@ -86,10 +100,10 @@ module.exports = function(item) {
 		url : item.url,
 		volume : 1
 	});
-	Ti.App.AudioPlayercontrolview = Ti.UI.createView({
+	self.audioplayercontrolview = Ti.UI.createView({
 		top : 0,
 		height : 110,
-		backgroundColor : '#224929'
+		backgroundColor : '#EF6426'
 	});
 	self.slider = Ti.UI.createSlider({
 		bottom : 0,
@@ -168,18 +182,20 @@ module.exports = function(item) {
 		opacity : OPAQUE,
 		height : 50
 	});
-	Ti.App.AudioPlayercontrolview.add(self.pausebutton);
-	Ti.App.AudioPlayercontrolview.add(self.playbutton);
-	Ti.App.AudioPlayercontrolview.add(self.spinner);
+
+	self.audioplayercontrolview.add(self.statustext);
+	self.audioplayercontrolview.add(self.pausebutton);
+	self.audioplayercontrolview.add(self.playbutton);
+	self.audioplayercontrolview.add(self.spinner);
 	self.spinner.show();
-	Ti.App.AudioPlayercontrolview.add(self.stopbutton);
-	Ti.App.AudioPlayercontrolview.add(self.slider);
-	Ti.App.AudioPlayercontrolview.add(self.currenttime);
-	Ti.App.AudioPlayercontrolview.add(self.endtime);
-	self.container.add(Ti.App.AudioPlayercontrolview);
+	self.audioplayercontrolview.add(self.stopbutton);
+	self.audioplayercontrolview.add(self.slider);
+	self.audioplayercontrolview.add(self.currenttime);
+	self.audioplayercontrolview.add(self.endtime);
+	self.container.add(self.audioplayercontrolview);
 	self.add(self.container);
 	self.container.addEventListener('swipe', function(_e) {
-		if (_e.direction == 'down' && !self.downloader.locked) {
+		if (_e.direction == 'down' && !self.downloader.locked && !item.local) {
 			var y = self.container.getRect().y;
 			self.container.animate({
 				top : y + 20,
@@ -197,6 +213,7 @@ module.exports = function(item) {
 		self.playbutton.setOpacity(1);
 	});
 	Ti.App.AudioPlayer.addEventListener('change', function(_evt) {
+		self.statustext.setText(_evt.description);
 		Ti.API.info('State: ' + _evt.description + ' (' + _evt.state + ')');
 		switch (_evt.description) {
 		case  'starting':
@@ -211,8 +228,8 @@ module.exports = function(item) {
 			break;
 		case 'paused':
 			self.playbutton.touchEnabled = true;
-			self.pausebutton.touchEnabled = false;
 			self.playbutton.setOpacity(1);
+			self.pausebutton.touchEnabled = false;
 			self.pausebutton.setOpacity(OPAQUE);
 			self.stopbutton.setOpacity(1);
 			break;
@@ -224,15 +241,18 @@ module.exports = function(item) {
 	});
 	self.playbutton.addEventListener('click', function() {
 		Ti.App.AudioPlayer.play();
+		self.playbutton.touchEnabled = false;
 		self.playbutton.setOpacity(OPAQUE);
 	});
 	self.pausebutton.addEventListener('click', function() {
-		console.log('Info: PAUSE');
+		self.pausebutton.touchEnabled = false;
+		self.pausebutton.setOpacity(OPAQUE);
 		Ti.App.AudioPlayer.pause();
 	});
 	self.stopbutton.addEventListener('click', function() {
 		console.log('Info: STOP');
 		Ti.App.AudioPlayer.stop();
+		self.close();
 	});
 	self.addEventListener('open', function() {
 		var activity = self.getActivity();

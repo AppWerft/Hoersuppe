@@ -13,7 +13,7 @@ module.exports = function(_parent) {
 		podcasts.forEach(function(section) {
 			var headerview = Ti.UI.createView({
 				height : 30,
-				backgroundColor : '#444'
+				backgroundColor : '#408b4d'
 			});
 			headerview.add(Ti.UI.createLabel({
 				text : '  ' + section.title,

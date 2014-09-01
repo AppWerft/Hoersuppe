@@ -50,7 +50,7 @@ HoersuppenModule.prototype = {
 	getAllPodcasts : function() {
 		var sections = [];
 		var selects = Ti.App.Properties.getList('LIST_OFSELECTEDPODCASTCATEGORIES');
-		var cats = require('model/podcasts');
+		var cats = require('model/hoersuppe');
 		cats.ul.li.forEach(function(cat) {
 			var selected = (selects == null || selects == [] || selects.indexOf(cat.a.content) != -1)//
 			? true : false;
@@ -104,7 +104,13 @@ HoersuppenModule.prototype = {
 	},
 	getPath : function(url) {
 		var file = getFilehandle(Ti.Utils.md5HexDigest(url));
-		return (file.exists()) ? file.nativePath : url;
+		return (file.exists()) ? {
+			path : file.nativePath,
+			local : true,
+		} : {
+			path : url,
+			local : false
+		};
 	},
 	trigger : function(_event, _payload) {
 		//console.log('Info: try to fire event ' + _event);
