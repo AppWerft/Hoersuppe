@@ -223,8 +223,9 @@ module.exports = function(item) {
 			self.playbutton.touchEnabled = false;
 			self.playbutton.setOpacity(OPAQUE);
 			self.pausebutton.setOpacity(1);
-			self.stopbutton.setOpacity(1);
-			self.stopbutton.setEnabled(true);
+			self.pausebutton.setEnabled(true);
+			self.stopbutton.setOpacity(OPAQUE);
+			self.stopbutton.setEnabled(false);
 			break;
 		case 'paused':
 			self.playbutton.touchEnabled = true;
@@ -232,6 +233,7 @@ module.exports = function(item) {
 			self.pausebutton.touchEnabled = false;
 			self.pausebutton.setOpacity(OPAQUE);
 			self.stopbutton.setOpacity(1);
+			self.stopbutton.setEnabled(true);
 			break;
 		case 'stopped':
 			self.stopbutton.setOpacity(OPAQUE);
