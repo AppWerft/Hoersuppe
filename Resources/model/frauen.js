@@ -41,7 +41,7 @@ exports.podcasterinnen = [{
 	description : "Was macht eine Person zur Persönlichkeit? Persönlichkeitsstarke Menschen haben Erfolg, sprühen vor Charme, stehen im Rampenlicht – sie haben ein selbstbewusstes Auftreten. Mit Charisma ist der Umgang mit Kunden und Mitarbeitern leichter, der Erfolg bei Geschäftsverhandlungen greifbarer. Wie können Sie aus Ihrem tiefsten Innern heraus Sicherheit, Lebensfreude, Zuversicht und Begeisterung ausstrahlen? In meinem Podcast lernen Sie, wie Sie zu einer erfolgreichen Persönlichkeit werden, Einfluss und Überzeugungskraft besitzt.",
 	logo : "http://www.heikeholz.de/wp-content/uploads/HH-Podcast-Charisma-neu.jpg"
 }, {
-	link : "https://itunes.apple.com/de/podcast/der-podcast-ubers-podcasten/id668334019?mt=2",
+	link : "http://www.audiobeitraege.de/category/podcast/feed/",
 	title : "Brigitte Hagedorn - audiobeiträge",
 	description : "",
 	hidden : true,
@@ -155,6 +155,106 @@ exports.podcasterinnen = [{
 	title : " (Er)Lebe Dein Potenzial",
 	description : "Entfachen | Verführen | Befreien",
 	logo : "http://www.erlebe-dein-potenzial.de/wp-content/uploads/2014/08/photodune-5063700-superhero-kid-l-1-1080x675.jpg"
+}, {
+	link : "http://besondereumstaende.podcaster.de/feed/",
+	title : "Besondere Umstände ",
+	description : "Podcast von Benni Bärmann und Antje Schrupp",
+	logo : ""
+}, {
+	link : "http://bzw.ansatzweise.de/feed/aac/",
+	title : "beziehungsweise",
+	description : "Reden schadet nicht. Von Alltagskram bis Krisenfall. Geprägt von Neugier, Streitlust und Halbwissen teilen wir zweimal im Monat unsere Sichtweisen - als Mann, als Frau, als Paar.",
+	logo : "http://a5.mzstatic.com/us/r30/Podcasts/v4/75/88/f7/7588f78a-834d-eeaf-6c7f-beab895aed2c/mza_7884405386005323666.170x170-75.jpg"
+}, {
+	link : "http://feeds.soundcloud.com/users/soundcloud:users:98241136/sounds.rss",
+	title : "bits of berlin",
+	description : "",
+	logo : "http://i1.sndcdn.com/avatars-000096486468-81i3at-original.png?e76cf77"
+}, {
+	link : "http://modellansatz.de/rss/",
+	title : "Der Modellansatz Podcast ",
+	description : "Bei genauem Hinsehen finden wir die Naturwissenschaft und besonders Mathematik überall in unserem Leben, vom Wasserhahn über die automatischen Temporegelungen an Autobahnen, in der Medizintechnik bis hin zum Mobiltelefon. Woran die Forscher, Absolventen und Lehrenden in Karlsruhe gerade tüfteln, erfahren wir hier aus erster Hand. ",
+	logo : "http://www.math.kit.edu/ianm4/seite/modellansatz/media/modellansatz-ka-simulation-300x300.jpg"
+}, {
+	link : "http://feeds.feedburner.com/DieBuchhaltung",
+	title : "Die Buchhaltung",
+	description : "Kora Beyer und Django Meyer sind Anfang der 80er Jahre geboren und haben verschiedene Geisteswissenschaften in Potsdam und Leipzig studiert. Sie sehen gut aus, lesen gern und treffen sich einmal im Monat in Koras Küche, um über Neuerscheinungen, Literaturverfilmungen und ihre Lieblingsklassiker zu sprechen.",
+	logo : "http://www.buchhaltung-podcast.de/wp-content/uploads/2013/07/Logo-Buchhaltung_130706.png"
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
+}, {
+	link : "",
+	title : "",
+	description : "",
+	logo : ""
 }, {
 	link : "",
 	title : "",
