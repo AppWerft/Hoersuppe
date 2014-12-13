@@ -4,6 +4,7 @@ module.exports = function(_channel, _items) {
 	var channel = _channel;
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
 	var AudioDownloader = new (require('controls/audiodownloader_adapter'))();
+	var Pusher   = new (require('controls/pushnotification_adapter'))();
 	// ref lists of downloader
 	var options = {};
 	var onClick = function(e) {
@@ -163,7 +164,7 @@ module.exports = function(_channel, _items) {
 					opacity : (item.islocal) ? 0.3 : 1
 				},
 				description : {
-					html : item.description
+					html : item.description.replace(/<img.*?>/gim,'')
 				},
 				logo : {
 					image : channel.logo
@@ -197,6 +198,8 @@ module.exports = function(_channel, _items) {
 							HoerSuppe.removeFav(channel);
 						} else {
 							item.setChecked(true);
+							console.log(channel);
+							Pusher.subscribeToFavoriteFeed(channel.url);
 							item.setIcon(Ti.App.Android.R.drawable.ic_action_good), HoerSuppe.addFav(channel);
 						}
 					});

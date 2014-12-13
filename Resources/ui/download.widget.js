@@ -1,3 +1,4 @@
+
 module.exports = function(_feed, _callback) {
 	var getStrip = function(_eventname) {
 		this.view = Ti.UI.createView({
@@ -13,7 +14,8 @@ module.exports = function(_feed, _callback) {
 		this.label = Ti.UI.createLabel({
 			top : 10,
 			left : 0,
-			width : Ti.UI.FILL,height:20,
+			width : Ti.UI.FILL,
+			height : 20,
 			textAlign : 'left',
 			font : {
 				fontSize : 11
@@ -84,7 +86,7 @@ module.exports = function(_feed, _callback) {
 		}
 	});
 	FeedAdapter.addEventListener('error', function(_e) {
-			_callback(null);
+		_callback(null);
 	});
 	FeedAdapter.start(_feed);
 	return self;

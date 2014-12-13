@@ -4,12 +4,10 @@
     <property name="acs-oauth-secret-development" type="string">sxdKAS9xHklFzVaSJqUWifM0QEE2ksW8</property>
     <property name="acs-oauth-key-development" type="string">iPpiDq0CWnoBEIaP0m7hT6lXmK419V66</property>
     <property name="acs-api-key-development" type="string">sVWpyDTyWYho2g0wy6x4WRzAIL6XVXoX</property>
-  
     <property name="acs-oauth-secret-production" type="string">tRx2BCLyj2cYiUIsTk9MC0LgfgiPl7dD</property>
     <property name="acs-oauth-key-production" type="string">cd2cvIG238G58DrDD0BFnIwu3ZcpFhjl</property>
     <property name="acs-api-key-production" type="string">IBiZ5MLJEtERUlH2lXAI5GH1stcESizW</property>
-    
-    					<name>Hinhörer</name>
+    <name>Hinhörer</name>
     <publisher>rainerschleevoigt</publisher>
     <url>http://</url>
     <description>not specified</description>
@@ -45,13 +43,13 @@
             </dict>
         </plist>
     </ios>
-    <version>1.4.2</version>
+    <version>1.4.5</version>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="42" android:versionName="1.4.2">
+        <manifest android:versionCode="45" android:versionName="1.4.5">
             <uses-sdk android:minSdkVersion="11"/>
-            <uses-sdk android:targetSdkVersion="19"/>
+            <uses-sdk android:targetSdkVersion="20"/>
             <application android:largeHeap="true" android:theme="@style/Theme.Hinhoerer">
-                <uses-sdk android:minSdkVersion="11	" android:targetSdkVersion="19"/>
+                <uses-sdk android:minSdkVersion="11 " android:targetSdkVersion="20"/>
             </application>
         </manifest>
     </android>
@@ -69,5 +67,5 @@
         <target device="mobileweb">false</target>
         <target device="tizen">false</target>
     </deployment-targets>
-    <sdk-version>3.2.3.GA</sdk-version>
+    <sdk-version>3.4.1.GA</sdk-version>
 </ti:app>

@@ -106,10 +106,10 @@ HoersuppenModule.prototype = {
 		var file = getFilehandle(Ti.Utils.md5HexDigest(url));
 		return (file.exists()) ? {
 			path : file.nativePath,
-			local : true,
+			islocal : true,
 		} : {
 			path : url,
-			local : false
+			islocal : false
 		};
 	},
 	trigger : function(_event, _payload) {

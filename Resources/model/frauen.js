@@ -9,7 +9,7 @@ exports.podcasterinnen = [{
 	link : "http://sophiezen.wordpress.com/feed/",
 	title : "Aufgeräumt",
 	description : "Ordentlich sein ist keine Arbeit, es ist eine Entscheidung. Wenn wir uns dafür entschieden haben, ist es eine Freude.",
-	logo : "http://1.gravatar.com/avatar/0bdaa1bab1bd2bf4caf2c19a50960931"
+	logo : "http://0.gravatar.com/avatar/0bdaa1bab1bd2bf4caf2c19a50960931?s=320&#38;d=identicon&#38;r=G"
 
 }, {
 	link : "http://antjeschrupp.podspot.de/rss",

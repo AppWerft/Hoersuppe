@@ -8,10 +8,11 @@ module.exports = function(_parent) {
 	});
 	var sections = [];
 	self.updateList = function() {
-		require('controls/podlove_adapter')(function(_res) {
-			var posts = _res.posts;
+		require('controls/podlove_adapter')(function(_payload) {
+			var posts = _payload.posts;
 			var items = [];
 			posts.forEach(function(post) {
+				console.log(post	);
 				var pod = post.podcast[0];
 
 				var mp3 = undefined;

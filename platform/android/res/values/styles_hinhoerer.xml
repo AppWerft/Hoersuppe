@@ -19,64 +19,62 @@
 
 <resources>
 
-    <style name="Theme.Hinhoerer" parent="@android:style/Theme.Holo.Light.DarkActionBar">
-        <item name="android:actionBarItemBackground">@drawable/selectable_background_hinhoerer</item>
-        <item name="android:popupMenuStyle">@style/PopupMenu.Hinhoerer</item>
-        <item name="android:dropDownListViewStyle">@style/DropDownListView.Hinhoerer</item>
-        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Hinhoerer</item>
-        <item name="android:actionDropDownStyle">@style/DropDownNav.Hinhoerer</item>
-        <item name="android:actionBarStyle">@style/ActionBar.Solid.Hinhoerer</item>
-        <item name="android:actionModeBackground">@drawable/cab_background_top_hinhoerer</item>
-        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_hinhoerer</item>
-        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Hinhoerer</item>
+    <style name="Theme.Hinhoerer" parent="@style/Theme.AppCompat">
+        <item name="actionBarItemBackground">@drawable/selectable_background_hinhoerer</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Hinhoerer</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Hinhoerer</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Hinhoerer</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Hinhoerer</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Hinhoerer</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_hinhoerer</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_hinhoerer</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Hinhoerer</item>
+
         
-                <!-- Light.DarkActionBar specific -->
-        <item name="android:actionBarWidgetTheme">@style/Theme.Hinhoerer.Widget</item>
-
     </style>
 
-    <style name="ActionBar.Solid.Hinhoerer" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@drawable/ab_solid_hinhoerer</item>
-        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_hinhoerer</item>
-        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_hinhoerer</item>
-        <item name="android:progressBarStyle">@style/ProgressBar.Hinhoerer</item>
+    <style name="ActionBar.Solid.Hinhoerer" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="background">@drawable/ab_solid_hinhoerer</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_hinhoerer</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_hinhoerer</item>
+        <item name="progressBarStyle">@style/ProgressBar.Hinhoerer</item>
     </style>
 
-    <style name="ActionBar.Transparent.Hinhoerer" parent="@android:style/Widget.Holo.ActionBar">
-        <item name="android:background">@drawable/ab_transparent_hinhoerer</item>
-        <item name="android:progressBarStyle">@style/ProgressBar.Hinhoerer</item>
+    <style name="ActionBar.Transparent.Hinhoerer" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/ab_transparent_hinhoerer</item>
+        <item name="progressBarStyle">@style/ProgressBar.Hinhoerer</item>
     </style>
-
-    <style name="PopupMenu.Hinhoerer" parent="@android:style/Widget.Holo.ListPopupWindow">
+	
+    <style name="PopupMenu.Hinhoerer" parent="@style/Widget.AppCompat.PopupMenu">	
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_hinhoerer</item>	
     </style>
-
-    <style name="DropDownListView.Hinhoerer" parent="@android:style/Widget.Holo.ListView.DropDown">
+	
+    <style name="DropDownListView.Hinhoerer" parent="@style/Widget.AppCompat.ListView.DropDown">
         <item name="android:listSelector">@drawable/selectable_background_hinhoerer</item>
     </style>
 
-    <style name="ActionBarTabStyle.Hinhoerer" parent="@android:style/Widget.Holo.ActionBar.TabView">
+    <style name="ActionBarTabStyle.Hinhoerer" parent="@style/Widget.AppCompat.ActionBar.TabView">
         <item name="android:background">@drawable/tab_indicator_ab_hinhoerer</item>
     </style>
-
-    <style name="DropDownNav.Hinhoerer" parent="@android:style/Widget.Holo.Spinner">
+	
+    <style name="DropDownNav.Hinhoerer" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
         <item name="android:background">@drawable/spinner_background_ab_hinhoerer</item>
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_hinhoerer</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_hinhoerer</item>
     </style>
     
-    <style name="ProgressBar.Hinhoerer" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
+    <style name="ProgressBar.Hinhoerer" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_hinhoerer</item>
     </style>
     
-    <style name="ActionButton.CloseMode.Hinhoerer" parent="@android:style/Widget.Holo.ActionButton.CloseMode">
+    <style name="ActionButton.CloseMode.Hinhoerer" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_hinhoerer</item>
     </style>
-
+    
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="Theme.Hinhoerer.Widget" parent="@android:style/Theme.Holo">
-        <item name="android:popupMenuStyle">@style/PopupMenu.Hinhoerer</item>
-        <item name="android:dropDownListViewStyle">@style/DropDownListView.Hinhoerer</item>
+    <style name="Theme.Hinhoerer.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.Hinhoerer</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Hinhoerer</item>
     </style>
 
 </resources>

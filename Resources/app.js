@@ -1,9 +1,7 @@
 ! function() {
-
 	Object.prototype.toType = function() {
 		return ({}).toString.call(this).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 	};
-
 	Ti.App.Pusher = new (require('controls/pushnotification_adapter'))();
 	require('ui/tabgroup')().open();
 }();

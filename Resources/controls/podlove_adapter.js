@@ -1,13 +1,13 @@
 module.exports = function(callback) {
-	/*if (Ti.App.Properties.hasProperty('PODLOVE'))
-		callback(Ti.App.Properties.getList('PODLOVE'));*/
+	if (Ti.App.Properties.hasProperty('PODLOVE'))
+		callback(Ti.App.Properties.getList('PODLOVE'));
 	var self = Ti.Network.createHTTPClient({
 		onload : function() {
-			var posts = JSON.parse(this.responseText).posts;
-			Ti.App.Properties.setList('PODLOVE', posts);
+			var data = JSON.parse(this.responseText);
+			Ti.App.Properties.setList('PODLOVE', data.posts);
 			callback({
-				success : true,
-				posts : posts
+				success : data.status,
+				posts : data.posts
 			});
 
 		}

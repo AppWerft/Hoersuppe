@@ -1,3 +1,4 @@
+
 const OPAQUE = 0.3;
 module.exports = function(item) {
 
@@ -12,7 +13,8 @@ module.exports = function(item) {
 	 */
 	var Adapter = new (require('controls/hoersuppe_adapter'))();
 	item.url = Adapter.getPath(item.url).path;
-	item.local = Adapter.getPath(item.url).local;
+	item.islocal = Adapter.getPath(item.url).islocal;
+	console.log(item);
 	var duration = 0;
 	var self = Ti.UI.createWindow({
 		fullscreen : true,

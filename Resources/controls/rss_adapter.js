@@ -81,7 +81,7 @@ Module.prototype = {
 								data.push({
 									url : url,
 									length : length,
-									description : description,
+									description : description.replace(/<img.*?>/gim,''),
 									title : element.getElementsByTagName('title').item(0).textContent,
 									pubDate : element.getElementsByTagName('pubDate').item(0).textContent
 								});
