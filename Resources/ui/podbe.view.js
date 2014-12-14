@@ -13,11 +13,9 @@ module.exports = function(_parent) {
 			var posts = _payload.posts;
 			var items = [];
 			posts.forEach(function(post) {
-				console.log(post);
 				var pod = post.podcast[0];
 				var mp3 = undefined;
 				pod['podbe_feed'].forEach(function(feed) {
-					console.log(feed['podbe_feed_audio']);
 					if (feed['podbe_feed_audio'] == 'Mp3' || feed['podbe_feed_audio'] == 'News') {
 						feedurl = feed['podbe_feed_url'].replace(/^feed:\/\//, 'http://');
 					}
@@ -51,7 +49,6 @@ module.exports = function(_parent) {
 						height : 0
 					}
 				};
-				console.log(item);
 				items.push(item);
 			});
 			sections.push(Ti.UI.createListSection({

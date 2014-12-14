@@ -45,7 +45,7 @@
     </ios>
     <version>1.4.6</version>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="45" android:versionName="1.4.5">
+        <manifest android:versionCode="46" android:versionName="1.4.6">
             <uses-sdk android:minSdkVersion="11"/>
             <uses-sdk android:targetSdkVersion="20"/>
             <application android:largeHeap="true" android:theme="@style/Theme.Hinhoerer">

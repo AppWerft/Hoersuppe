@@ -10,6 +10,8 @@ module.exports = function(_parent) {
 	});
 	self.container = Flip.createFlipView({
 		backgroundColor : '#fff',
+		top : 0,
+		bottom : 0,
 		orientation : Flip.ORIENTATION_HORIZONTAL,
 		overFlipMode : Flip.OVERFLIPMODE_RUBBER_BAND,
 		views : [require('ui/hoersuppe.view')(self), require('ui/frauen.view')(self), require('ui/podbe.view')(self)]
@@ -17,7 +19,7 @@ module.exports = function(_parent) {
 	self.add(self.container);
 	self.container.peakNext(true);
 	self.container.addEventListener('flipped', function(_e) {
-		
+
 	});
 	if (Ti.Android) {
 		self.addEventListener("open", function() {

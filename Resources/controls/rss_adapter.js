@@ -1,4 +1,4 @@
-const USINGCACHE = true;
+const USINGCACHE = false;
 
 var Module = function(_feed, _reload) {
 	if (_feed && ( typeof _feed.key) == 'String')
@@ -6,9 +6,9 @@ var Module = function(_feed, _reload) {
 	this.eventhandlers = [];
 	return this;
 };
+
 Module.prototype = {
 	start : function(_feed, _reload) {
-		console.log(_feed);
 		if (_feed) {
 			this.key = _feed.key;
 		}
@@ -75,13 +75,13 @@ Module.prototype = {
 							var element = elements.item(i);
 							try {
 								var description = (element.getElementsByTagName('description').item(0)) ? element.getElementsByTagName('description').item(0).textContent : '';
-								description=description.replace(/<a.*?>/igm,'').replace(/<\/a>/igm,'');
+								description = description.replace(/<a.*?>/igm, '').replace(/<\/a>/igm, '');
 								var url = element.getElementsByTagName('enclosure').item(0).getAttribute('url');
 								var length = element.getElementsByTagName('enclosure').item(0).getAttribute('length');
 								data.push({
 									url : url,
 									length : length,
-									description : description.replace(/<img.*?>/gim,''),
+									description : description.replace(/<img.*?>/gim, ''),
 									title : element.getElementsByTagName('title').item(0).textContent,
 									pubDate : element.getElementsByTagName('pubDate').item(0).textContent
 								});
@@ -137,14 +137,17 @@ Module.prototype = {
 	},
 	_getUrl : function(_feed, callback) {
 		var that = this;
-		if (_feed.key)
+		console.log('Info: getURL start');
+		if (_feed.key) {
 			if (_feed.key.search('http://') == 0 || _feed.key.search('https://') == 0) {
 				callback(_feed.key);
 				return;
 			}
-		if (_feed.url) callback(_feed.url);	
-		if (Ti.App.Properties.hasProperty('RSSURL' + _feed.key)) {
-			var url = _feed.key && Ti.App.Properties.getString('RSSURL' + _feed.key);
+		}
+		if (_feed.url)
+			callback(_feed.url);
+		if (Ti.App.Properties.hasProperty('RSS_URL' + _feed.key)) {
+			var url = _feed.key && Ti.App.Properties.getString('RSS_URL' + _feed.key);
 			callback(url);
 			return;
 		}
@@ -152,6 +155,13 @@ Module.prototype = {
 		var cron = setInterval(function() {
 			counter += 0.05;
 		}, 500);
+		var urlofpage = 'http://hoersuppe.de/podcast/' + _feed.key;
+		var web = Ti.UI.createWebView({url:urlofpage});
+		web.addEventListener('load',function(){
+			console.log('Info: web loaded');
+			var data= web.evalJS(window.podcastData);
+			console.log(data);
+		});
 		var self = Ti.Network.createHTTPClient({
 			onerror : function() {
 				clearInterval(cron);
@@ -162,17 +172,26 @@ Module.prototype = {
 			},
 			onload : function() {
 				clearInterval(cron);
+				console.log('URL:  ' + urlofpage);
 				var page = this.responseText;
-				var regex = /"pcast:\/\/(.*?)"/mg;
+				console.log(this.responseText.length);
+				var regex = /podcastData=(.*?)<\/script>/mig;
 				var res = regex.exec(page);
+				//console.log(page);
 				if (res) {
-					var url = res[1];
-					Ti.App.Properties.setString('RSSURL' + _feed.key, url);
-					that.fireEvent('geturl:ready', {
-						value : url,
-						message : 'FeedURL OK'
-					});
-					callback(url);
+					try {
+						var json = JSON.parse(res[1].replace('},]}','}]}'));
+						console.log(json.feeds);
+						var url = json.feeds[0].url;
+						Ti.App.Properties.setString('RSS_URL' + _feed.key, url);
+						that.fireEvent('geturl:ready', {
+							value : url,
+							message : 'FeedURL OK'
+						});
+						callback(url);
+					} catch(E) {
+						console.log(E);
+					}
 				} else {
 					console.log('Error: urlpage found, but without link to pcast on it');
 					that.fireEvent('geturl:error', {});
@@ -185,8 +204,13 @@ Module.prototype = {
 				});
 			}
 		});
-		self.open('GET', 'http://hoersuppe.de/podcast/' + _feed.key, true);
-		self.send();
+		self.open('GET', urlofpage, true);
+
+		self.setRequestHeader('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:34.0) Gecko/20100101 Firefox/34.0');
+		self.setRequestHeader('User-Referer', 'http://hoersuppe.de/');
+		self.setRequestHeader('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8');
+		self.setRequestHeader('Accept-Encoding', 'gzip, deflate');
+		self.send(true);
 	},
 	fireEvent : function(_event, _payload) {
 		if (this.eventhandlers[_event]) {
