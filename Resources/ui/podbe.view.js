@@ -4,7 +4,8 @@ module.exports = function(_parent) {
 			'main' : require('ui/TEMPLATES').main
 		},
 		caseInsensitiveSearch : true,
-		defaultItemTemplate : 'main',backgroundColor : '#fff',
+		defaultItemTemplate : 'main',
+		backgroundColor : '#fff',
 	});
 	var sections = [];
 	self.updateList = function() {
@@ -12,13 +13,17 @@ module.exports = function(_parent) {
 			var posts = _payload.posts;
 			var items = [];
 			posts.forEach(function(post) {
-				console.log(post	);
+				console.log(post);
 				var pod = post.podcast[0];
 				var mp3 = undefined;
 				pod['podbe_feed'].forEach(function(feed) {
 					console.log(feed['podbe_feed_audio']);
-					if (feed['podbe_feed_audio'] == 'Mp3' || feed['podbe_feed_audio'] == 'News')
-						feedurl = feed['podbe_feed_url'].replace(/^feed:\/\//,'http://');
+					if (feed['podbe_feed_audio'] == 'Mp3' || feed['podbe_feed_audio'] == 'News') {
+						feedurl = feed['podbe_feed_url'].replace(/^feed:\/\//, 'http://');
+					}
+					if (feed['podbe_feed_audio'] == 'M4a') {
+						feedurl = feed['podbe_feed_url'].replace(/^feed:\/\//, 'http://');
+					}
 				});
 				var item = {
 					properties : {

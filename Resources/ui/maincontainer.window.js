@@ -15,8 +15,9 @@ module.exports = function(_parent) {
 		views : [require('ui/hoersuppe.view')(self), require('ui/frauen.view')(self), require('ui/podbe.view')(self)]
 	});
 	self.add(self.container);
-	self.container.peakNext();
+	self.container.peakNext(true);
 	self.container.addEventListener('flipped', function(_e) {
+		
 	});
 	if (Ti.Android) {
 		self.addEventListener("open", function() {

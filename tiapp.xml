@@ -43,7 +43,7 @@
             </dict>
         </plist>
     </ios>
-    <version>1.4.5</version>
+    <version>1.4.6</version>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:versionCode="45" android:versionName="1.4.5">
             <uses-sdk android:minSdkVersion="11"/>
