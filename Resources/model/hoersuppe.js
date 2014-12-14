@@ -123,6 +123,10 @@ module.exports = {
 		"id" : "mz_geschichten",
 		"name" : "mz_geschichten"
 	}, {
+		"href" : "/podcast/systemfehler",
+		"summary" : "Audiodokumentationen zur Fehlerkultur. Sendungen über die Vielfalt des Zufalls. Hörstücke über die Abweichung vom Normalwert. Geschichten über den Defekt.",
+		"content" : "Systemfehler"
+	}, {
 		"href" : "/podcast/2080",
 		"summary" : "2080 - Der Podcast erzählt die Geschichte von Ulf Ferm, Social Ingenieur in einer nicht allzu fernen Zukunft.",
 		"content" : "2080"
@@ -278,6 +282,10 @@ module.exports = {
 		"id" : "mz_gesellschaft",
 		"name" : "mz_gesellschaft"
 	}, {
+		"href" : "/podcast/gretchenfrage",
+		"summary" : "Religion, Theologie, Philosophie, Kirche, Welt und Glaube",
+		"content" : "Gretchenfrage"
+	},{
 		"href" : "/podcast/1337kultur",
 		"summary" : "Kultur aus der Nerdperspektive",
 		"content" : "1337kultur"
@@ -749,7 +757,11 @@ module.exports = {
 	}, {
 		"id" : "mz_technik",
 		"name" : "mz_technik"
-	}, {
+	},  {
+		"href" : "/podcast/mikrowelle",
+		"summary" : "Mikrowelle µ~, der etwas andere Techpodcast aus Dresden. Mit technischen Einblicken, häufig mit Themen wie Geodaten, Fotografie und anderen Sachen, von denen wir keine Ahnung haben.",
+		"content" : "Mikrowelle"
+	},{
 		"href" : "/podcast/devradio",
 		"summary" : "Das Radiomagazin des CCC Erfa Ulms mit allerlei Wissenswertem aus der Welt der Computertechnik, Medien und Netzkultur.",
 		"content" : "/dev/radio"

@@ -181,7 +181,6 @@ Module.prototype = {
 				if (res) {
 					try {
 						var json = JSON.parse(res[1].replace('},]}','}]}'));
-						console.log(json.feeds);
 						var url = json.feeds[0].url;
 						Ti.App.Properties.setString('RSS_URL' + _feed.key, url);
 						that.fireEvent('geturl:ready', {
