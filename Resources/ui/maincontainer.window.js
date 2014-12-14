@@ -1,3 +1,5 @@
+var Flip = require('de.manumaticx.androidflip');
+
 module.exports = function(_parent) {
 	var self = Ti.UI.createWindow({
 		title : 'Hörsuppe',
@@ -6,11 +8,16 @@ module.exports = function(_parent) {
 		exitOnClose : true
 
 	});
-	self.container = Ti.UI.createScrollableView({
-		showPagingControl : true,
-		views : [require('ui/hoersuppe.view')(self), require('ui/podbe.view')(self),require('ui/frauen.view')(self)]
+	self.container = Flip.createFlipView({
+		backgroundColor : '#fff',
+		orientation : Flip.ORIENTATION_HORIZONTAL,
+		overFlipMode : Flip.OVERFLIPMODE_RUBBER_BAND,
+		views : [require('ui/hoersuppe.view')(self), require('ui/frauen.view')(self), require('ui/podbe.view')(self)]
 	});
 	self.add(self.container);
+	self.container.peakNext();
+	self.container.addEventListener('flipped', function(_e) {
+	});
 	if (Ti.Android) {
 		self.addEventListener("open", function() {
 			var activity = self.getActivity();
@@ -21,7 +28,7 @@ module.exports = function(_parent) {
 		});
 		self.container.addEventListener('scrollend', function(_e) {
 			var ndx = _e.currentPage;
-			var titles = ['Hörsuppe','PodBe','Frauen'];
+			var titles = ['Hörsuppe', 'Frauen', 'PodBe'];
 			_parent.activeTab.setTitle(titles[ndx]);
 		});
 	};

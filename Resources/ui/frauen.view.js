@@ -4,6 +4,7 @@ module.exports = function(_parent) {
 			'main' : require('ui/TEMPLATES').main
 		},
 		caseInsensitiveSearch : true,
+		backgroundColor : '#fff',
 		defaultItemTemplate : 'main'
 	});
 	var sections = [];
@@ -37,7 +38,8 @@ module.exports = function(_parent) {
 					height : 0
 				}
 			};
-			if (pod.title && !pod.hidden) items.push(item);
+			if (pod.title && !pod.hidden)
+				items.push(item);
 		});
 		sections.push(Ti.UI.createListSection({
 			items : items,

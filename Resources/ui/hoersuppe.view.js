@@ -1,6 +1,7 @@
 module.exports = function(_parent) {
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
 	var self = Ti.UI.createListView({
+		backgroundColor : '#fff',
 		templates : {
 			'main' : require('ui/TEMPLATES').main
 		},

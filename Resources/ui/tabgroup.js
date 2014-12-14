@@ -1,4 +1,4 @@
-module.exports = function() {
+	module.exports = function() {
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
 
 	var self = Ti.UI.createTabGroup({

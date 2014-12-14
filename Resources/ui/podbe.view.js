@@ -4,7 +4,7 @@ module.exports = function(_parent) {
 			'main' : require('ui/TEMPLATES').main
 		},
 		caseInsensitiveSearch : true,
-		defaultItemTemplate : 'main'
+		defaultItemTemplate : 'main',backgroundColor : '#fff',
 	});
 	var sections = [];
 	self.updateList = function() {
@@ -14,7 +14,6 @@ module.exports = function(_parent) {
 			posts.forEach(function(post) {
 				console.log(post	);
 				var pod = post.podcast[0];
-
 				var mp3 = undefined;
 				pod['podbe_feed'].forEach(function(feed) {
 					console.log(feed['podbe_feed_audio']);
