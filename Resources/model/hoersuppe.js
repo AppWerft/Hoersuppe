@@ -123,6 +123,10 @@ module.exports = {
 		"id" : "mz_geschichten",
 		"name" : "mz_geschichten"
 	}, {
+		"href" : "/podcast/fireflycast",
+		"summary" : "Hier sprechen Alexander, Bastian und Arne über die renommierte Fernsehserie Firefly von Joss Whedon und das gesamte damit zusammenhängende Universum. Jede Folge eine Folge, von vorn bis hinten.",
+		"content" : "Fireflycast"
+	},{
 		"href" : "/podcast/systemfehler",
 		"summary" : "Audiodokumentationen zur Fehlerkultur. Sendungen über die Vielfalt des Zufalls. Hörstücke über die Abweichung vom Normalwert. Geschichten über den Defekt.",
 		"content" : "Systemfehler"
@@ -282,6 +286,14 @@ module.exports = {
 		"id" : "mz_gesellschaft",
 		"name" : "mz_gesellschaft"
 	}, {
+		"href" : "/podcast/glaubenssache",
+		"summary" : "Was passiert, wenn ein humanistischer Atheist auf einen strenggläubigen Katholiken trifft und mit ihm Dinge des Lebens diskutiert?",
+		"content" : "Glaubenssache"
+	},{
+		"href" : "/podcast/heissluftdampfer",
+		"summary" : "Der M4A/MP4-Feed des Heissluftdampfers - Alle Episoden und Lichtspruch-Sendungen",
+		"content" : "Heissluftdampfer"
+	},{
 		"href" : "/podcast/gretchenfrage",
 		"summary" : "Religion, Theologie, Philosophie, Kirche, Welt und Glaube",
 		"content" : "Gretchenfrage"
@@ -573,6 +585,10 @@ module.exports = {
 	}, {
 		"id" : "mz_medien",
 		"name" : "mz_medien"
+	}, {
+		"href" : "/podcast/speckschau",
+		"summary" : "Wann immer Lars etwas sieht, das er für empfehlenswert hält, landet eine kleine Rezension in diesem Podcast. Darunter befinden sich hauptsächlich Filme, Serien oder Comics.",
+		"content" : "Speckschau"
 	}, {
 		"href" : "/podcast/datenschau",
 		"summary" : "Mit Philip Banse, Marcus Bösch, Lorenz Matzat und Anna Lena Schiller. ",

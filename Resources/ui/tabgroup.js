@@ -75,7 +75,6 @@
 					if (section.selected)
 						selected.push(section.title);
 				});
-
 				var picker = require("yy.tidialogs").createMultiPicker({
 					title : "Podcastkategoriefilter",
 					options : options,

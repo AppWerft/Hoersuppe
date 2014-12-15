@@ -1,4 +1,4 @@
-const USINGCACHE = false;
+const USINGCACHE = true;
 
 var Module = function(_feed, _reload) {
 	if (_feed && ( typeof _feed.key) == 'String')
@@ -64,6 +64,9 @@ Module.prototype = {
 				onload : function() {
 					clearInterval(cron);
 					var head = this.responseText;
+					console.log(head);
+					
+					
 					that.fireEvent('getfeed:progress', {
 						progress : 1,
 						message : (this.responseText.length / 1024).toFixed(1) + ' kB von ' + this.getResponseHeader('Server') + '  erhalten.'
@@ -96,12 +99,6 @@ Module.prototype = {
 						that.cache.write(JSON.stringify(data));
 					} else {
 						var counter = 0;
-						/*var cron = setInterval(function() {
-						 counter += 0.1;
-						 that.fireEvent('getfeed:progress', {
-						 value : counter
-						 });
-						 }, 1000);*/
 						var yql = 'SELECT * FROM xml WHERE url="http://' + _url + '"';
 						that.fireEvent('getfeed:start', {
 							message : 'Feed über yql besorgen …'
@@ -129,7 +126,7 @@ Module.prototype = {
 			var url = (_url.search('http') == 0) ? _url : 'http://' + _url;
 			xhr.open('GET', url, true);
 			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (KHTML, like Gecko)');
-			xhr.setRequestHeader('Accept', 'application/rss+xml');
+			xhr.setRequestHeader('Accept', 'application/xhtml+xml,application/xml');
 			xhr.setRequestHeader('Cookie', null);
 			xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate');
 			xhr.send();
@@ -165,6 +162,7 @@ Module.prototype = {
 		var self = Ti.Network.createHTTPClient({
 			onerror : function() {
 				clearInterval(cron);
+				console.log('ErrorURL:  ' + urlofpage);
 				that.fireEvent('geturl:error', {
 					message : this.error
 				});
@@ -174,14 +172,13 @@ Module.prototype = {
 				clearInterval(cron);
 				console.log('URL:  ' + urlofpage);
 				var page = this.responseText;
-				console.log(this.responseText.length);
 				var regex = /podcastData=(.*?)<\/script>/mig;
 				var res = regex.exec(page);
-				//console.log(page);
 				if (res) {
 					try {
 						var json = JSON.parse(res[1].replace('},]}','}]}'));
 						var url = json.feeds[0].url;
+						console.log(json.feeds);
 						Ti.App.Properties.setString('RSS_URL' + _feed.key, url);
 						that.fireEvent('geturl:ready', {
 							value : url,
