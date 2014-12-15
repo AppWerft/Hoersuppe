@@ -16,7 +16,9 @@ Module.prototype = {
 		this.fireEvent('geturl:start', {
 			message : 'Feed-Suche für „' + this.key + '“'
 		});
+		// obtaining Feed url asynchronly:
 		this._getUrl(_feed, function(_url) {
+			console.log('Info: feedurl found '+ _url);
 			var contentLength = -1;
 			that.cache = Ti.Filesystem.getFile(Ti.Filesystem.getApplicationCacheDirectory(), 'CACHE_' + Ti.Utils.md5HexDigest(_url));
 			that.fireEvent('geturl:ready', {
@@ -43,6 +45,7 @@ Module.prototype = {
 			var cron = setInterval(function() {
 				counter += 0.05;
 			}, 500);
+			console.log('Info: try to get feed');
 			var xhr = Ti.Network.createHTTPClient({
 				timeout : 30000,
 				autoRedirect : false,
@@ -58,13 +61,15 @@ Module.prototype = {
 						});
 				},
 				onerror : function() {
+					console.log('Error:' + this.error);
 					clearInterval(cron);
 					that.fireEvent('error');
 				},
 				onload : function() {
+					console.log('Info: Status=' +this.status);
 					clearInterval(cron);
 					var head = this.responseText;
-					console.log(head);
+					console.log(head.substr(0,16));
 					
 					
 					that.fireEvent('getfeed:progress', {
@@ -125,6 +130,7 @@ Module.prototype = {
 			});
 			var url = (_url.search('http') == 0) ? _url : 'http://' + _url;
 			xhr.open('GET', url, true);
+			console.log('Info: URL='+url);
 			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (KHTML, like Gecko)');
 			xhr.setRequestHeader('Accept', 'application/xhtml+xml,application/xml');
 			xhr.setRequestHeader('Cookie', null);
@@ -152,8 +158,8 @@ Module.prototype = {
 		var cron = setInterval(function() {
 			counter += 0.05;
 		}, 500);
-		var urlofpage = 'http://hoersuppe.de/podcast/' + _feed.key;
-		var web = Ti.UI.createWebView({url:urlofpage});
+		var urlofwebpagewhichcontainsrealfeedurl = 'http://hoersuppe.de/podcast/' + _feed.key;
+		var web = Ti.UI.createWebView({url:urlofwebpagewhichcontainsrealfeedurl});
 		web.addEventListener('load',function(){
 			console.log('Info: web loaded');
 			var data= web.evalJS(window.podcastData);
@@ -162,7 +168,7 @@ Module.prototype = {
 		var self = Ti.Network.createHTTPClient({
 			onerror : function() {
 				clearInterval(cron);
-				console.log('ErrorURL:  ' + urlofpage);
+				console.log('ErrorURL:  ' + urlofwebpagewhichcontainsrealfeedurl);
 				that.fireEvent('geturl:error', {
 					message : this.error
 				});
@@ -170,7 +176,7 @@ Module.prototype = {
 			},
 			onload : function() {
 				clearInterval(cron);
-				console.log('URL:  ' + urlofpage);
+				console.log('URL:  ' + urlofwebpagewhichcontainsrealfeedurl);
 				var page = this.responseText;
 				var regex = /podcastData=(.*?)<\/script>/mig;
 				var res = regex.exec(page);
@@ -189,7 +195,7 @@ Module.prototype = {
 						console.log(E);
 					}
 				} else {
-					console.log('Error: urlpage found, but without link to pcast on it');
+					console.log('Error: urlpage found, but without link to feed on it');
 					that.fireEvent('geturl:error', {});
 				}
 			},
@@ -200,7 +206,7 @@ Module.prototype = {
 				});
 			}
 		});
-		self.open('GET', urlofpage, true);
+		self.open('GET', urlofwebpagewhichcontainsrealfeedurl, true);
 
 		self.setRequestHeader('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:34.0) Gecko/20100101 Firefox/34.0');
 		self.setRequestHeader('User-Referer', 'http://hoersuppe.de/');
