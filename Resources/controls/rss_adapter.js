@@ -18,7 +18,7 @@ Module.prototype = {
 		});
 		// obtaining Feed url asynchronly:
 		this._getUrl(_feed, function(_url) {
-			console.log('Info: feedurl found '+ _url);
+			console.log('Info: feedurl found ' + _url);
 			var contentLength = -1;
 			that.cache = Ti.Filesystem.getFile(Ti.Filesystem.getApplicationCacheDirectory(), 'CACHE_' + Ti.Utils.md5HexDigest(_url));
 			that.fireEvent('geturl:ready', {
@@ -45,10 +45,10 @@ Module.prototype = {
 			var cron = setInterval(function() {
 				counter += 0.05;
 			}, 500);
-			console.log('Info: try to get feed');
+			console.log('Info: try to get feed ' + _url);
 			var xhr = Ti.Network.createHTTPClient({
 				timeout : 30000,
-				autoRedirect : false,
+				//autoRedirect : false,
 				cache : false,
 				ondatastream : function(_e) {
 					if (_e.progress > 0)
@@ -60,18 +60,18 @@ Module.prototype = {
 							value : counter
 						});
 				},
-				onerror : function() {
+				onerror : function(_e) {
 					console.log('Error:' + this.error);
+					console.log('Error:' + _e.error);
 					clearInterval(cron);
 					that.fireEvent('error');
 				},
-				onload : function() {
-					console.log('Info: Status=' +this.status);
+				onload : function(_e) {
+					console.log('Info: Status=' + _e.status);
 					clearInterval(cron);
 					var head = this.responseText;
-					console.log(head.substr(0,16));
-					
-					
+					console.log(head.substr(0, 16));
+
 					that.fireEvent('getfeed:progress', {
 						progress : 1,
 						message : (this.responseText.length / 1024).toFixed(1) + ' kB von ' + this.getResponseHeader('Server') + '  erhalten.'
@@ -130,11 +130,11 @@ Module.prototype = {
 			});
 			var url = (_url.search('http') == 0) ? _url : 'http://' + _url;
 			xhr.open('GET', url, true);
-			console.log('Info: URL='+url);
+			console.log('Info: URL=' + url);
 			xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (KHTML, like Gecko)');
-			xhr.setRequestHeader('Accept', 'application/xhtml+xml,application/xml');
+			xhr.setRequestHeader('Accept', '*/*');
 			xhr.setRequestHeader('Cookie', null);
-			xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate');
+			xhr.setRequestHeader('Accept-Encoding', '*');
 			xhr.send();
 		});
 	},
@@ -159,10 +159,12 @@ Module.prototype = {
 			counter += 0.05;
 		}, 500);
 		var urlofwebpagewhichcontainsrealfeedurl = 'http://hoersuppe.de/podcast/' + _feed.key;
-		var web = Ti.UI.createWebView({url:urlofwebpagewhichcontainsrealfeedurl});
-		web.addEventListener('load',function(){
+		var web = Ti.UI.createWebView({
+			url : urlofwebpagewhichcontainsrealfeedurl
+		});
+		web.addEventListener('load', function() {
 			console.log('Info: web loaded');
-			var data= web.evalJS(window.podcastData);
+			var data = web.evalJS(window.podcastData);
 			console.log(data);
 		});
 		var self = Ti.Network.createHTTPClient({
@@ -182,7 +184,7 @@ Module.prototype = {
 				var res = regex.exec(page);
 				if (res) {
 					try {
-						var json = JSON.parse(res[1].replace('},]}','}]}'));
+						var json = JSON.parse(res[1].replace('},]}', '}]}'));
 						var url = json.feeds[0].url;
 						console.log(json.feeds);
 						Ti.App.Properties.setString('RSS_URL' + _feed.key, url);
