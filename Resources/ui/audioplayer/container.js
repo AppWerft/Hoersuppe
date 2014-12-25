@@ -1,4 +1,3 @@
-
 const OPAQUE = 0.3;
 module.exports = function(item) {
 
@@ -84,18 +83,7 @@ module.exports = function(item) {
 		height : 240,
 		top : 0,
 	}));
-	/*
-	 self.container.add(Ti.UI.createLabel({
-	 height : 50,
-	 width : Ti.UI.FILL,
-	 left : 5,
-	 right : 5,
-	 textAlign : 'left',
-	 color : '#000',
-	 top : 0,
-	 ellipsize : true,
-	 text : item.title
-	 }));*/
+
 	Ti.App.AudioPlayer = Ti.Media.createAudioPlayer({
 		allowBackground : true,
 		autoplay : false,
@@ -214,8 +202,14 @@ module.exports = function(item) {
 		self.stopbutton.setOpacity(OPAQUE);
 		self.playbutton.setOpacity(1);
 	});
+	Ti.App.AudioPlayer.addEventListener('error', function(_evt) {
+		alert('Audioplayer meldet Störung');
+		self.stopbutton.setOpacity(1);
+		self.stopbutton.touchEnabled = true;
+	});
 	Ti.App.AudioPlayer.addEventListener('change', function(_evt) {
 		self.statustext.setText(_evt.description);
+		console.log('°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°');
 		Ti.API.info('State: ' + _evt.description + ' (' + _evt.state + ')');
 		switch (_evt.description) {
 		case  'starting':
@@ -225,9 +219,9 @@ module.exports = function(item) {
 			self.playbutton.touchEnabled = false;
 			self.playbutton.setOpacity(OPAQUE);
 			self.pausebutton.setOpacity(1);
-			self.pausebutton.setEnabled(true);
+			self.pausebutton.touchEnabled = true;
 			self.stopbutton.setOpacity(OPAQUE);
-			self.stopbutton.setEnabled(false);
+			self.stopbutton.touchEnabled = true;
 			break;
 		case 'paused':
 			self.playbutton.touchEnabled = true;
@@ -235,7 +229,7 @@ module.exports = function(item) {
 			self.pausebutton.touchEnabled = false;
 			self.pausebutton.setOpacity(OPAQUE);
 			self.stopbutton.setOpacity(1);
-			self.stopbutton.setEnabled(true);
+			self.stopbutton.touchEnabled = true;
 			break;
 		case 'stopped':
 			self.stopbutton.setOpacity(OPAQUE);
@@ -249,6 +243,7 @@ module.exports = function(item) {
 		self.playbutton.setOpacity(OPAQUE);
 	});
 	self.pausebutton.addEventListener('click', function() {
+		console.log('Info: pause clicked');
 		self.pausebutton.touchEnabled = false;
 		self.pausebutton.setOpacity(OPAQUE);
 		Ti.App.AudioPlayer.pause();
@@ -285,7 +280,9 @@ module.exports = function(item) {
 };
 
 function formatTime(ms) {
-	var s = Math.round(ms / 1000), sec = s % 60, min = (s - sec) / 60;
+	var s = Math.round(ms / 1000),
+	    sec = s % 60,
+	    min = (s - sec) / 60;
 	if (sec < 10) {
 		sec = '0' + sec;
 	}

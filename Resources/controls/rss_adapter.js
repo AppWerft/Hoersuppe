@@ -168,13 +168,13 @@ Module.prototype = {
 			console.log(data);
 		});
 		var self = Ti.Network.createHTTPClient({
-			onerror : function() {
+			onerror : function(_e) {
 				clearInterval(cron);
 				console.log('ErrorURL:  ' + urlofwebpagewhichcontainsrealfeedurl);
 				that.fireEvent('geturl:error', {
-					message : this.error
+					message : _e.error
 				});
-				console.log('Error: ' + this.error);
+				console.log('Error: ' + _e.error);
 			},
 			onload : function() {
 				clearInterval(cron);
@@ -213,7 +213,7 @@ Module.prototype = {
 		self.setRequestHeader('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:34.0) Gecko/20100101 Firefox/34.0');
 		self.setRequestHeader('User-Referer', 'http://hoersuppe.de/');
 		self.setRequestHeader('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8');
-		self.setRequestHeader('Accept-Encoding', 'gzip, deflate');
+		self.setRequestHeader('Accept-Encoding', '*');
 		self.send(true);
 	},
 	fireEvent : function(_event, _payload) {
