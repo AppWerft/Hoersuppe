@@ -1,6 +1,8 @@
 /* helper function to detect save place */
 function getFilehandle(file) {
-	return (Ti.Filesystem.isExternalStoragePresent() ) ? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, file) : Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, filename + '.meta');
+	return (Ti.Filesystem.isExternalStoragePresent() ) //
+	? Ti.Filesystem.getFile(Ti.Filesystem.externalStorageDirectory, file) //
+	: Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, file);
 }
 
 /* Constructor */
@@ -100,7 +102,7 @@ HoersuppenModule.prototype = {
 	},
 	isSaved : function(url) {
 		var file = getFilehandle(Ti.Utils.md5HexDigest(url));
-		return file.exist();
+		return file.exists();
 	},
 	getPath : function(url) {
 		var file = getFilehandle(Ti.Utils.md5HexDigest(url));

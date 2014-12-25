@@ -407,12 +407,6 @@ exports.podcasterinnen = [{
 	description : "Hören, was wir gesehen haben.",
 	logo : "http://www.sneakpod.de/wp-content/sneakpodlogo249.jpg"
 }, {
-	link : "http://wikigeeks.de/feed/",
-	title : "",
-	description : "",
-	logo : "",
-	hidden : true
-}, {
 	link : "http://mops.podspot.de/rss",
 	title : "Der Mops kam in die Küche",
 	description : "Jeder hat heutzutage einen Podcast. Also auch wir. Wir müssen reden. Butter bei die Fische, Leute, wir sind die Beziehungsweisen. Habt teil.",
@@ -498,20 +492,10 @@ exports.podcasterinnen = [{
 	description : "Ein queeres Stößchen aus den Zonen der Unbewohnbarkeit",
 	logo : "http://i.imgur.com/nKDi7bj.png"
 }, {
-	link : "http://www.iknowyourgame.de/category/podcast/pixelfrauen-1/feed/",
-	title : "Pixelfrauen",
-	description : "Podcast",
-	logo : "http://www.iknowyourgame.de/wp-content/uploads/2013/09/pixelfrauen-logo.jpg"
-}, {
 	link : "http://feeds.feedburner.com/derPottCast",
 	title : "PottCast",
 	description : "Der Podcast für den Ruhrpott",
 	logo : "http://i.imgur.com/GwyGvZT.png"
-}, {
-	link : "",
-	title : "",
-	description : "",
-	logo : ""
 }, {
 	link : "http://www.krimikiste.com/feed/",
 	title : "Krimikiste",

@@ -1,6 +1,8 @@
 module.exports = function(_parent) {
 	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
-	var self = Ti.UI.createListView({
+	var self = Ti.UI.createView();
+	
+	self.container = Ti.UI.createListView({
 		backgroundColor : '#fff',
 		templates : {
 			'main' : require('ui/TEMPLATES').main
@@ -63,11 +65,11 @@ module.exports = function(_parent) {
 					headerView : headerview
 				}));
 		});
-		self.setSections(sections);
+		self.container.setSections(sections);
 	};
 
 	self.updateList();
-	self.addEventListener('itemclick', function(_e) {
+	self.container.addEventListener('itemclick', function(_e) {
 		var feed = JSON.parse(_e.itemId);
 		var windowmodule = require('ui/rsslist.window');
 		var doOpenFeedWindow = function(items) {
@@ -94,8 +96,7 @@ module.exports = function(_parent) {
 		};
 		var dialog = require('ui/download.widget')(feed, doOpenFeedWindow);
 		_parent.add(dialog);
-
-		//
 	});
+	self.add(self.container);
 	return self;
 };

@@ -18,7 +18,7 @@ exports.main = {
 		properties : {
 			layout : 'vertical',
 			left : 100,
-			top : 5,
+			top : 5,bottom:5,
 			right : 25,
 			height : Ti.UI.SIZE,
 		},
@@ -49,8 +49,7 @@ exports.main = {
 				font : {
 					fontSize : 16,
 				},
-				top : 0,
-				bottom : 5
+				top : 0
 			}
 		}, {
 			type : 'Ti.UI.Label',

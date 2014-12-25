@@ -1,6 +1,5 @@
 module.exports = function() {
-	var HoerSuppe = new (require('controls/hoersuppe_adapter'))();
-
+	var Model = new (require('controls/hoersuppe_adapter'))();
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#fff',
 	});
@@ -18,11 +17,10 @@ module.exports = function() {
 		Ti.UI.createNotification({
 			message : 'Teste alle Podcasts auf Aktualität …'
 		}).show();
-		var favs = HoerSuppe.getAllFavs(), items = [];
+		var favs = Model.getAllFavs(), items = [];
 		if (favs) {
 			var i=0;
 			favs.forEach(function(fav) {
-				console.log(fav);
 				items.push(new (require('ui/listitem.widget'))(fav, sections[0], i++));
 				//items.push(getItem(favs[i],sections[0], i));
 			});
@@ -33,7 +31,6 @@ module.exports = function() {
 	self.add(self.list);
 	self.list.addEventListener('itemclick', function(_e) {
 		var feed = JSON.parse(_e.itemId);
-		console.log(feed);
 		var windowmodule = require('ui/rsslist.window');
 		var doOpenFeedWindow = function(items) {
 			if (items) {

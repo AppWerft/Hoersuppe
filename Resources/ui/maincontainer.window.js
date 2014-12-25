@@ -2,14 +2,11 @@ var Flip = require('de.manumaticx.androidflip');
 
 module.exports = function(_parent) {
 	var self = Ti.UI.createWindow({
-		title : 'Hörsuppe',
-		backgroundColor : '#aaa',
+		backgroundColor : '#888',
 	});
 	self.container = Flip.createFlipView({
-		top : 0,
-		bottom : 0,
 		orientation : Flip.ORIENTATION_HORIZONTAL,
-		overFlipMode : Flip.OVERFLIPMODE_RUBBER_BAND,
+		overFlipMode : Flip.OVERFLIPMODE_GLOW,
 		views : [require('ui/hoersuppe.view')(self), require('ui/frauen.view')(self), require('ui/podbe.view')(self)]
 	});
 	self.add(self.container);
@@ -17,12 +14,10 @@ module.exports = function(_parent) {
 	self.container.addEventListener('flipped', function(_e) {
 		Ti.App.Properties.setInt('PEAK', Ti.App.Properties.getInt('PEAK', 0) + 1);
 	});
-	if (Ti.Android) {
-		self.container.addEventListener('flipped', function(_e) {
-			var ndx = _e.index;
-			var titles = ['Hörsuppe', 'FrauenPodcasts', 'PodBe'];
-			_parent.activeTab.setTitle(titles[ndx]);
-		});
-	};
+	Ti.Android && self.container.addEventListener('flipped', function(_e) {
+		var ndx = _e.index;
+		var titles = ['Hörsuppe', 'FrauenPodcasts', 'PodBe'];
+		_parent.activeTab.setTitle(titles[ndx]);
+	});
 	return self;
 };

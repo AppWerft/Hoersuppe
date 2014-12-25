@@ -10,10 +10,9 @@ module.exports = function(item) {
 	 blurRadius : 10
 	 });
 	 */
-	var Adapter = new (require('controls/hoersuppe_adapter'))();
-	item.url = Adapter.getPath(item.url).path;
-	item.islocal = Adapter.getPath(item.url).islocal;
-	console.log(item);
+	var Model = new (require('controls/hoersuppe_adapter'))();
+	item.url = Model.getPath(item.url).path;
+	item.islocal = Model.isSaved(item.url);
 	var duration = 0;
 	var self = Ti.UI.createWindow({
 		fullscreen : true,
@@ -56,13 +55,10 @@ module.exports = function(item) {
 			}).show();
 			self.close();
 		}
-
 	});
-
 	self.add(dummyplayer);
-	//videolayer only works after adding
 	self.add(Ti.UI.createView({
-		backgroundColor : '#000',
+		backgroundColor : 'black',
 		opacity : 0.77,
 	}));
 	self.container = Ti.UI.createView({
@@ -74,7 +70,6 @@ module.exports = function(item) {
 	self.downloader = new (require('./downloader.widget'))();
 	if (!item.islocal) {
 		self.container.add(self.downloader.createView(item));
-		console.log('Info: downloader added');
 	}
 	self.container.add(Ti.UI.createImageView({
 		image : item.logo,
@@ -204,6 +199,7 @@ module.exports = function(item) {
 	});
 	Ti.App.AudioPlayer.addEventListener('error', function(_evt) {
 		alert('Audioplayer meldet Störung');
+		console.log(_evt.error);
 		self.stopbutton.setOpacity(1);
 		self.stopbutton.touchEnabled = true;
 	});

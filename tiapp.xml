@@ -43,9 +43,9 @@
             </dict>
         </plist>
     </ios>
-    <version>1.5.3</version>
+    <version>1.5.4</version>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="53" android:versionName="1.5.3 ">
+        <manifest android:versionCode="54" android:versionName="1.5.4">
             <uses-sdk android:minSdkVersion="11"/>
             <uses-sdk android:targetSdkVersion="20"/>
             <application android:largeHeap="true" android:theme="@style/Theme.Hinhoerer">
